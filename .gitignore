@@ -1,0 +1,29 @@
+# macOS folder metadata to ignore
+._*
+.DS_Store
+
+# Package files to ignore
+*.pkg
+*.dmg
+*.egg
+*.app
+
+# Logs and crash reports
+*.log
+*.crash
+/reports/
+
+# Compiled files and binaries
+*.o
+*.pyc
+*.class
+
+# macOS temporary files to ignore
+*.swp
+*~
+
+# Composer
+composer.phar
+composer.lock
+/vendor/
+

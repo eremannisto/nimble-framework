@@ -1,0 +1,14 @@
+# Set rewrite engine on
+RewriteEngine On
+
+# Redirect to the front controller
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !^/controller\.php
+RewriteRule ^([^/]+)/?$ controller.php?route=$1 [QSA,NC,L]
+
+# Remove index listing
+Options -Indexes
+
+# Index file
+DirectoryIndex controller.php

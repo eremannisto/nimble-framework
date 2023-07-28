@@ -1,0 +1,11 @@
+{
+    "name": "ere/nimbler-framework",
+    "require": {
+        "phpmailer/phpmailer": "^6.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ere\\NimblerFramework\\": "src/"
+        }
+    }
+}
