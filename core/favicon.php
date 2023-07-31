@@ -1,10 +1,11 @@
 <?php
 
 // Dependencies:
-if(!class_exists('Package'))     require_once('system/methods/package.php');
-if(!class_exists('Directories')) require_once('system/methods/directories.php');
-if(!class_exists('Controller'))  require_once('system/methods/controller.php');
-if(!class_exists('Files'))       require_once('system/methods/files.php');
+if(!class_exists('Config'))     require_once(__DIR__ . '/config.php');
+if(!class_exists('Report'))     require_once(__DIR__ . '/report.php');
+if(!class_exists('Directory'))  require_once(__DIR__ . '/directory.php');
+if(!class_exists('Controller')) require_once(__DIR__ . '/controller.php');
+if(!class_exists('Files'))      require_once(__DIR__ . '/files.php');
 
 
 /**
@@ -15,30 +16,64 @@ if(!class_exists('Files'))       require_once('system/methods/files.php');
  */
 class Favicon {
 
-    // Cache variable to store the favicon.
-    private static $cache;
+
+    // Cache the favicon object
+    private static $cache = null;
 
     /**
-     * Retrieves favicons from cache or package.json file if 
-     * the cache is empty. If the cache is empty, it will be
-     * populated with the favicon object.
+     * Get the favicon object, and it's information and cache it.
      * 
-     * @return object|null
-     * Returns the favicon object if it exists.
+     * @param string $favicon
+     * The favicon to get the object for.
+     * 
+     * @param string $file
+     * The path to the favicons.json file.
+     * 
+     * @return mixed
+     * Returns the favicon object.
      */
-    public static function favicons(): ?object {
+    public static function get(?string $request, string $file = "favicons.json"): mixed {
 
-        // Check if pages are cached:
-        if (!isset(Favicon::$cache)) {
-
-            // Get pages from package.json and cache them:
-            $favicons       = Package::get()->favicon ?? null;
-            Favicon::$cache = $favicons;
+        // Check if the favicon object is cached, if not, read and cache it. Notice that
+        // we search for the whole favicon object, and not just the favicon itself. If the 
+        // favicon is cached, we can return parts of it, instead of reading the file again.
+        if (Favicon::$cache === null) {
+            Favicon::$cache = Config::get("", sprintf("%s/%s", Directory::get("favicon"), $file));
         }
 
-        // Return pages:
-        return Favicon::$cache;
+        // Get the cached favicon object
+        $favicons = Favicon::$cache;
+
+        // Check if the favicon parameter is empty or null, 
+        // return the entire favicon object
+        if (empty($request) || is_null($request)) { 
+            return $favicons; 
+        }
+
+        // Get the keys of the path to traverse the favicon object
+        $keys = explode('/', $request);
+
+        // Go through each key and search for the value, if the key doesn't exist, return null
+        foreach ($keys as $key) {
+
+            // Check if the key exists in the favicon object
+            if (!isset($favicons->{$key})) {
+                Report::exception(new RuntimeException("Key '$key' doesn't exist in the favicon file"));
+            }
+
+            // Get the value of the key
+            $favicons = $favicons->{$key};
+        }
+
+        // Return the favicon object
+        return $favicons;
+
     }
+
+
+
+
+
 
     /**
      * This method generates the favicon.
@@ -47,13 +82,10 @@ class Favicon {
      * True if the favicon was generated successfully,
      * otherwise false.
      */
-    public static function generate(): bool {
+    public static function generate(string $directory = "/public/favicon"): bool {
 
-        // Favicon directory:
-        $root      = sprintf("%s%s", dirname(__DIR__, 2), Controller::getRootFolder());
-        $directory = Directories::getFaviconDirectory();
-        $favicons  = Favicon::favicons();
-
+        // Get favicon object,
+        $favicons  = Favicon::$cache;
 
         // Check if the favicon object is exists:
         if (!isset($favicons)) {

@@ -1,0 +1,36 @@
+{
+    "apple"         : {
+        "href":     "apple-touch.png",
+        "rel":      "apple-touch-icon",
+        "type":     null,
+        "size":     null  
+    },
+
+    "ico"           : {
+        "href":     "favicon.ico",
+        "rel":      "icon",
+        "type":     null,
+        "size":     "any"    
+    },           
+
+    "svg"           :{
+        "href":     "favicon.svg",
+        "rel":      "icon",
+        "type":     "image/svg+xml",
+        "size":     "any"
+    },
+
+    "192"           :{
+        "href":     "favicon-192.png",
+        "rel":      "icon",
+        "type":     "image/png",
+        "size":     "192x192"
+    },
+    
+    "512"           :{
+        "href":     "favicon-512.png",
+        "rel":      "icon",
+        "type":     "image/png",
+        "size":     "512x512"
+    }
+}

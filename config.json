@@ -24,6 +24,13 @@
         }
     },
 
+    "directories": {
+        "favicon"           : "/public/favicon/",
+        "images"            : "/public/images/",
+        "css"               : "/public/css/",
+        "js"                : "/public/js/"  
+    },
+
     "meta": {
         "title"             : "The default title",
         "description"       : "The default description",

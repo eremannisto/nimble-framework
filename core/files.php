@@ -9,30 +9,47 @@ if(!class_exists('Controller')){
     require_once(__DIR__ . '/controller.php');
 }
 
-/**
- * This class handles all file related methods,
- * such as creating, deleting, moving, copying, etc.
- * 
- * It also handles all file references, such as CSS an JS files,
- * and various automated file version numberings.
- * 
- * @version 1.0.0
- */
 class Files {
 
-    /**
-     * Returns the modification time of the specified file.
-     *
-     * @param string $path 
-     * The file path.
-     * 
-     * @return int|null 
-     * The modification time, or null if the file doesn't exist.
-     */
-    public static function getModTime(string $path): ?int {
-        $fullPath = join(DIRECTORY_SEPARATOR, [$_SERVER['DOCUMENT_ROOT'], $path]);
-        return file_exists($fullPath) ? filemtime($fullPath) : null;
+    public static function get(string $parameter, ?string $path): mixed{
+
+        switch ($parameter) {
+
+            /**
+             * Returns the modification time of the specified file.
+             *
+             * @param string $path 
+             * The file path.
+             * 
+             * @return int|null 
+             * The modification time, or null if the file doesn't exist.
+             */
+            case 'modtime':
+                $path = join(DIRECTORY_SEPARATOR, [$_SERVER['DOCUMENT_ROOT'], $path]);
+                return file_exists($path) ? filemtime($path) : null;
+            
+            /**
+             * Get the file version number.
+             * 
+             * @param string $path
+             * The file path.
+             * 
+             * @return string|null
+             * The file href with a version number, or null if the file doesn't exist.
+             */
+            case 'version':
+                $modified = Files::get("modtime", $path);
+                return $modified !== null ? sprintf("%s?version=%d", $path, $modified) : null;
+
+            default:
+                # code...
+                break;
+        }
+
     }
+
+}
+
 
     /**
      * Set the modification time of the specified file.

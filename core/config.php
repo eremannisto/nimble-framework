@@ -1,8 +1,7 @@
 <?php
 // Dependancies:
-if (!class_exists('Report')) {
-    require_once(__DIR__ . '/report.php');
-}
+if (!class_exists('Report')) require_once(__DIR__ . '/report.php');
+
 
 /**
  * Config class will be used to read and write to the config.json file.
@@ -14,14 +13,14 @@ if (!class_exists('Report')) {
 class Config {
 
     // Cache the config object
-    private static $cache   = null;
+    private static $cache = null;
 
     /**
      * Reads and decodes the config.json file. If the
      * config.json file is not cached, it will be read and cached, otherwise
      * the cached version will be returned.
      * 
-     * @param string $path
+     * @param string $request
      * The path of the JSON object to retrieve, if empty or null, the entire
      * config object will be returned.
      * 
@@ -31,7 +30,7 @@ class Config {
      * @return mixed
      * Returns the value of the JSON object at the specified path.
      */
-    public static function get(?string $path = "", string $file = "/config.json"): mixed {
+    public static function get(?string $request = "", string $file = "/config.json"): mixed {
 
         // Check if the config file is cached, if not, read and cache it.
         if (Config::$cache === null) {
@@ -41,14 +40,14 @@ class Config {
         // Get the cached config object
         $config = Config::$cache;
 
-        // Check if the path parameter is empty or null, 
+        // Check if the request parameter is empty or null, 
         // return the entire config object
-        if (empty($path) || is_null($path)) { 
+        if (empty($request) || is_null($request)) { 
             return $config; 
         }
 
-        // Get the keys of the path to traverse the config object
-        $keys = explode('/', $path);
+        // Get the keys of the request to traverse the config object
+        $keys = explode('/', $request);
 
         // Go through each key and search for the value, if the key doesn't exist, return null
         foreach ($keys as $key) {
@@ -65,29 +64,24 @@ class Config {
         return $config;
     }
 
-    public static function set(string $path, mixed $data, ?string $file = "/config.json"): bool {
+    public static function set(string $request, mixed $data, ?string $file = "/config.json"): bool {
 
-        // Path cannot be empty, otherwise the risk of overwriting the entire 
+        // Request cannot be empty, otherwise the risk of overwriting the entire 
         // config file is too high
-        if (empty($path)) {
-            Report::exception(new InvalidArgumentException("Path cannot be empty"));
+        if (empty($request)) {
+            Report::exception(new InvalidArgumentException("Request cannot be empty"));
         }
 
-        // Data must be scalar or null
-        if (!is_scalar($data) && !is_null($data)) {
-            Report::exception(new InvalidArgumentException("Data must be scalar or null"));
-        }
-    
         // Retrieve the entire JSON object to update it 
-        // and split the path into array of keys
+        // and split the request into array of keys
         $config = Config::get('');
-        $keys   = explode('/', $path);
+        $keys   = explode('/', $request);
     
         // Assigns the reference of the $config variable to the $current variable.
         // This allows changes made to $current to also affect $config.
         $current = &$config;
     
-        // Traverse the path and update the value
+        // Traverse the request and update the value
         foreach ($keys as $key) {
 
             // If the current object is an array and the key is numeric
@@ -113,7 +107,7 @@ class Config {
             
             // If the current object is not an array or an object
             else {
-                Report::exception(new RuntimeException("Cannot traverse path: '$path'"));
+                Report::exception(new RuntimeException("Cannot traverse request: '$request'"));
             }
         }
 
