@@ -1,0 +1,17 @@
+{
+    "notification":{
+        "slug"    : "notification",
+        "template": "notification.component.php", 
+        "styles"  : ["notification.component.css"],
+        "scritps" : ["notification.component.js"],
+        "requires": []
+    },
+
+    "cookie-consent":{
+        "slug"    : "cookie-consent",
+        "template": "cookie-consent.component.php", 
+        "styles"  : ["cookie-consent.component.css"],
+        "scritps" : ["cookie-consent.component.js"],
+        "requires": []
+    }
+}
