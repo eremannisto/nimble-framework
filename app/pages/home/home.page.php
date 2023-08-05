@@ -1,7 +1,7 @@
 <?php
 
 // Always list all your components on the top of the page:
-Components::require('header', 'footer');
+Components::require('CookieConsent');
 
 // Server-side rendering:
 // Add any check ups here, e.g. if the user is logged in, etc.
@@ -11,10 +11,14 @@ Components::require('header', 'footer');
 // You can also add any custom CSS or JS files here.
 Head::render()
 
+// Render the cookie consent component:
+// CookieConsent::render();
+
 // Add your page content here: ?>
 <div class="container">
 
     <h1>Hello World!</h1>
+
 
 </div> <?php
 
