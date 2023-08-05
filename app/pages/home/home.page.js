@@ -1,0 +1,1 @@
+// This is automatically added to the home page: app/pages/home/home.page.php, unless deleted.
