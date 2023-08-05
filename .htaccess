@@ -5,10 +5,10 @@ RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI} !^/controller\.php
-RewriteRule ^([^/]+)/?$ controller.php?route=$1 [QSA,NC,L]
+RewriteRule ^([^/]+)/?$ controller.php?page=$1 [QSA,NC,L]
 
 # Remove index listing
 Options -Indexes
 
 # Index file
-DirectoryIndex controller.php
+DirectoryIndex controller.php?page=home
