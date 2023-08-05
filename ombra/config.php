@@ -1,19 +1,19 @@
 <?php
 // Dependancies:
 if (!class_exists('Report'))  require_once(__DIR__ . '/report.php');
-if (!class_exists('Comment')) require_once(__DIR__ . '/comment.php');
-
 
 /**
- * Config class will be used to read and write to the config.json file.
- * The get and set functions can be also used to write on any other
- * JSON file on the server.
- * 
- * @version 0.0.0
+ * This class provides methods to read and update a JSON configuration file.
+ *
+ * @version     1.0.0
+ * @package     Ombra
+ * @subpackage  Config
  */
 class Config {
 
-    // Cache the config object
+    /**
+     * The cached config object.
+     */
     private static $cache = null;
 
     /**
@@ -63,6 +63,45 @@ class Config {
         }
 
         return $config;
+    }
+
+    /**
+     * Reads and decodes a JSON file.
+     *
+     * @param string $file  
+     * The path to the JSON file.
+     * 
+     * @return object|null      
+     * An object representation of the JSON data, or null if the file could not be 
+     * read or decoded.
+     */
+    private static function read(string $file): ?object {
+
+        // The location of the JSON file:
+        $location = dirname(__DIR__, 1) . $file;
+
+        // Check if the file exists:
+        if (!file_exists($location)) {
+            $exception = new Exception("Configuration file not found: $location");
+            Report::exception($exception);
+        }
+    
+        // Read the JSON file:
+        $json = file_get_contents($location);
+        if ($json === false) {
+            $exception = new Exception("Error reading configuration file: $location");
+            Report::exception($exception);
+        }
+    
+        // Decode the JSON data:
+        $data = json_decode($json);
+        if ($data === null) {
+            $exception = new Exception("Error decoding configuration file: $location");
+            Report::exception($exception);
+        }
+    
+        // Return the decoded JSON data:
+        return $data;
     }
 
 
@@ -137,45 +176,6 @@ class Config {
     }
 
     /**
-     * Reads and decodes a JSON file.
-     *
-     * @param string $file  
-     * The path to the JSON file.
-     * 
-     * @return object|null      
-     * An object representation of the JSON data, or null if the file could not be 
-     * read or decoded.
-     */
-    private static function read(string $file = "/config.json"): ?object {
-
-        // The location of the JSON file:
-        $location = dirname(__DIR__, 1) . $file;
-
-        // Check if the file exists:
-        if (!file_exists($location)) {
-            $exception = new Exception("Configuration file not found: $location");
-            Report::exception($exception);
-        }
-    
-        // Read the JSON file:
-        $json = file_get_contents($location);
-        if ($json === false) {
-            $exception = new Exception("Error reading configuration file: $location");
-            Report::exception($exception);
-        }
-    
-        // Decode the JSON data:
-        $data = json_decode($json);
-        if ($data === null) {
-            $exception = new Exception("Error decoding configuration file: $location");
-            Report::exception($exception);
-        }
-    
-        // Return the decoded JSON data:
-        return $data;
-    }
-
-    /**
      * Encodes and writes JSON data to a file.
      *
      * @param string $file 
@@ -213,5 +213,4 @@ class Config {
 
         return true;
     }
-
 }
