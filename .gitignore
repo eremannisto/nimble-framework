@@ -14,6 +14,9 @@
 /ombra/reports/
 /ombra/trash/
 
+# Environment
+.env
+
 # Compiled files and binaries
 *.o
 *.pyc
@@ -27,7 +30,4 @@
 composer.phar
 composer.lock
 /vendor/
-
-# Environment
-.env
 
