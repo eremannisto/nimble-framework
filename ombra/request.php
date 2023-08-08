@@ -108,8 +108,8 @@ class Request {
      * The current page name.
      */
     public static function page(): string {
-        return $_GET[Config::get('app/router/parameter')] 
-        ?? Config::get('app/router/index');
+        return $_GET[Config::get('application/router/parameter')] 
+        ?? Config::get('application/router/index');
     }
 
     /**
@@ -119,7 +119,7 @@ class Request {
      * The current base path.
      */
     public static function base(): string {
-        return Config::get('app/router/base')               // Get the base path from the configuration file.
+        return Config::get('application/router/base')               // Get the base path from the configuration file.
         ?: Request::scheme() . '://' . Request::host();     // Otherwise, get it from the current protocol and host.
     }
 
@@ -142,7 +142,7 @@ class Request {
      * The current host name.
      */
     public static function host(): string {
-        return Config::get('app/router/host')   // Get the host from the configuration file.
+        return Config::get('application/router/host')   // Get the host from the configuration file.
         ?: $_SERVER['HTTP_HOST'];               // Otherwise, get it from the $_SERVER superglobal array.
     }
 
@@ -251,31 +251,24 @@ class Request {
             case 'scheme':
                 return ($value === TRUE) ? Request::scheme() : (
                     ($value === FALSE) ? '' : (
-                        (in_array($value, ['http', 'https'], true)) ? $value : ''
-                    )
-                );
+                        (in_array($value, ['http', 'https'], true)) ? $value : '' ));
 
             case 'host':
                 return ($value === TRUE) ? Request::host() : (
-                    (is_string($value)) ? $value : ''
-                );
+                    (is_string($value)) ? $value : '' );
 
             case 'port':
                 return ($value === TRUE) ? Request::port() : (
-                    (is_int($value) && $value >= 0 && $value <= 65535) ? $value : ''
-                );
+                    (is_int($value) && $value >= 0 && $value <= 65535) ? $value : '' );
 
             case 'path':
                 return ($value === TRUE) ? Request::path() : (
-                    (is_string($value)) ? $value : ''
-                );
+                    (is_string($value)) ? $value : '' );
 
             case 'query':
                 return ($value === TRUE) ? Request::query() : (
                     (is_array($value)) ? http_build_query($value) : (
-                        (is_string($value)) ? $value : ''
-                    )
-                );
+                        (is_string($value)) ? $value : '' ));
 
             default:
                 Report::warning("Invalid option: $option");

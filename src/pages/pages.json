@@ -1,0 +1,18 @@
+{
+    "home":{
+        "title"         : "Ombra - Simple PHP Framework",
+        "description"   : "Welcome to the Ombra PHP Framework. Ombra is a simple PHP framework that allows you to create web applications quickly and easily.",
+        "slug"          : "home",
+        "styles"        : [],
+        "scripts"       : []
+
+    },
+
+    "error":{
+        "title"         : "Error 404 - Page Not Found",
+        "description"   : "The page you are looking for could not be found.",
+        "slug"          : "error",
+        "styles"        : [],
+        "scripts"       : []
+    }
+}

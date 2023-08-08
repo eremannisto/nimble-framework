@@ -1,134 +1,83 @@
 <?php
 
-// // Dependencies:
-// if (!class_exists('Package')) {
-//     require_once(__DIR__ . '/package.php');
-// }
+// Dependencies:
+if(!class_exists('JSON'))        require_once(__DIR__ . '/json.php');
+if(!class_exists('Report'))      require_once(__DIR__ . '/report.php');
 
-// if(!class_exists('Controller')) {
-//     require_once(__DIR__ . '/controller.php');
-// }
+class Pages {
 
-// if(!class_exists('Directories')) {
-//     require_once(__DIR__ . '/directories.php');
-// }
+    /**
+     * The cached pages object, this is updated when
+     * the JSON::get method is called. Works also as
+     * a whitelist for pages.
+     */
+    public static mixed $cache;
 
-// if(!class_exists('Templates')) {
-//     require_once(__DIR__ . '/templates.php');
-// }
+    /**
+     * The path to the pages.json file from the
+     * root directory of the project.
+     */
+    private static $file = "/pages.json";
 
-// if(!class_exists('Components')) {
-//     require_once(__DIR__ . '/components.php');
-// }
+    /**
+     * Retrieves favicons data from the specified location.
+     *
+     * @param string|null $location 
+     * The location of the pages.json file. Defaults to an empty string.
+     * 
+     * @return mixed 
+     * The pages data.
+     */
+    public static function get(?string $location = ""): mixed {
+        $directory = sprintf("%s%s", Directories::get("pages"), self::$file);
+        return JSON::get($location, $directory, get_called_class());
+    }
+
+    /**
+     * Sets the given data at the specified location in the config file.
+     *
+     * @param string $location 
+     * The location where the data should be set.
+     * 
+     * @param mixed $data 
+     * The data to be set.
+     * 
+     * @return bool 
+     * Returns true if the data was successfully set, false otherwise.
+     */
+    public static function set(string $location, mixed $data): bool {
+        return JSON::set($location, $data, self::$file);
+    }
+
+    /**
+     * Require a page by its key name. This will
+     * require the page file, for example: test.page.php
+     * from the pages directory.
+     * 
+     * @param string $page
+     * The page name
+     * 
+     * @return void
+     * Returns nothing
+     */
+    public static function require(string $page): void {
+        $directory = Directories::get("pages", dirname(__DIR__, 1)) . "/$page";
+        file_exists($path = "$directory/$page.page.php") 
+        ? require_once $path : Report::error("Page '$page' not found");
+    }
+}
+
+
+
+
+
+
+
+
+
 
 // class Pages {
 
-//     // Variable to cache pages:
-//     private static $cache;
-
-//     public static function this(): string {
-//         $parameter  = Controller::getPageParameter();           // Get parameter name
-//         $index      = Controller::getIndexName() ?? 'page';     // Get index name, or fallback to 'page'
-//         return isset($_GET[$parameter]) ? $_GET[$parameter] : $index;
-//     }
-
-//     /**
-//      * Gets all pages from package.json and caches them.
-//      * If pages are already cached, the cached pages
-//      * will be returned.
-//      * 
-//      * @return object|null
-//      * The pages object or null if not found
-//      */
-//     public static function pages(): ?object {
-
-//         // Check if pages are cached:
-//         if (!isset(Pages::$cache)) {
-
-//             // Get pages from package.json and cache them:
-//             $pages        = Package::get()->pages ?? null;
-//             Pages::$cache = $pages;
-//         }
-
-//         // Return pages:
-//         return Pages::$cache;
-//     }
-
-//     /**
-//      * Get a specific page by it's key name.
-//      * 
-//      * @param string $page
-//      * The page by it's key name
-//      * 
-//      * @return object|null
-//      * The page object or null if not found
-//      */
-//     public static function get(string $page): ?object {
-
-//         // Get cached pages list:
-//         $pages = Pages::pages();
-
-//         // Check if page exists:
-//         if (!isset($pages->$page)) {
-//             Report::error("Page '{$page}' not found");
-//         }
-
-//         // Return page:
-//         return $pages->$page ?? null;
-//     }
-
-//     /**
-//      * Set a specific page by it's key name.   
-//      * 
-//      * @param string $page
-//      * The page by it's key name
-//      * 
-//      * @param object $object
-//      * The page object
-//      */
-//     public static function set(string $page, object $object): bool {
-
-//         // Get cached pages list:
-//         $pages = Pages::pages();
-
-//         // Make sure the page doesn't exists:
-//         if (isset($pages->$page)) {
-//             Report::notice("Page '{$page}' already exists");
-//             return false;
-//         }
-
-//         // Set page:
-//         $pages->$page = $object;
-
-//         // Update the package.json:
-//         Package::get()->pages = $pages;
-//         Package::set(Package::get());
-
-//         // Update cache:
-//         Pages::$cache = $pages;
-
-//         // Return true:
-//         return true;
-//     }
-
-//     /**
-//      * Require a page by its key name. This will
-//      * require the page file, for example: test.page.php
-//      * 
-//      * @param string $page
-//      * The page name
-//      * 
-//      * @return void
-//      * Returns nothing
-//      */
-//     public static function require(string $page): void {
-
-//         // Get page file:
-//         $file = Pages::getFile($page);
-
-//         // Require page file:
-//         require_once($file);
-//     }
 
 //     /**
 //      * Load page components and templates.

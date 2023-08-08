@@ -1,14 +1,12 @@
 {
     "Notification":{
         "slug"    : "Notification",
-        "template": null,
         "styles"  : null,
         "scritps" : null
     },
 
     "CookieConsent":{
         "slug"    : "CookieConsent",
-        "template": null, 
         "styles"  : null,
         "scritps" : null
     }

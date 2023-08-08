@@ -1,10 +1,15 @@
 <?php
 
+// Dependencies:
+if(!class_exists('Directories')) require_once(__DIR__ . '/directories.php');
+
 /**
  * Report class handles all logging related methods, such as writing
  * to log files, handling exceptions, errors, warnings and notices.
  * 
- * @version 1.0.0
+ * @version     1.0.0
+ * @package     Ombra
+ * @subpackage  Reports
  */
 class Report {
 
@@ -23,21 +28,19 @@ class Report {
      * @return void
      * Returns nothing.
      */
-    private static function write(string $file, string $message, string $level = 'notice'): bool {
+    private static function write(string $file, string $message, string $level): bool {
 
-        $extension  = '.log';
-        $directory  = dirname(__DIR__, 1) . '/reports';
-        $file       = sprintf('%s/%s%s', $directory, $file, $extension);
-        $levels     = ['warning', 'notice', 'error', 'exception', "success"];
+        // Get the log file and directory
+        $directory = Directories::get('reports', dirname(__DIR__, 1)); 
+        $file      = "$directory/$file.log";
 
         // Ensure log directory exists, if not, create it
         if (!is_dir($directory)) {
             mkdir($directory, 0777, true);
         }
-        
-        // TODO: Regex the file name
 
         // Validate log level
+        $levels = ['warning', 'notice', 'error', 'exception', "success", "debug"];
         if (!in_array(strtolower($level), $levels)) {
             return false;
         }
@@ -48,6 +51,8 @@ class Report {
         elseif ($level === "warning")   { $color = "🟠"; }  // Warning
         elseif ($level === "error")     { $color = "🔴"; }  // Error
         elseif ($level === "exception") { $color = "🟣"; }  // Exception
+        else                            { $color = "⚪"; }  // Debug
+
 
         // Get the file name and line number where the error occurred
         $backtrace  = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2);
@@ -147,39 +152,23 @@ class Report {
      * Returns nothing.
      */
     public static function exception(object $exception): void {
-
-        // Put the code and the message together and log it
-        $message = $exception->getMessage();
-        Report::write('report', $message, 'exception');
+        Report::write('report', $exception->getMessage(), 'exception');
     }
     
     /**
-     * Custom log handler will be used to trigger a custom log
-     * when a custom log occurs.
-     * 
-     * @param string $file
-     * The log file.
+     * Debug handler will be used to trigger a debug
+     * when a debug occurs.
      * 
      * @param string $code
-     * The log code.
+     * The debug code.
      * 
      * @param string $message
-     * The log message.
+     * The debug message.
      * 
-     * @param string $level
-     * The log level.
-     * 
-     * @return void 
+     * @return void
      * Returns nothing.
      */
-    public static function custom(string $file, string $message, string $level = "notice"): void {
-
-        // Validate levels:
-        $level  = strtolower($level);
-        $levels = ["warning", "notice", "error", "exception", "success"];
-        if (!in_array($level, $levels)) { $level = "notice"; }
-
-        // Write the message to the log file
-        Report::write($file, $message, $level);
+    public static function debug(string $message): void {
+        Report::write('debug', $message, 'debug');
     }
 }

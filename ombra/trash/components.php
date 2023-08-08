@@ -5,108 +5,69 @@
 // if(!class_exists('Controller'))  require_once(__DIR__ . '/controller.php');
 // if(!class_exists('Directory'))   require_once(__DIR__ . '/directory.php');
 
-// class Components {
+class Components {
 
-//     // Variable to cache components:
-//     private static $cache;
+    /**
+     * The cached components object, this is updated when
+     * the JSON::get method is called.
+     */
+    public static mixed $cache;
 
-//     /**
-//      * Gets all components from config.json and caches them.
-//      * If components are already cached, the cached components
-//      * will be returned.
-//      * 
-//      * @return object|null
-//      * The components object or null if not found
-//      */
-//     public static function components(): ?object {
+    /**
+     * Retrieves components data from the specified location.
+     *
+     * @param string|null $location 
+     * The location of the components.json file. Defaults to an empty string.
+     * 
+     * @return mixed 
+     * The favicon data.
+     */
+    public static function get(?string $location = ""): mixed {
+        $directory = sprintf("%s%s", Directories::get("components"), self::$file);
+        return JSON::get($location, $directory, get_called_class());
+    }
 
-//         // Check if components are cached:
-//         if (!isset(Components::$cache)) {
+    /**
+     * Sets the given data at the specified location in the component file.
+     *
+     * @param string $location 
+     * The location where the data should be set.
+     * 
+     * @param mixed $data 
+     * The data to be set.
+     * 
+     * @return bool 
+     * Returns true if the data was successfully set, false otherwise.
+     */
+    public static function set(string $location, mixed $data): bool {
+        return JSON::set($location, $data, self::$file);
+    }
 
-//             // Get components from config.json and cache them:
-//             $components       = Config::get()->components ?? null;
-//             Components::$cache = $components;
-//         }
+    /**
+     * Require a page by its key name. This will
+     * require the page file, for example: test.component.php
+     * from the pages directory.
+     * 
+     * @param string $page
+     * The page name
+     * 
+     * @return void
+     * Returns nothing
+     */
+    public static function require(string $component): void {
+        $directory = Directories::get("component", dirname(__DIR__, 1)) . $page;
+        !file_exists($directory) 
+        ? Report::error("Component '{$component}' not found") 
+        : require_once(sprintf("%s/%s", $directory, "{$component}.component.php"));
+    }
 
-//         // Return components:
-//         return Components::$cache;
-//     }
-
-//     /**
-//      * Get a specific component by it's key name.
-//      * 
-//      * @param string $component
-//      * The component by it's key name
-//      * 
-//      * @return object|null
-//      * The component object or null if not found
-//      */
-//     public static function get(string $component): ?object {
-
-//         // Get cached components list:
-//         $components = Components::components();
-
-//         // Check if component exists:
-//         if (!isset($components->$component)) {
-//             Report::error("Component '{$component}' not found");
-//         }
-
-//         // Return component:
-//         return $components->$component ?? null;
-//     }
-
-//     /**
-//      * Set a specific component by it's key name.   
-//      * 
-//      * @param string $component
-//      * The component by it's key name
-//      * 
-//      * @param object $value
-//      * The component object
-//      */
-//     public static function set(string $component, object $object): bool {
-
-//         // Get cached components list:
-//         $components = Components::components();
-
-//         // Make sure the component doesn't exists:
-//         if (isset($components->$component)) {
-//             Report::notice("Component '{$component}' already exists");
-//             return false;
-//         }
-
-//         // Set component:
-//         $components->$component = $object;
-
-//         // Update the config.json:
-//         Config::get()->components = $components;
-//         Config::set(Config::get());
-
-//         // Update cache:
-//         Components::$cache = $components;
-
-//         // Return true:
-//         return true;
-//     }
-
-//     /**
-//      * Require a component by its key name. This will
-//      * require the component file, for example: example.component.php
-//      * 
-//      * @param string $component
-//      * The component name
-//      * 
-//      * @return void
-//      * Returns nothing
-//      */
-//     public static function require(string $component): void {
-
-//         // Get component file:
-//         $file = Components::getFile($component);
-
-//         // Require component file:
-//         require_once($file);
-//     }
+    /**
+     * This action adds a new component. It includes updating the
+     * components.json file and creating a new directory for the
+     * component with its PHP, CSS, and JS files.
+     */
+    
+}
 
 //     /**
 //      * Remove a specific component from config.json.

@@ -6,23 +6,28 @@ if (!class_exists('Config')) require_once (__DIR__ . '/config.php');
  * Directories class handles all directories related methods,
  * such as getting and setting the path of the directories.
  * 
- * @version     1.0.0
+ * @version     0.0.1
  * @package     Ombra
- * @subpackage  Request
+ * @subpackage  Directories
  */
 class Directories {
 
     /**
-     * Gets the path of the requested directory.
-     * 
+     * Returns the path of a directory based on its name and an optional subpath.
+     *
      * @param string $directory
-     * The directory name to get the path for.
+     * The name of the directory to retrieve.
      * 
-     * @return string|null
-     * The path of the requested directory, or null if the directory doesn't exist.
+     * @param string|null $path (optional)
+     * An optional subpath to append to the directory path.
+     * 
+     * @return string|null 
+     * The full path of the directory, including the optional subpath, 
+     * or null if the directory is not found.
      */
-    public static function get(string $directory): ?string {
-        return Config::get("directories/$directory") ?? null;
+    public static function get(string $directory, ?string $path = null): ?string {
+        $directory = Config::get("application/directories/$directory");
+        return $path === null ? $directory : sprintf("%s%s", $path, $directory);
     }
 
     /**
@@ -35,9 +40,7 @@ class Directories {
      * The path to set for the requested directory.
      */
     public static function set(string $directory, string $path): void {
-        Config::set("directories/$directory", $path) 
-        ? Report::success("Successfully set directory '$directory' to '$path'")
-        : Report::error("Failed to set directory '$directory' to '$path'");
+        Config::set("application/directories/$directory", $path);
     }
 
     /**
@@ -50,6 +53,6 @@ class Directories {
      * True if the directory exists, false otherwise.
      */
     public static function exists(string $directory): bool {
-        return file_exists(dirname(__DIR__, 1) . '/' . Directories::get($directory));
+        return is_dir(dirname(__DIR__, 1) . '/' . Directories::get($directory));
     }
 }

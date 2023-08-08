@@ -276,7 +276,7 @@ class Controller {
      * @return void
      * The sanitized parameters
      */
-    public static function sanitize(): void {
+    private static function sanitize(): void {
 
         // Sanitize the GET parameters
         $sanitized = array_map(function ($value) {

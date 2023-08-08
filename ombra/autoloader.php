@@ -1,11 +1,12 @@
 <?php
 
 /**
- * Autoloads all classes in the core directory, by
- * scanning the core directory and requiring all php files.
- * 
- * @return void
- * Returns nothing.
+ * Autoloader class that loads all PHP files in the same directory 
+ * as the class file.
+ *
+ * @version     0.0.1
+ * @package     Ombra
+ * @subpackage  AutoLoader
  */
 class AutoLoader {
 

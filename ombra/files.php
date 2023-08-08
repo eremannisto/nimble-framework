@@ -1,10 +1,29 @@
 <?php
 
 // Dependancies:
-if(!class_exists('Request')) require_once(__DIR__ . '/controller.php');
+if(!class_exists('Request')) require_once(__DIR__ . '/request.php');
 
 class Files {
 
+    /**
+     * This method provides various file-related information based on the given parameter and path.
+     *
+     * @param string $parameter 
+     * The parameter to determine what information to return. 
+     * Possible values are:
+     * - modtime:   The file modtime unix timestamp.
+     * - size:      The file size.
+     * - mime:      The file mime type.
+     * - contents:  The file contents.
+     * - version:   The file href with a version number.
+     * 
+     * @param string|null $path 
+     * The path to the file.
+     * 
+     * @return mixed|null 
+     * The file-related information based on the given parameter and path. 
+     * Returns null if the file does not exist or the parameter is not valid.
+     */
     public static function get(string $parameter, ?string $path): mixed{
 
         switch ($parameter) {
@@ -38,9 +57,23 @@ class Files {
                 Report::warning("The parameter '$parameter' is not valid.");
                 return null;
         }
-
     }
 
+    /**
+     * Set a file parameter.
+     *
+     * @param string $parameter 
+     * The parameter to set. Valid values are 'modtime' and 'contents'.
+     * 
+     * @param string|null $path
+     * The path to the file.
+     * 
+     * @param mixed $value
+     * The value to set the parameter to.
+     * 
+     * @return bool|null 
+     * Returns true if the parameter was set successfully, false if the file does not exist, or null if the parameter is not valid.
+     */
     public static function set(string $parameter, ?string $path, mixed $value): bool{
 
         switch ($parameter) {
@@ -71,7 +104,7 @@ class Files {
      * @return bool
      * True if the file should be included, false otherwise.
      */
-    private static function includeFilter(string $condition = null): bool {
+    private static function filter(string $condition = null): bool {
 
         // If no condition is specified, return true (include on every page)
         if ($condition === null) {
@@ -82,7 +115,7 @@ class Files {
         // negation of the result of calling itself again with the exclamation point
         // removed (exclude on specific pages)
         if (strpos($condition, "!") === 0) {
-            return !includeFilter(substr($condition, 1));
+            return !filter(substr($condition, 1));
         }
 
         // Return true if the current page matches the include condition; otherwise, 
@@ -108,61 +141,44 @@ class Files {
      */
     private static function link(string $file, string $type, ?string $conditions = null): mixed {
         
-        // Get file modification time as the version number:
-        $version = Files::get("version", $file);
-
-        // Convert the conditions to an array if necessary:
+        // Get the file version and filter the conditions, this also makes sure the
+        // file exists:
+        $version    = Files::get("version", $file);
         $conditions = is_array($conditions) ? $conditions : [$conditions];
-
-        // Iterate over the conditions:
         foreach ($conditions as $condition) {
-
-            // If conditions are not met, skip this iteration:
-            if (!Files::includeFilter($condition)) {
-                continue;
-            }
-
-            // If the version is null, skip this iteration:
-            if($version === null) {
-                continue;
-            }
-            
-            // Initialize the output variable:
-            $output = "";
-
-            // Generate the HTML code based on the type:
-            switch (true) {
-
-                // Generate a CSS link:
-                case $type === 'css' || $type === 'text/css':
-                    $output .= sprintf('<link rel="stylesheet" type="text/css" href="%s" media="all">', $version);
+            if (!Files::filter($condition) || $version === null) { continue; }
+        
+            // Check the file type and generate the link:
+            switch ($type) {
+                case $type == 'css' || $type == 'text/css'::
+                    $output = sprintf('<link rel="stylesheet" type="text/css" href="%s" media="all">', $version);
                     break;
 
-                // Generate a JavaScript script:
-                case $type === 'js' || $type === 'text/javascript':
-                    $output .= sprintf('<script type="text/javascript" src="%s"></script>', $version);
+                case $type == 'js' || $type == 'text/javascript':
+                    $output = sprintf('<script type="text/javascript" src="%s"></script>', $version);
+                    break;
+    
+                case $type == 'module' || $type == 'text/javascript':
+                    $output = sprintf('<script type="module" src="%s"></script>', $version);
                     break;
 
-                // Generate a JavaScript module:
-                case $type === 'module' || $type === 'js-module':
-                    $output .= sprintf('<script type="module" src="%s"></script>', $version);
-                    break;
-
-                // Invalid type: do nothing
                 default:
                     Report::warning("Invalid type '$type' for file '$file'.");
                     break;
             }
-
-            // Return the output:
+        
             return $output;
         }
-
-        // Return null if the file was not included:
+        
         return null;
     }
 
+
+
+
 }
+
+
 
 
 
@@ -194,35 +210,6 @@ class Files {
     //     // Add the page styling to the page stylesheets
     //     $style = (array)str_replace($_SERVER['DOCUMENT_ROOT'], '', Pages::getStyle($page));
     //     $stylesheets = array_merge($stylesheets, $style);
-
-
-    //     // Templates:
-    //     // Get all the template stylesheets for each template
-    //     // used by the current page:
-    //     $templates  = $pages->$page->templates;
-    //     foreach ($templates as $template) {
-
-    //         // For each template, get the template stylesheets,
-    //         // and add them to the page stylesheets:
-    //         $style = (array)str_replace($_SERVER['DOCUMENT_ROOT'], '', Templates::getStyle($template));
-    //         $stylesheets = array_merge($stylesheets, $style);
-
-    //         // Add also each templates own stylesheets object:
-    //         $style = Templates::templates()->$template->styles;
-    //         $stylesheets = array_merge($stylesheets, $style);
-
-    //         // For each component that the template uses, get the component styles,
-    //         // and add them to the page styles: (Remove the SERVER_ROOT from the path)
-    //         $components = Templates::templates()->$template->components;
-    //         foreach ($components as $component) {
-    //             $style = (array)str_replace($_SERVER['DOCUMENT_ROOT'], '', Components::getStyle($component));
-    //             $stylesheets = array_merge($stylesheets, $style);
-
-    //             // Add also each components own style object:
-    //             $style = Components::components()->$component->styles;
-    //             $stylesheets = array_merge($stylesheets, $style);
-    //         }
-    //     }
 
     //     // Components:
     //     // Get all the component stylesheets for each component
