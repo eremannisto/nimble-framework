@@ -12,7 +12,7 @@
 *.log
 *.crash
 /ombra/reports/
-/ombra/trash/
+/ombra/depricated/
 
 # Environment
 .env
