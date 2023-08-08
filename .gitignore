@@ -12,6 +12,7 @@
 *.log
 *.crash
 /ombra/reports/
+/ombra/trash/
 
 # Compiled files and binaries
 *.o
@@ -26,4 +27,7 @@
 composer.phar
 composer.lock
 /vendor/
+
+# Environment
+.env
 
