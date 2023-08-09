@@ -83,7 +83,13 @@ class JSON {
         // Requirement 5: JSON::remove('pages', $file), removes the pages object from the json file.
         // Requirement 6: JSON::remove('', $file), removes all data from the json file.
 
+        // Get the whole JSON object from the file
+        $json = JSON::get("", $file, $class);
 
+        // Traverse the JSON object to the specified path
+        $data = JSON::traverse($json, $path);
+
+        
     }
 
 
