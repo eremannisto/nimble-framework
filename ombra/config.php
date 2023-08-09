@@ -38,7 +38,7 @@ class Config {
     }
 
     /**
-     * Sets the given data at the specified location in the config file.
+     * Sets the given data at the specified location in the json file.
      *
      * @param string $location 
      * The location where the data should be set.
@@ -50,11 +50,11 @@ class Config {
      * Returns true if the data was successfully set, false otherwise.
      */
     public static function set(string $location, mixed $data): bool {
-        return JSON::set($location, $data, self::$file);
+        return JSON::set($location, $data, self::$file, get_called_class());
     }
 
     /**
-     * Deletes the data at the specified location in the config file.
+     * Deletes the data at the specified location in the json file.
      * 
      * @param string $location
      * The location where the data should be deleted.
@@ -63,7 +63,6 @@ class Config {
      * Returns true if the data was successfully deleted, false otherwise.
      */
     public static function remove(string $location): bool {
-        echo("Removing $location from " . self::$file . "\n");
         return JSON::remove($location, self::$file, get_called_class());
     }
 }

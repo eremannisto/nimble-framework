@@ -26,33 +26,31 @@ class Files {
      */
     public static function get(string $parameter, ?string $path): mixed{
 
+        // Get the full path to the file:
+        $fullPath = $_SERVER['DOCUMENT_ROOT'] . '/' . $path;
+
         switch ($parameter) {
-
-            // Return the file modtime unix timestamp:
             case 'modtime':
-                $path = join(DIRECTORY_SEPARATOR, [$_SERVER['DOCUMENT_ROOT'], $path]);
-                return file_exists($path) ? filemtime($path) : null;
-            
-            // Return the file size:
+                return file_exists($fullPath) 
+                ? filemtime($fullPath) : null;
+
             case 'size':
-                $path = join(DIRECTORY_SEPARATOR, [$_SERVER['DOCUMENT_ROOT'], $path]);
-                return file_exists($path) ? filesize($path) : null;
+                return file_exists($fullPath) 
+                ? filesize($fullPath) : null;
 
-            // Return the file mime type:
             case 'mime':
-                $path = join(DIRECTORY_SEPARATOR, [$_SERVER['DOCUMENT_ROOT'], $path]);
-                return file_exists($path) ? mime_content_type($path) : null;
+                return file_exists($fullPath) 
+                ? mime_content_type($fullPath) : null;
 
-            // Return the file contents:
             case 'contents':
-                $path = join(DIRECTORY_SEPARATOR, [$_SERVER['DOCUMENT_ROOT'], $path]);
-                return file_exists($path) ? file_get_contents($path) : null;
+                return file_exists($fullPath) 
+                ? file_get_contents($fullPath) : null;
 
-            // Return the file href with a version number:
             case 'version':
                 $modified = Files::get("modtime", $path);
-                return $modified !== null ? sprintf("%s?version=%d", $path, $modified) : null;
- 
+                return $modified !== null 
+                ? sprintf("%s?version=%d", $path, $modified) : null;
+
             default:
                 Report::warning("The parameter '$parameter' is not valid.");
                 return null;
@@ -72,7 +70,8 @@ class Files {
      * The value to set the parameter to.
      * 
      * @return bool|null 
-     * Returns true if the parameter was set successfully, false if the file does not exist, or null if the parameter is not valid.
+     * Returns true if the parameter was set successfully, false if the file does
+     * not exist, or null if the parameter is not valid.
      */
     public static function set(string $parameter, ?string $path, mixed $value): bool{
 

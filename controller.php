@@ -27,7 +27,10 @@ AutoLoader::load();
 //     ]
 // ]);
 
-Config::remove('application/name');
+// echo(Config::set("application/version", "0.0.1"));
+// echo(Config::get("application/version"));
+Config::remove("application/directories/");
+
 
 // Pages::require('home');
 ?>

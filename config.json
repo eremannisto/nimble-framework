@@ -1,53 +1,47 @@
 {
-    "application"   : {
-
-        "version"       : "1.0.0",
-        "name"          : "Application name",
-        "description"   : "Application description",
-        "folder"        : "ombra-framework",
-        "created"       : "01.01.2023 00:00:00",
-        "updated"       : "01.01.2023 00:00:00",
-
-        "router"        : {
-            "host"          : "example.com",
-            "base"          : "https://example.com",
-            "index"         : "home",
-            "error"         : "error",
-            "controller"    : "controller",
-            "parameter"     : "page"
+    "application": {
+        "version": "0.0.1",
+        "name": "Application name",
+        "description": "Application description",
+        "folder": "ombra-framework",
+        "created": "01.01.2023 00:00:00",
+        "updated": "01.01.2023 00:00:00",
+        "router": {
+            "host": "example.com",
+            "base": "https:\/\/example.com",
+            "index": "home",
+            "error": "error",
+            "controller": "controller",
+            "parameter": "page"
         },
-
-        "directories"   : {
-            "root"          : "/",
-            "source"        : "/src",
-            "pages"         : "/src/pages",
-            "components"    : "/src/components",
-            "public"        : "/public",
-            "favicon"       : "/public/favicon",
-            "images"        : "/public/images",
-            "css"           : "/public/css",
-            "js"            : "/public/js",
-            "ombra"         : "/ombra",
-            "reports"       : "/ombra/reports",
-            "vendor"        : "/vendor"
+        "directories": {
+            "root": "\/",
+            "source": "\/src",
+            "pages": "\/src\/pages",
+            "components": "\/src\/components",
+            "public": "\/public",
+            "favicon": "\/public\/favicon",
+            "images": "\/public\/images",
+            "css": "\/public\/css",
+            "js": "\/public\/js",
+            "ombra": "\/ombra",
+            "vendor": "\/vendor"
         },
-
-        "time"          : {
-            "format"        : "d.m.Y H:i:s",
-            "zone"          : "Europe/Helsinki",
-            "locale"        : "fi_FI",
-            "restriction"   : {
-                "start"         : null,
-                "end"           : null
+        "time": {
+            "format": "d.m.Y H:i:s",
+            "zone": "Europe\/Helsinki",
+            "locale": "fi_FI",
+            "restriction": {
+                "start": null,
+                "end": null
             }
         },
-
         "meta": {
-            "title"         : "The default title",
-            "description"   : "The default description",
-            "type"          : "website",
-            "image"         : "social.png",
-            "language"      : "en"
+            "title": "The default title",
+            "description": "The default description",
+            "type": "website",
+            "image": "social.png",
+            "language": "en"
         }
     }
 }

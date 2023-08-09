@@ -6,12 +6,13 @@ if(!class_exists('Report'))      require_once(__DIR__ . '/report.php');
 if(!class_exists('Directories')) require_once(__DIR__ . '/directories.php');
 if(!class_exists('Files'))       require_once(__DIR__ . '/files.php');
 
-
 /**
  * This class handles how the favicon is displayed,
  * and also how the favicon is generated.
  * 
- * @version 1.0.0
+ * @version     0.0.1
+ * @package     Ombra
+ * @subpackage  Favicon
  */
 class Favicon {
 
@@ -20,13 +21,13 @@ class Favicon {
      * The cached favicon object, this is updated when
      * the JSON::get method is called.
      */
-    public static $cache = null;
+    public static mixed $cache = null;
 
     /**
      * The path to the favicons.json file from the
      * root directory of the project.
      */
-    private static $file = "/favicons.json";
+    private static string $file = "/favicons.json";
 
     /**
      * Retrieves favicons data from the specified location.
@@ -43,7 +44,7 @@ class Favicon {
     }
 
     /**
-     * Sets the given data at the specified location in the config file.
+     * Sets the given data at the specified location in the json file.
      *
      * @param string $location 
      * The location where the data should be set.
@@ -55,7 +56,20 @@ class Favicon {
      * Returns true if the data was successfully set, false otherwise.
      */
     public static function set(string $location, mixed $data): bool {
-        return JSON::set($location, $data, self::$file);
+        return JSON::set($location, $data, self::$file, get_called_class());
+    }
+
+    /**
+     * Deletes the data at the specified location in the json file.
+     * 
+     * @param string $location
+     * The location where the data should be deleted.
+     * 
+     * @return bool
+     * Returns true if the data was successfully deleted, false otherwise.
+     */
+    public static function remove(string $location): bool {
+        return JSON::remove($location, self::$file, get_called_class());
     }
 
     /**
