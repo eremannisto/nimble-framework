@@ -75,23 +75,74 @@ class JSON {
      * True if the property was removed successfully, false otherwise.
      */
     public static function remove(string $path, string $file, string $class): bool {
-     
-        // Requirement 1: JSON::remove('pages/home', $file), removes the home page from the pages object.
-        // Requirement 2: JSON::remove('pages/home/title', $file), removes the title property from the home page.
-        // Requirement 3: JSON::remove('pages/home/title/en', $file), removes the english title from the home page.
-        // Requirement 4: JSON::remove('pages/home/title/en/', $file), Remove everything from the english title.
-        // Requirement 5: JSON::remove('pages', $file), removes the pages object from the json file.
-        // Requirement 6: JSON::remove('', $file), removes all data from the json file.
 
-        // Get the whole JSON object from the file
-        $json = JSON::get("", $file, $class);
-
-        // Traverse the JSON object to the specified path
-        $data = JSON::traverse($json, $path);
-
+        $json = JSON::get('', $file, $class);
+        if ($json === NULL) {
+            Report::error("Updating JSON data failed: Unable to read JSON file");
+            return FALSE;
+        }
+    
+        // If the path is empty, clear JSON data and create a new empty object.
+        if ($path === '' || $path === '/') {
+            $target = new stdClass;
+            if (!JSON::write($file, $target)) {
+                Report::error("Updating JSON data failed: Unable to write updated JSON data");
+                return FALSE;
+            }
+        } 
         
+        else {
+
+            // Check if the path ends with a slash.
+            $slashed = substr($path, -1) === '/';
+    
+            if ($slashed) {
+                // Remove everything inside the property but keep the property itself.
+                // Remove the trailing slash from the path.
+                $path = substr($path, 0, -1);
+
+                $target = JSON::traverse($json, $path);
+
+                if (is_object($target)) {
+                    foreach ($target as $key => $value) {
+                        unset($target->{$key});
+                    }
+                }
+            } 
+            
+            else {
+                // Remove requested property (key) or nested property from JSON data.
+                $keys = explode('/', $path);
+                $current = &$json;
+                foreach ($keys as $key) {
+                    if (is_object($current) && isset($current->$key)) {
+                        if (end($keys) === $key) {
+                            unset($current->$key);
+                        } else {
+                            $current = &$current->$key;
+                        }
+                    } else {
+                        break;
+                    }
+                }
+            }
+    
+            // Update the JSON data and try to write it to the file.
+            // Return false if the data could not be written.
+            if (!JSON::write($file, $json)) {
+                Report::error("Updating JSON data failed: Unable to write updated JSON data");
+                return FALSE;
+            }
+        }
+    
+        // Clear the cache and return true if 
+        // the data was updated successfully.
+        JSON::clear($class);
+        Report::success("Successfully updated JSON data");
+        return TRUE;
     }
 
+        
 
     /**
      * Reads and decodes a JSON file.
