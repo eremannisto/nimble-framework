@@ -1,6 +1,6 @@
 {
     "application": {
-        "version": "1.0.0",
+        "version": null,
         "name": "Ombra - Simple PHP Framework",
         "description": "Application description",
         "folder": "ombra-framework",
