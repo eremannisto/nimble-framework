@@ -1,12 +1,12 @@
 <?php
 
 // Dependancies:
-if(!class_exists('Config'))      require_once(__DIR__ . '/config.php');
-if(!class_exists('Request'))     require_once(__DIR__ . '/request.php');
-if(!class_exists('Report'))      require_once(__DIR__ . '/report.php');
-if(!class_exists('Pages'))       require_once(__DIR__ . '/pages.php');
-if(!class_exists('Files'))       require_once(__DIR__ . '/files.php');
-if(!class_exists('Directories')) require_once(__DIR__ . '/directories.php');
+if (!class_exists('Config'))      require_once(__DIR__ . '/config.php');
+if (!class_exists('Request'))     require_once(__DIR__ . '/request.php');
+if (!class_exists('Report'))      require_once(__DIR__ . '/report.php');
+if (!class_exists('Pages'))       require_once(__DIR__ . '/pages.php');
+if (!class_exists('Files'))       require_once(__DIR__ . '/files.php');
+if (!class_exists('Directories')) require_once(__DIR__ . '/directories.php');
 
 
 /**
@@ -33,7 +33,7 @@ class Meta {
     public static function get(string $parameter): ?string {
 
         // Get current page:
-        $currentPage     = Request::page();
+        $currentPage     = Request::current();
 
         // Get meta data:
         switch ($parameter) {
