@@ -27,15 +27,10 @@ AutoLoader::load();
 //     ]
 // ]);
 
-// echo(Config::set("application/version", "0.0.1"));
-// echo(Config::get("application/version"));
-<<<<<<< Updated upstream
-Config::remove("application/directories/");
 
-=======
-// Config::set("application/name", "Ombra - Simple PHP Framework");
-Config::remove("application/version/");
->>>>>>> Stashed changes
+echo(Path::root());
+echo('<br><br>');
+echo(Path::build(Directories::get("images"), "banner.png"));
 
 // Pages::require('home');
 ?>
