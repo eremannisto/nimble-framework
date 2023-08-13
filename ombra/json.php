@@ -1,8 +1,17 @@
 <?php
 
 // Depencencies
-if(!class_exists('Report')) require_once(__DIR__ . '/report.php');
+if (!class_exists('Report')) require_once(__DIR__ . '/report.php');
 
+/**
+ * The JSON class is responsible for managing JSON files by performing tasks
+ * such as reading, writing, removing, and updating them. This framework heavily
+ * relies on the JSON class to access and modify different configuration files.
+ *
+ * @version     1.0.0
+ * @package     Ombra
+ * @subpackage  JSON
+ */
 class JSON {
 
     /**
@@ -62,6 +71,7 @@ class JSON {
         return TRUE;
     }
  
+
     /**
      * Removes a property from a JSON file.
      *
@@ -72,24 +82,20 @@ class JSON {
      * The path to the JSON file.
      *
      * @return bool 
-     * True if the property was removed successfully, FALSE otherwise.
+     * True if the property was removed successfully, false otherwise.
      */
     public static function remove(string $path, string $file, string $class): bool {
-     
-        // Requirement 1: JSON::remove('pages/home', $file), removes the home page from the pages object.
-        // Requirement 2: JSON::remove('pages/home/title', $file), removes the title property from the home page.
-        // Requirement 3: JSON::remove('pages/home/title/en', $file), removes the english title from the home page.
-        // Requirement 4: JSON::remove('pages/home/title/en/', $file), Remove everything from the english title.
-        // Requirement 5: JSON::remove('pages', $file), removes the pages object from the json file.
-        // Requirement 6: JSON::remove('', $file), removes all data from the json file.
 
-        // Get the whole JSON object from the file
-        $json = JSON::get("", $file, $class);
+        $json = JSON::get('', $file, $class);
+        if ($json === NULL) {
+            Report::error("Updating JSON data failed: Unable to read JSON file");
+            return FALSE;
+        }
+    
+        // If the path is empty or has a single slash,
+        // clear the entire JSON data and create an empty object.
+        if ($path === '' || $path === '/') { $json = new stdClass; } 
 
-<<<<<<< Updated upstream
-        // Traverse the JSON object to the specified path
-        $data = JSON::traverse($json, $path);
-=======
         // If the path ends with a slash:
         elseif (substr($path, -1) === '/') {
 
@@ -106,7 +112,7 @@ class JSON {
             }
 
             // Otherwise json is a string or number, so change that value
-            // to NULL and update the JSON data.
+            // to null and update the JSON data.
             else { $json   = JSON::update($json, NULL, $path); }
 
         }
@@ -125,23 +131,20 @@ class JSON {
         }
 
         // Update the JSON data and try to write it to the file.
-        // Return FALSE if the data could not be written.
+        // Return false if the data could not be written.
         if (!JSON::write($file, $json)) {
             Report::error("Updating JSON data failed: Unable to write updated JSON data");
             return FALSE;
         }
     
-        // Clear the cache and return TRUE if 
+        // Clear the cache and return true if 
         // the data was updated successfully.
         JSON::clear($class);
         Report::success("Successfully updated JSON data");
         return TRUE;
     }
->>>>>>> Stashed changes
 
         
-    }
-
 
     /**
      * Reads and decodes a JSON file.
@@ -288,7 +291,7 @@ class JSON {
      * @param object $object
      * The object to encode.
      * 
-     * @return string|null
+     * @return string|NULL
      * The encoded JSON object as a string, or NULL if the object 
      * could not be encoded.
      */
@@ -310,10 +313,10 @@ class JSON {
      * @param object $data 
      * The object to traverse.
      * 
-     * @param string|null $path 
+     * @param string|NULL $path 
      * The path string to the nested property.
      * 
-     * @return mixed|null 
+     * @return mixed|NULL 
      * The value of the nested property or NULL if not found.
      */
     private static function traverse(mixed $object, ?string $path = NULL): mixed {
@@ -443,5 +446,4 @@ class JSON {
         $class::$cache = NULL;
         return TRUE;
     }
-
 }
