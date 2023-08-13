@@ -1,9 +1,9 @@
 <?php
 
 // Dependancies:
-if(!class_exists('Config'))  require_once(__DIR__ . '/config.php');
-if(!class_exists('Request')) require_once(__DIR__ . '/request.php');
-if(!class_exists('Report'))  require_once(__DIR__ . '/report.php');
+if (!class_exists('Config')) require_once(__DIR__ . '/config.php');
+if (!class_exists('Report')) require_once(__DIR__ . '/report.php');
+if (!class_exists('URL'))    require_once(__DIR__ . '/url.php');
 
 /**
  * Head class handles all head related methods,
@@ -42,7 +42,7 @@ class Head {
 
         // Get the default meta data:
         $defaults = [
-            'url'           => Request::url(),
+            'url'           => URL::get(),
             'title'         => Meta::get('title'),
             'description'   => Meta::get('description'),
             'keywords'      => Meta::get('keywords'),
