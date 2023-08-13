@@ -56,16 +56,4 @@ class Directories {
         return is_dir(dirname(__DIR__, 1) . '/' . Directories::get($directory));
     }
 
-    /**
-     * Get a directory from framework folder.
-     * 
-     * @param int $level
-     * The level of the directory to retrieve.
-     * 
-     * @return string
-     * The directory path.
-     */
-    public static function DIR(int $level): string {
-        return dirname(__DIR__, $level);
-    }
 }
