@@ -1,4 +1,8 @@
 <?php
+
+// Dependencies:
+// Not Allowed
+
 /**
  * Report class handles all logging related methods, such as writing
  * to log files, handling exceptions, errors, warnings and notices.
