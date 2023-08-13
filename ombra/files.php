@@ -1,9 +1,36 @@
 <?php
 
 // Dependancies:
-if(!class_exists('Request')) require_once(__DIR__ . '/request.php');
+if (!class_exists('Request')) require_once(__DIR__ . '/request.php');
 
 class Files {
+
+    /**
+     * The array of stylesheet files to include.
+     * Key is the path to the file, and value is the condition under which the file
+     * should be included.
+     * 
+     * @var array
+     */
+    public static array $stylesheets = [];
+
+    /**
+     * The array of javascript files to include.
+     * Key is the path to the file, and value is the condition under which the file
+     * should be included.
+     * 
+     * @var array
+     */
+    public static array $javascripts = [];
+
+    /**
+     * The array of module files to include.
+     * Key is the path to the file, and value is the condition under which the file
+     * should be included.
+     * 
+     * @var array
+     */
+    public static array $modules = [];
 
     /**
      * This method provides various file-related information based on the given parameter and path.
@@ -55,6 +82,74 @@ class Files {
                 Report::warning("The parameter '$parameter' is not valid.");
                 return null;
         }
+    }
+
+
+    /**
+     * Get the mod time of a file.
+     * 
+     * @param string $path
+     * The path to the file.
+     * 
+     * @return int|null
+     * The file mod time, or null if the file does not exist.
+     */
+    public static function modtime(string $path): ?int {
+        $path = Path::root($path);
+        return file_exists($fullPath) ? filemtime($fullPath) : null;
+    }
+
+    /**
+     * Get the size of a file.
+     * 
+     * @param string $path
+     * The path to the file.
+     * 
+     * @return int|null
+     * The file size, or null if the file does not exist.
+     */
+    public static function size(string $path): ?int {
+        return file_exists($fullPath) ? filesize($fullPath) : null;
+    }
+
+    /**
+     * Get the mime type of a file.
+     * 
+     * @param string $path
+     * The path to the file.
+     * 
+     * @return string|null
+     * The file mime type, or null if the file does not exist.
+     */
+    public static function mime(string $path): ?string {
+        return file_exists($fullPath) ? mime_content_type($fullPath) : null;
+    }
+
+    /**
+     * Get the contents of a file.
+     * 
+     * @param string $path
+     * The path to the file.
+     * 
+     * @return string|null
+     * The file contents, or null if the file does not exist.
+     */
+    public static function contents(string $path): ?string {
+        return file_exists($fullPath) ? file_get_contents($fullPath) : null;
+    }
+
+    /**
+     * Get the version of a file.
+     * 
+     * @param string $path
+     * The path to the file.
+     * 
+     * @return string|null
+     * The file version, or null if the file does not exist.
+     */
+    public static function version(string $path): ?string {
+        $modified = Files::modtime($path);
+        return $modified !== null ? sprintf("%s?version=%d", $path, $modified) : null;
     }
 
     /**
@@ -119,10 +214,10 @@ class Files {
 
         // Return true if the current page matches the include condition; otherwise, 
         // return false (include on specific pages)
-        return Request::page() === $condition;
+        return Request::current() === $condition;
     }
 
-/**
+    /**
      * Method to generate a file reference based on the specified file name, type,
      * and conditions.
      * 
