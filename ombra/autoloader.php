@@ -4,7 +4,7 @@
  * Autoloader class that loads all PHP files in the same directory 
  * as the class file.
  *
- * @version     0.0.1
+ * @version     1.0.0
  * @package     Ombra
  * @subpackage  AutoLoader
  */
