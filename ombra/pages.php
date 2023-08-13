@@ -1,8 +1,8 @@
 <?php
 
 // Dependencies:
-if(!class_exists('JSON'))        require_once(__DIR__ . '/json.php');
-if(!class_exists('Report'))      require_once(__DIR__ . '/report.php');
+if (!class_exists('JSON'))        require_once(__DIR__ . '/json.php');
+if (!class_exists('Report'))      require_once(__DIR__ . '/report.php');
 
 class Pages {
 
