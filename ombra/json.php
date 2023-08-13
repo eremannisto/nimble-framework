@@ -82,66 +82,49 @@ class JSON {
             return FALSE;
         }
     
-        // If the path is empty, clear JSON data and create a new empty object.
-        if ($path === '' || $path === '/') {
-            $target = new stdClass;
-            if (!JSON::write($file, $target)) {
-                Report::error("Updating JSON data failed: Unable to write updated JSON data");
-                return FALSE;
-            }
-        } 
+        // If the path is empty or has a single slash,
+        // clear the entire JSON data and create an empty object.
+        if ($path === '' || $path === '/') { $json = new stdClass; } 
 
+        // If the path ends with a slash:
+        elseif (substr($path, -1) === '/') {
+
+            // Remove the trailing slash from the path, and
+            // traverse the JSON data to get the target.
+            $path   = substr($path, 0, -1);
+            $target = JSON::traverse($json, $path);
+
+            // If the target is an object or array, clear it.
+            if (is_object($target) || is_array($target)) {
+                foreach ($target as $key => $value) {
+                    unset($target->{$key});
+                }
+            }
+
+            // Otherwise json is a string or number, so change that value
+            // to null and update the JSON data.
+            else { $json   = JSON::update($json, NULL, $path); }
+
+        }
+
+        // Traverse the json data and remove the property at the path.
         else {
-
-            // Check if the path ends with a slash.
-            $slashed = substr($path, -1) === '/';
-    
-            if ($slashed) {
-                
-                // Remove the trailing slash from the path.
-                $path = substr($path, 0, -1);
-
-                $target = JSON::traverse($json, $path);
-
-                // If the target is an object or array, clear it.
-                if (is_object($target) || is_array($target)) {
-                    foreach ($target as $key => $value) {
-                        unset($target->{$key});
-                    }
-                }
-
-                // Otherwise json is a string or number, so change that value
-                // to null and update the JSON data.
-                else {
-                    $target = null;
-                    $json   = JSON::update($json, $target, $path);
-                }
-
-            } 
-            
-            else {
-                // Remove requested property (key) or nested property from JSON data.
-                $keys = explode('/', $path);
-                $current = &$json;
-                foreach ($keys as $key) {
-                    if (is_object($current) && isset($current->$key)) {
-                        if (end($keys) === $key) {
-                            unset($current->$key);
-                        } else {
-                            $current = &$current->$key;
-                        }
-                    } else {
-                        break;
-                    }
-                }
+            $keys    = explode('/', $path);
+            $current = &$json;
+            foreach ($keys as $key) {
+                if (is_object($current) && isset($current->$key)) {
+                    if (end($keys) === $key) { unset($current->$key); } 
+                    else { $current = &$current->$key; }
+                } 
+                else { break; }
             }
-    
-            // Update the JSON data and try to write it to the file.
-            // Return false if the data could not be written.
-            if (!JSON::write($file, $json)) {
-                Report::error("Updating JSON data failed: Unable to write updated JSON data");
-                return FALSE;
-            }
+        }
+
+        // Update the JSON data and try to write it to the file.
+        // Return false if the data could not be written.
+        if (!JSON::write($file, $json)) {
+            Report::error("Updating JSON data failed: Unable to write updated JSON data");
+            return FALSE;
         }
     
         // Clear the cache and return true if 
