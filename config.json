@@ -27,11 +27,7 @@
             "images"        : "/public/images",
             "css"           : "/public/css",
             "js"            : "/public/js",
-            "ombra"         : "/ombra",
-<<<<<<< Updated upstream
-            "reports"       : "/ombra/reports",
-=======
->>>>>>> Stashed changes
+            "framework"     : "/ombra",
             "vendor"        : "/vendor"
         },
 
