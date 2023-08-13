@@ -8,16 +8,16 @@ class JSON {
     /**
      * Get the value of a nested property in an object using a path string.
      *
-     * @param string|null $path 
+     * @param string|NULL $path 
      * The path to the nested property.
      * 
-     * @param string|null $file
+     * @param string|NULL $file
      * The path to the JSON file.
      * 
-     * @return mixed|null 
-     * The value of the nested property or null if not found.
+     * @return mixed|NULL 
+     * The value of the nested property or NULL if not found.
      */
-    public static function get(?string $path = null, string $file, string $class): mixed {
+    public static function get(?string $path = NULL, string $file, string $class): mixed {
         $class::$cache = $class::$cache ?? JSON::read($file);
         return JSON::traverse($class::$cache, $path);
     }
@@ -35,12 +35,12 @@ class JSON {
      * The path of the JSON file.
      * 
      * @return bool
-     * Returns true if the update was successful, false otherwise.
+     * Returns TRUE if the update was successful, FALSE otherwise.
      */
     public static function set(string $path, mixed $data, string $file, string $class): bool {
         
         // Get the JSON data from the file, and
-        // return false if the data could not be read.
+        // return FALSE if the data could not be read.
         $json = JSON::get('', $file, $class);
         if (empty($path) || $json === NULL) {
             Report::error("Updating JSON data failed: Unable to read JSON file");
@@ -48,14 +48,14 @@ class JSON {
         }
 
         // Update the JSON data and try to write it to the file.
-        // Return false if the data could not be written.
+        // Return FALSE if the data could not be written.
         $updated = JSON::update($json, $data, $path);        
         if ($updated === NULL || !JSON::write($file, $updated)) {
             Report::error("Updating JSON data failed: Unable to write updated JSON data");
             return FALSE;
         }
         
-        // Clear the cache and return true if 
+        // Clear the cache and return TRUE if 
         // the data was updated successfully.
         JSON::clear($class);
         Report::success("Successfully updated JSON data");
@@ -72,7 +72,7 @@ class JSON {
      * The path to the JSON file.
      *
      * @return bool 
-     * True if the property was removed successfully, false otherwise.
+     * True if the property was removed successfully, FALSE otherwise.
      */
     public static function remove(string $path, string $file, string $class): bool {
      
@@ -86,8 +86,58 @@ class JSON {
         // Get the whole JSON object from the file
         $json = JSON::get("", $file, $class);
 
+<<<<<<< Updated upstream
         // Traverse the JSON object to the specified path
         $data = JSON::traverse($json, $path);
+=======
+        // If the path ends with a slash:
+        elseif (substr($path, -1) === '/') {
+
+            // Remove the trailing slash from the path, and
+            // traverse the JSON data to get the target.
+            $path   = substr($path, 0, -1);
+            $target = JSON::traverse($json, $path);
+
+            // If the target is an object or array, clear it.
+            if (is_object($target) || is_array($target)) {
+                foreach ($target as $key => $value) {
+                    unset($target->{$key});
+                }
+            }
+
+            // Otherwise json is a string or number, so change that value
+            // to NULL and update the JSON data.
+            else { $json   = JSON::update($json, NULL, $path); }
+
+        }
+
+        // Traverse the json data and remove the property at the path.
+        else {
+            $keys    = explode('/', $path);
+            $current = &$json;
+            foreach ($keys as $key) {
+                if (is_object($current) && isset($current->$key)) {
+                    if (end($keys) === $key) { unset($current->$key); } 
+                    else { $current = &$current->$key; }
+                } 
+                else { break; }
+            }
+        }
+
+        // Update the JSON data and try to write it to the file.
+        // Return FALSE if the data could not be written.
+        if (!JSON::write($file, $json)) {
+            Report::error("Updating JSON data failed: Unable to write updated JSON data");
+            return FALSE;
+        }
+    
+        // Clear the cache and return TRUE if 
+        // the data was updated successfully.
+        JSON::clear($class);
+        Report::success("Successfully updated JSON data");
+        return TRUE;
+    }
+>>>>>>> Stashed changes
 
         
     }
@@ -99,23 +149,23 @@ class JSON {
      * @param string $file  
      * The path to the JSON file.
      * 
-     * @return object|null      
-     * An object representation of the JSON data, or null if the file 
+     * @return object|NULL      
+     * An object representation of the JSON data, or NULL if the file 
      * could not be read or decoded.
      */
     private static function read(string $file): ?object {
 
         // Get the path to the JSON file, and
-        // return null if the file does not exist.
+        // return NULL if the file does not exist.
         $file = dirname(__DIR__, 1) . $file;
         if (!JSON::exists($file)) 
-            return null; 
+            return NULL; 
 
         // Get the contents of the JSON file,
         // decode the contents and return the decoded data.
         $json    = JSON::getContents($file);
         $decoded = JSON::decode($json);
-        return ($decoded === null) ? null : $decoded;
+        return ($decoded === NULL) ? NULL : $decoded;
     }
 
     /**
@@ -135,13 +185,13 @@ class JSON {
         // Get the path to the JSON file
         $file = dirname(__DIR__, 1) . $file;
 
-        // Encode the data and write it to the file and return true, 
+        // Encode the data and write it to the file and return TRUE, 
         // otherwise report an error.
         if (!JSON::putContents($file, JSON::encode($data))) {
             Report::error("Failed to write data to JSON file: $file");
-            return false;
+            return FALSE;
         }
-        return true;
+        return TRUE;
     }
 
     /**
@@ -152,17 +202,17 @@ class JSON {
      * The path to the JSON file.
      * 
      * @return bool
-     * Returns true if the file exists, false otherwise.
+     * Returns TRUE if the file exists, FALSE otherwise.
      */
     private static function exists(string $file): bool {
 
         // If the file does not exist, report an error and 
-        // return false.
+        // return FALSE.
         if (!file_exists($file)) {
             Report::warning("File does not exist: $file");
-            return false;
+            return FALSE;
         }
-        return true;
+        return TRUE;
     }
 
     /**
@@ -172,17 +222,17 @@ class JSON {
      * The path to the JSON file.
      * 
      * @return string|null 
-     * The contents of the JSON file as a string, or null if the file
+     * The contents of the JSON file as a string, or NULL if the file
      * could not be read.
      */
     private static function getContents(string $file): ?string {
 
-        // Get the contents of the JSON file and return null if the
+        // Get the contents of the JSON file and return NULL if the
         // contents could not be read.
         $contents = file_get_contents($file);
         if (!$contents) {
             Report::error("Failed to get contents of JSON file: " . $file);
-            return null;
+            return NULL;
         } 
         return $contents;
     }
@@ -197,17 +247,17 @@ class JSON {
      * The contents to write to the file.
      * 
      * @return bool 
-     * Returns true if the contents were successfully written to the file, false otherwise.
+     * Returns TRUE if the contents were successfully written to the file, FALSE otherwise.
      */
     private static function putContents(string $file, string $contents): bool {
 
-        // Write the contents to the file and return false if the
+        // Write the contents to the file and return FALSE if the
         // contents could not be written.
         if (!file_put_contents($file, $contents)) {
             Report::error("Failed to put contents of JSON file: " . $file);
-            return false;
+            return FALSE;
         } 
-        return true;
+        return TRUE;
     }
 
     /**
@@ -217,17 +267,17 @@ class JSON {
      * The JSON string to decode.
      * 
      * @return object|null
-     * The decoded JSON string as an object, or null if the string 
+     * The decoded JSON string as an object, or NULL if the string 
      * could not be decoded.
      */
     private static function decode(string $json): ?object {
 
-        // Decode the JSON string and return null if the string
+        // Decode the JSON string and return NULL if the string
         // could not be decoded.
         $decoded = json_decode($json);
         if (!$decoded) {
             Report::error("Failed to decode JSON string");
-            return null;
+            return NULL;
         } 
         return $decoded;
     }
@@ -239,17 +289,17 @@ class JSON {
      * The object to encode.
      * 
      * @return string|null
-     * The encoded JSON object as a string, or null if the object 
+     * The encoded JSON object as a string, or NULL if the object 
      * could not be encoded.
      */
     private static function encode(mixed $object, int $options = JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE): ?string {
 
-        // Encode the JSON object and return null if the object
+        // Encode the JSON object and return NULL if the object
         // could not be encoded.
         $encoded = json_encode($object, $options);
         if (!$encoded) {
             Report::error("Failed to encode JSON object");
-            return null;
+            return NULL;
         }
         return $encoded;
     }
@@ -264,21 +314,21 @@ class JSON {
      * The path string to the nested property.
      * 
      * @return mixed|null 
-     * The value of the nested property or null if not found.
+     * The value of the nested property or NULL if not found.
      */
-    private static function traverse(mixed $object, ?string $path = null): mixed {
+    private static function traverse(mixed $object, ?string $path = NULL): mixed {
 
-        // If the path is null or empty, return the original object.
-        if ($path === null || $path === "") { return $object; }
+        // If the path is NULL or empty, return the original object.
+        if ($path === NULL || $path === "") { return $object; }
 
         // Split the path string into an array of keys.
         $keys = explode('/', $path);
 
         // Traverse the object using the keys. If the key 
-        // is not found in the object, return null. Otherwise,
+        // is not found in the object, return NULL. Otherwise,
         // update the object to the value of the current key.
         foreach ($keys as $key) {
-            if (!isset($object->{$key})) { return null; }
+            if (!isset($object->{$key})) { return NULL; }
             $object = $object->{$key};
         }
 
@@ -299,7 +349,7 @@ class JSON {
      * The location of the value to update in the JSON object, in the format 'key1/key2/.../keyN'.
      * 
      * @return bool      
-     * True if the object was updated successfully, false otherwise.
+     * True if the object was updated successfully, FALSE otherwise.
      */
     private static function update(mixed &$object, mixed $data, string $location = ''): mixed {
         // Split the location into an array of keys:
@@ -323,7 +373,7 @@ class JSON {
             } 
     
             // If the current value is not an array or an object, 
-            // return false:
+            // return FALSE:
             else { return FALSE; }
         }
     
@@ -340,20 +390,20 @@ class JSON {
      * The path to the json file.
      * 
      * @return bool
-     * Returns true if the file was deleted successfully, false otherwise.
+     * Returns TRUE if the file was deleted successfully, FALSE otherwise.
      */
     private static function delete(string $file): bool {
 
         // Get the path to the JSON file
         $file = dirname(__DIR__, 1) . $file;
 
-        // Return false if the file does not exist,
-        // otherwise delete the file and return true.
+        // Return FALSE if the file does not exist,
+        // otherwise delete the file and return TRUE.
         if (!JSON::exists($file) && !unlink($file)) {
             Report::error("Failed to delete JSON file: " . $file);
-            return false;
+            return FALSE;
         }
-        return true;
+        return TRUE;
     }
 
     /**
@@ -363,7 +413,7 @@ class JSON {
      * The path and filename of the JSON file to create.
      * 
      * @return bool 
-     * Returns true if the file was created successfully, false otherwise.
+     * Returns TRUE if the file was created successfully, FALSE otherwise.
      */
     private static function create(string $file): bool {
 
@@ -371,12 +421,12 @@ class JSON {
         $file = dirname(__DIR__, 1) . $file;
 
         // If file exists, or the contents of the file could not be written,
-        // report an error and return false.
+        // report an error and return FALSE.
         if (JSON::exists($file) && !JSON::putContents($file, '{}')) {
             Report::error("Failed to create JSON file: $file");
-            return false;
+            return FALSE;
         } 
-        return true;
+        return TRUE;
     }
 
 
@@ -387,11 +437,11 @@ class JSON {
      * The class to clear the cache of.
      * 
      * @return bool
-     * Returns true if the cache was cleared successfully
+     * Returns TRUE if the cache was cleared successfully
      */
     private static function clear(string $class): bool {
-        $class::$cache = null;
-        return true;
+        $class::$cache = NULL;
+        return TRUE;
     }
 
 }
