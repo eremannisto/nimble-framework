@@ -27,7 +27,8 @@
             "images"        : "/public/images",
             "css"           : "/public/css",
             "js"            : "/public/js",
-            "framework"     : "/ombra",
+            "ombra"         : "/ombra",
+            "reports"       : "/ombra/reports",
             "vendor"        : "/vendor"
         },
 

@@ -28,9 +28,5 @@ AutoLoader::load();
 // ]);
 
 
-echo(Path::root());
-echo('<br><br>');
-echo(Path::build(Directories::get("images"), "banner.png"));
-
 // Pages::require('home');
 ?>
