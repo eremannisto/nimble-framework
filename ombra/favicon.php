@@ -1,10 +1,10 @@
 <?php
 
 // Dependencies:
-if(!class_exists('JSON'))        require_once(__DIR__ . '/json.php');
-if(!class_exists('Report'))      require_once(__DIR__ . '/report.php');
-if(!class_exists('Directories')) require_once(__DIR__ . '/directories.php');
-if(!class_exists('Files'))       require_once(__DIR__ . '/files.php');
+if (!class_exists('JSON'))        require_once(__DIR__ . '/json.php');
+if (!class_exists('Report'))      require_once(__DIR__ . '/report.php');
+if (!class_exists('Directories')) require_once(__DIR__ . '/directories.php');
+if (!class_exists('Files'))       require_once(__DIR__ . '/files.php');
 
 /**
  * This class handles how the favicon is displayed,
@@ -15,7 +15,6 @@ if(!class_exists('Files'))       require_once(__DIR__ . '/files.php');
  * @subpackage  Favicon
  */
 class Favicon {
-
 
     /**
      * The cached favicon object, this is updated when
