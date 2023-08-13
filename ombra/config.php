@@ -1,12 +1,12 @@
 <?php
 
 // Dependancies:
-if(!class_exists('JSON'))    require_once(__DIR__ . '/json.php');
+if (!class_exists('JSON'))    require_once(__DIR__ . '/json.php');
 
 /**
  * This class provides methods to read and update the config.json file.
  *
- * @version     0.0.1
+ * @version     1.0.0
  * @package     Ombra
  * @subpackage  Config
  */
