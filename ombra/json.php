@@ -3,6 +3,15 @@
 // Depencencies
 if(!class_exists('Report')) require_once(__DIR__ . '/report.php');
 
+/**
+ * The JSON class is responsible for managing JSON files by performing tasks
+ * such as reading, writing, removing, and updating them. This framework heavily
+ * relies on the JSON class to access and modify different configuration files.
+ *
+ * @version     1.0.0
+ * @package     Ombra
+ * @subpackage  JSON
+ */
 class JSON {
 
     /**
