@@ -1,5 +1,4 @@
-![Ombra - Personal PHP Framework](https://github.com/eremannisto/ombra-framework/blob/main/public/images/social.png)
-
+![Ombra - Personal PHP Framework](https://github.com/eremannisto/ombra-framework/blob/main/public/assets/images/social.png)
 # Ombra - Simple PHP Framework (in progress)
 Ombra is my personal, simple PHP framework project to simplify some of my projects while learning how to create a custom framework. I will try my best to keep the code well documented and updated. This is not meant for production, but any suggestions are always welcome.
 
