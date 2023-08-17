@@ -11,8 +11,8 @@
 # Logs and crash reports
 *.log
 *.crash
-/ombra/reports/
-/ombra/depricated/
+/core/reports/
+/core/depricated/
 
 # Environment
 .env

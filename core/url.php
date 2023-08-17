@@ -19,7 +19,6 @@ class URL {
      * @param array 
      * $options An array of options to build the URL string.
      *
-     *
      * @return string 
      * The generated URL string.
      */

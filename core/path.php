@@ -83,7 +83,7 @@ class Path {
      * The framework folder
      */
     public static function framework(): string {
-        return Path::build(Directories::get('framework'));
+        return Path::build(Folder::getPath('framework'));
     }
 
     /**

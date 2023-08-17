@@ -1,10 +1,10 @@
 <?php
 
 // Dependencies:
-if (!class_exists('JSON'))        require_once(__DIR__ . '/json.php');
-if (!class_exists('Report'))      require_once(__DIR__ . '/report.php');
-if (!class_exists('Directories')) require_once(__DIR__ . '/directories.php');
-if (!class_exists('Files'))       require_once(__DIR__ . '/files.php');
+if (!class_exists('JSON'))   require_once(__DIR__ . '/json.php');
+if (!class_exists('Report')) require_once(__DIR__ . '/report.php');
+if (!class_exists('Folder')) require_once(__DIR__ . '/folder.php');
+if (!class_exists('File'))   require_once(__DIR__ . '/file.php');
 
 /**
  * This class handles how the favicon is displayed,
@@ -38,8 +38,8 @@ class Favicon {
      * The favicon data.
      */
     public static function get(?string $location = ""): mixed {
-        $directory = sprintf("%s%s", Directories::get("favicon"), self::$file);
-        return JSON::get($location, $directory, get_called_class());
+        $folder = sprintf("%s%s", Folder::getPath("favicon"), self::$file);
+        return JSON::get($location, $folder, get_called_class());
     }
 
     /**
@@ -80,9 +80,9 @@ class Favicon {
      */
     public static function generate(): ?string {
         $favicons  = Favicon::get();
-        $directory = Directories::get("favicon");
+        $directory = Folder::getPath("favicon");
 
-        if (empty($favicons) || !Directories::exists("favicon")) {
+        if (empty($favicons) || !Folder::exists("favicon")) {
             Report::warning("The favicon JSON or directory is missing");
             return null;
         }
@@ -91,7 +91,7 @@ class Favicon {
 
         // Go through each favicon and generate the link tag:
         foreach ($favicons as $favicon) {
-            $href = Files::get("version", $directory . $favicon->href);
+            $href = File::version($directory .'/'. $favicon->href);
             $rel  = $favicon->rel  ?? null;
             $type = $favicon->type ?? null;
             $size = $favicon->size ?? null;

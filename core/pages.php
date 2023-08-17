@@ -1,8 +1,9 @@
 <?php
 
 // Dependencies:
-if (!class_exists('JSON'))        require_once(__DIR__ . '/json.php');
-if (!class_exists('Report'))      require_once(__DIR__ . '/report.php');
+if (!class_exists('JSON'))   require_once(__DIR__ . '/json.php');
+if (!class_exists('Report')) require_once(__DIR__ . '/report.php');
+if (!class_exists('Folder')) require_once(__DIR__ . '/folder.php');
 
 class Pages {
 
@@ -29,7 +30,7 @@ class Pages {
      * The pages data.
      */
     public static function get(?string $location = ""): mixed {
-        $directory = sprintf("%s%s", Directories::get("pages"), self::$file);
+        $directory = sprintf("%s%s", Folder::getPath("pages"), self::$file);
         return JSON::get($location, $directory, get_called_class());
     }
 
@@ -60,23 +61,6 @@ class Pages {
      */
     public static function remove(string $location): bool {
         return JSON::remove($location, self::$file, get_called_class());
-    }
-
-    /**
-     * Require a page by its key name. This will
-     * require the page file, for example: test.page.php
-     * from the pages directory.
-     * 
-     * @param string $page
-     * The page name
-     * 
-     * @return void
-     * Returns nothing
-     */
-    public static function require(string $page): void {
-        $directory = Directories::get("pages", dirname(__DIR__, 1)) . "/$page";
-        file_exists($path = "$directory/$page.page.php") 
-        ? require_once $path : Report::error("Page '$page' not found");
     }
 
     /**

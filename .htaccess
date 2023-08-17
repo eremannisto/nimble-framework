@@ -1,14 +1,25 @@
-# Set rewrite engine on
+# Turn on URL rewriting:
 RewriteEngine On
 
-# Redirect to the front controller
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_URI} !^/controller\.php
-RewriteRule ^([^/]+)/?$ controller.php?page=$1 [QSA,NC,L]
+# Make the new root directory. Remember to change the
+# correct address if you are not using localhost
+RewriteCond %{HTTP_HOST} ^localhost:8888$ [NC]
+RewriteCond %{REQUEST_URI} !/public/
+RewriteRule (.*) /public/$1 [L]
 
-# Remove index listing
-Options -Indexes
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
-# Index file
-DirectoryIndex controller.php?page=home
+# Handle CLIENT errors with custom redirects
+ErrorDocument 400 /?error=400
+ErrorDocument 401 /?error=401
+ErrorDocument 403 /?error=403
+ErrorDocument 404 /?error=404
+ErrorDocument 405 /?error=405
+ErrorDocument 406 /?error=406
+
+# Handle SERVER errors with custom redirects
+ErrorDocument 500 /?error=500
+ErrorDocument 501 /?error=501
+ErrorDocument 502 /?error=502
+ErrorDocument 503 /?error=503
+ErrorDocument 504 /?error=504

@@ -87,4 +87,18 @@ class Request {
             ??  Config::get('application/router/index');
     }
 
+
+    /**
+     * Get the current base path, for example: https://example.com
+     *
+     * @return string 
+     * The current base path.
+     */
+    public static function isClientFileFetch(): bool {
+        return Request::has("GET", "mode", "fetch")
+            && Request::has("GET", "asset")
+            && Request::has("GET", "type")
+            && Request::has("GET", "src");
+    }
+
 }
