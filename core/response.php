@@ -1,11 +1,12 @@
-<?php
-
-// Dependencies:
-if (!class_exists('Report')) { require_once(__DIR__ . '/report.php'); }
+<?php declare(strict_types=1);
 
 /**
  * The Response class provides methods for working 
  * with HTTP response codes and headers.
+ * 
+ * @version     1.0.0
+ * @package     Ombra
+ * @subpackage  Response
  */
 class Response {
 
@@ -68,9 +69,9 @@ class Response {
             "description" => $errors[$code]["description"]
         )
         : array(
-            "code"        => "520",
-            "title"       => "Unknown Error",
-            "description" => "The server encountered an unexpected error."
+            "code"        => "404",
+            "title"       => "Page Not Found",
+            "description" => "The page you are looking for could not be found."
         );
     }
 

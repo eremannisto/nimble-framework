@@ -1,13 +1,4 @@
-<?php
-
-// Dependancies:
-if (!class_exists('Config'))  require_once(__DIR__ . '/config.php');
-if (!class_exists('Request')) require_once(__DIR__ . '/request.php');
-if (!class_exists('Report'))  require_once(__DIR__ . '/report.php');
-if (!class_exists('Pages'))   require_once(__DIR__ . '/pages.php');
-if (!class_exists('File'))    require_once(__DIR__ . '/file.php');
-if (!class_exists('Folder'))  require_once(__DIR__ . '/folder.php');
-
+<?php declare(strict_types=1);
 
 /**
  * Meta class handles all meta related methods,
@@ -33,7 +24,7 @@ class Meta {
     public static function get(string $parameter): ?string {
 
         // Get current page:
-        $currentPage     = Request::current();
+        $currentPage     = ucfirst(Request::current());
 
         // Get meta data:
         switch ($parameter) {

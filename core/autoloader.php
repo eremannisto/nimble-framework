@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /**
  * Autoloader class that loads all PHP files in the same directory 

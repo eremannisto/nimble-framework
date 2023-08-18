@@ -1,5 +1,12 @@
-<?php
+<?php declare(strict_types=1);
 
+/**
+ * This class handles the foot area of the page.
+ * 
+ * @version     0.0.1
+ * @package     Ombra
+ * @subpackage  Foot
+ */
 class Foot {
 
     /**

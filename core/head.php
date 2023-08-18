@@ -1,12 +1,4 @@
-<?php
-
-// Dependancies:
-if (!class_exists('Config')) require_once(__DIR__ . '/config.php');
-if (!class_exists('Report')) require_once(__DIR__ . '/report.php');
-if (!class_exists('URL'))    require_once(__DIR__ . '/url.php');
-
-// Require components:
-// Component::require('Header');
+<?php declare(strict_types=1);
 
 /**
  * Head class handles all head related methods,
@@ -277,23 +269,18 @@ class Head {
      * The HTML code for stylesheets.
      */
     private static function stylesheets(): string {
-
         $styles = Head::$cache['styles'];
-
         if(!empty($styles) && is_array($styles)) {
             foreach ($styles as $path => $style) {
                 $data = [
-                    'path'       => $path,
-                    'conditions' => $style['conditions'],
-                    'type'       => 'text/css'
+                    "mode"       => "client",
+                    "path"       => $path,
+                    "conditions" => $style["conditions"],
+                    "type"       => "text/css"
                 ];
-
                 File::add($data);
             }
         }
-        echo('<pre>');
-        print_r(File::$styles);
-        echo('</pre>');
 
         $output = '<!-- Stylesheets: -->';
 
@@ -311,25 +298,20 @@ class Head {
      * The HTML code for scripts.
      */
     private static function scripts(): string {
-
         $scripts = Head::$cache['scripts'];
-
         if(!empty($scripts) && is_array($scripts)) {
             foreach ($scripts as $path => $script) {
-                File::add([
-                    'path'       => $path,
-                    'conditions' => $script['conditions'],
-                    'type'       => 'text/javascript'
-                ]);
+                $data = [
+                    "mode"       => "client",
+                    "path"       => $path,
+                    "conditions" => $script["conditions"],
+                    "type"       => "text/javascript"
+                ];
+                File::add($data);
             }
         }
 
-        echo('<pre>');
-        print_r(File::$scripts);
-        echo('</pre>');
-
         $output = '<!-- Scripts: -->';
-
         // Not implemented yet
 
         return $output;

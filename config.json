@@ -1,5 +1,5 @@
 {
-    "application"   : {
+    "application"       : {
         "PHP"           : "8.0.0",
         "version"       : "1.0.0",
         "name"          : "Application name",
@@ -8,7 +8,7 @@
         "created"       : "01.01.2023 00:00:00",
         "updated"       : "01.01.2023 00:00:00",
 
-        "router"        : {
+        "router"            : {
             "host"          : "example.com",
             "base"          : "https://example.com",
             "index"         : "home",
@@ -17,7 +17,7 @@
             "parameter"     : "page"
         },
 
-        "meta": {
+        "meta"              : {
             "language"      : "en",
             "title"         : "The default title",
             "description"   : "The default description",
@@ -26,18 +26,18 @@
             "robots"        : "index, follow"
         },
 
-        "folders"   : {
-            "root"          : "/public",
-            "favicon"       : "/public/assets/favicon",
-            "images"        : "/public/assets/images",
-            "css"           : "/public/assets/css",
-            "js"            : "/public/assets/js",
-            "source"        : "/src",
-            "pages"         : "/src/pages",
-            "home"          : "/src/pages/home",
-            "errors"        : "/src/pages/error",
-            "components"    : "/src/components",
-            "framework"     : "/core"
+        "folders"               : {
+            "root"              : "/public",
+            "assets"            : "/public/assets",
+            "favicon"           : "/public/assets/favicon",
+            "images"            : "/public/assets/images",
+            "styles"            : "/public/assets/styles",
+            "scripts"           : "/public/assets/scripts",
+            "framework"         : "/core",
+            "reports"           : "/core/reports",
+            "src"               : "/src",
+            "pages"             : "/src/pages",
+            "components"        : "/src/components"
         },
 
         "time"          : {

@@ -1,7 +1,4 @@
-<?php
-
-// Dependencies:
-if (!class_exists('Config')) require_once(__DIR__ . '/config.php');
+<?php declare(strict_types=1);
 
 /**
  * The Server class provides methods to retrieve information about the

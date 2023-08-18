@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 /**
  * Path class handles path related operations, such as
  * building a path to a directory or file, getting the

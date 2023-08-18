@@ -1,8 +1,13 @@
-<?php
+<?php declare(strict_types=1);
 
-// Dependancies:
-if (!class_exists('Request')) require_once(__DIR__ . '/request.php');
-
+/** 
+ * This class provides file related methods, such as getting 
+ * the file mod time, size, mime type, contents, and version.
+ *
+ * @version     1.0.0
+ * @package     Ombra
+ * @subpackage  File
+ */
 class File {
 
     /**
@@ -260,6 +265,14 @@ class File {
             if (!File::filter($condition) || $version === NULL) continue; 
         
             // Check the file type and generate the link:
+            // if($type == "text/css"){
+            //     if($method = "client"){
+            //         $output = sprintf('<link rel="stylesheet" type="text/css" href="%s" media="all">', $version);
+            //     }
+            //     else{
+            //         $output = sprintf('<link rel="stylesheet" type="text/css" href="%s" media="all">', $version);
+            //     }
+            // }
             switch ($type) {
                 case $type == 'css' || $type == 'text/css'::
                     $output = sprintf('<link rel="stylesheet" type="text/css" href="%s" media="all">', $version);
@@ -310,174 +323,6 @@ class File {
     }
 
 }
-
-
-
-
-
-    // /**
-    //  * This method reference CSS files. It retrieve stylesheets for the 
-    //  * current page, template, and components, combines them with provided
-    //  * stylesheets and generate necessary HTML code for each stylesheet.
-    //  * 
-    //  * @param array $stylesheets
-    //  * The stylesheets to include.
-    //  * 
-    //  * @return bool
-    //  * True if the stylesheets were included successfully, false otherwise.
-    //  */
-    // public static function styles(array $parameter = []): bool {
-        
-    //     // Current page and the pages object:
-    //     $page  = Pages::this();
-    //     $pages = Pages::pages();
-
-    //     // Initialize the stylesheets array:
-    //     $stylesheets = [];
-
-    //     // Page:
-    //     // Get all the current pages stylesheets:
-    //     $style = $pages->$page->styles;
-    //     $stylesheets = array_merge($stylesheets, $style);
-
-    //     // Add the page styling to the page stylesheets
-    //     $style = (array)str_replace($_SERVER['DOCUMENT_ROOT'], '', Pages::getStyle($page));
-    //     $stylesheets = array_merge($stylesheets, $style);
-
-    //     // Components:
-    //     // Get all the component stylesheets for each component
-    //     // used by the current page:
-    //     $components = $pages->$page->components;
-    //     foreach ($components as $component) {
-
-    //         // For each component, get the component stylesheets,
-    //         // and add them to the page stylesheets: (Remove the SERVER_ROOT from the path)
-    //         $style = (array)str_replace($_SERVER['DOCUMENT_ROOT'], '', Components::getStyle($component));
-    //         $stylesheets = array_merge($stylesheets, $style);
-
-    //         // Add also each components own stylesheets object:
-    //         $style = Components::components()->$component->styles;
-    //         $stylesheets = array_merge($stylesheets, $style);
-    //     }
-
-    //     // Build the array with keys being stylesheets file paths and values set to null,
-    //     // then merge the parameter stylesheets with the page stylesheets:
-    //     $stylesheets = array_fill_keys($stylesheets, null);
-    //     $stylesheets = array_merge($stylesheets, $parameter);
-
-    //     // Initialize the output string:
-    //     $output = "";
-
-    //     // Iterate over the stylesheets:
-    //     foreach ($stylesheets as $filename => $conditions) {
-
-    //         // Generate the HTML code for the stylesheet:
-    //         $output .= File::reference($filename, 'css', $conditions);
-    //     }
-
-    //     // Return the generated HTML code:
-    //     echo $output;
-    //     return true;
-    // }
-
-    //     /**
-    //  * This method reference CSS files. It retrieve scripts for the 
-    //  * current page, template, and components, combines them with provided
-    //  * scripts and generate necessary HTML code for each script.
-    //  * 
-    //  * @param array $scripts
-    //  * The scripts to include.
-    //  * 
-    //  * @return bool
-    //  * True if the scripts were included successfully, false otherwise.
-    //  */
-    // public static function scripts(array $parameter = []): bool {
-        
-    //     // Current page and the pages object:
-    //     $page  = Pages::this();
-    //     $pages = Pages::pages();
-
-    //     // Initialize the scripts array:
-    //     $scripts = [];
-
-    //     // Page:
-    //     // Get all the current pages scripts:
-    //     $script = $pages->$page->scripts;
-    //     $scripts = array_merge($scripts, $script);
-
-    //     // Add the page styling to the page scripts
-    //     $script = (array)str_replace($_SERVER['DOCUMENT_ROOT'], '', Pages::getScript($page));
-    //     $scripts = array_merge($scripts, $script);
-
-
-    //     // Templates:
-    //     // Get all the template scripts for each template
-    //     // used by the current page:
-    //     $templates  = $pages->$page->templates;
-    //     foreach ($templates as $template) {
-
-    //         // For each template, get the template scripts,
-    //         // and add them to the page scripts:
-    //         $script = (array)str_replace($_SERVER['DOCUMENT_ROOT'], '', Templates::getScript($template));
-    //         $scripts = array_merge($scripts, $script);
-
-    //         // Add also each templates own script object:
-    //         $script = Templates::templates()->$template->scripts;
-    //         $scripts = array_merge($scripts, $script);
-
-    //         // For each component that the template uses, get the component scripts,
-    //         // and add them to the page scripts: (Remove the SERVER_ROOT from the path)
-    //         $components = Templates::templates()->$template->components;
-    //         foreach ($components as $component) {
-    //             $script = (array)str_replace($_SERVER['DOCUMENT_ROOT'], '', Components::getScript($component));
-    //             $scripts = array_merge($scripts, $script);
-
-    //             // Add also each components own script object:
-    //             $script = Components::components()->$component->scripts;
-    //             $scripts = array_merge($scripts, $script);
-    //         }
-    //     }
-
-    //     // Components:
-    //     // Get all the component scripts for each component
-    //     // used by the current page:
-    //     $components = $pages->$page->components;
-    //     foreach ($components as $component) {
-
-    //         // For each component, get the component scripts,
-    //         // and add them to the page scripts: (Remove the SERVER_ROOT from the path)
-    //         $script = (array)str_replace($_SERVER['DOCUMENT_ROOT'], '', Components::getScript($component));
-    //         $scripts = array_merge($scripts, $script);
-
-    //         // Add also each components own script object:
-    //         $script = Components::components()->$component->scripts;
-    //         $scripts = array_merge($scripts, $script);
-    //     }
-
-
-    //     // Build the array with keys being scripts file paths and values set to null,
-    //     // then merge the parameter scripts with the page scripts:
-    //     $scripts = array_fill_keys($scripts, null);
-    //     $scripts = array_merge($scripts, $parameter);
-
-    //     // Reverse the order of the scripts:
-    //     $scripts = array_reverse($scripts);
-
-    //     // Initialize the output string:
-    //     $output = "";
-
-    //     // Iterate over the scripts:
-    //     foreach ($scripts as $filename => $conditions) {
-
-    //         // Generate the HTML code for the script:
-    //         $output .= File::reference($filename, 'js', $conditions);
-    //     }
-
-    //     // Return the generated HTML code:
-    //     echo $output;
-    //     return true;
-    // }
-
 
     // /**
     //  * Open a requested file.

@@ -1,7 +1,4 @@
-<?php
-
-// Dependencies:
-if (!class_exists('Report')) require_once(__DIR__ . '/report.php');
+<?php declare(strict_types=1);
 
 /**
  * URL class provides a method to build a URL string based on the given 

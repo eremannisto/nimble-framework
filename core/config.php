@@ -1,7 +1,4 @@
-<?php
-
-// Dependancies:
-if (!class_exists('JSON'))    require_once(__DIR__ . '/json.php');
+<?php declare(strict_types=1);
 
 /**
  * This class provides methods to read and update the config.json file.

@@ -1,18 +1,20 @@
-<?php
+<?php declare(strict_types=1);
 
-// Dependencies:
-if (!class_exists('JSON'))   require_once(__DIR__ . '/json.php');
-if (!class_exists('Report')) require_once(__DIR__ . '/report.php');
-if (!class_exists('Folder')) require_once(__DIR__ . '/folder.php');
-
+/**
+ * This class handles how the pages are displayed,
+ * and also how the pages are generated.
+ * 
+ * @version     0.0.1
+ * @package     Ombra
+ * @subpackage  Pages
+ */
 class Pages {
-
+    
     /**
      * The cached pages object, this is updated when
-     * the JSON::get method is called. Works also as
-     * a whitelist for pages.
+     * the JSON::get method is called.
      */
-    public static mixed $cache;
+    public static mixed $cache = null;
 
     /**
      * The path to the pages.json file from the
@@ -30,8 +32,8 @@ class Pages {
      * The pages data.
      */
     public static function get(?string $location = ""): mixed {
-        $directory = sprintf("%s%s", Folder::getPath("pages"), self::$file);
-        return JSON::get($location, $directory, get_called_class());
+        $folder = self::$file;
+        return JSON::get($location, $folder, get_called_class());
     }
 
     /**
@@ -64,17 +66,76 @@ class Pages {
     }
 
     /**
-     * Components can be loaded in many ways, either by requiring them
-     * directly at the top of the page by using the Components::require method,
-     * or by adding them to the page components list in the pages.json file.
+     * This method is used to require a page file and add its
+     * stylesheet and script to the master stylesheet and scripts array.
      * 
-     * @param string $page
-     * The page name
+     * @param string $page 
+     * The name of the page file to require.
      * 
      * @return void
-     * Returns nothing
      */
-    public static function load(string $page): void {
 
+    public static function require(string $page = null): void {
+    
+        // If parameter is empty, use the current page, otherwise
+        // use the requested page. Get also the current HTTP response
+        // status code in case the requested page does not exist
+        $status = Request::req("GET", "error") ?? Response::getStatus();
+        $page   = ucfirst($page ?? Request::current());
+        $pages  = Pages::get();
+
+        // Get the path to the 'pages' folder and construct the full
+        // path to the requested page file
+        $folder = Folder::getPath('pages', Path::root());
+        $file = "$folder/$page/$page";
+
+        // If page parameter is empty, use the index page
+        if (empty($page)) {
+            $page = ucfirst(Config::get("application/router/index"));
+            $file = "$folder/$page/$page";
+        }
+
+        // Check if status code is between 400 and 599. If it is,
+        // redirect to the error page with the same status code:
+        if (($status >= 400 && $status < 600)){
+            $page = ucfirst(Config::get("application/router/error"));
+            $file = "$folder/$page/$page";
+            Response::setStatus($status);
+        }
+        
+        // Get pages object:
+
+        // If the requested file does not exist or is not part of the
+        // pages.json, redirect to the error page with a 404 status code:
+        if (!file_exists("$file.php") || !array_key_exists($page, (array)$pages)) {
+            $page = ucfirst(Config::get("application/router/error"));
+            $file = "$folder/$page/$page";
+            Response::setStatus(404);
+        }
+
+        // Add the component stylesheet to the master stylesheet array
+        if (file_exists("$file.css")) {
+            File::add([
+                "mode"       => "server",           // Get the file from the server 
+                "path"       => "pages/$page",      // Automatically will add from src/->
+                "type"       => "text/css",         // Type is CSS
+                "conditions" => null,               // No conditions
+            ]);
+        }   
+
+        // Add the component script to the master scripts array
+        if (file_exists("$file.js")) {
+            File::add([
+                "mode"       => "server",           // Get the file from the server 
+                "path"       => "pages/$page",      // Automatically will add from src/->
+                "type"       => "text/javascript",  // Type is JS
+                "conditions" => null,               // No conditions
+            ]);
+        }
+
+        // Include the requested component file
+        require_once "$file.php";
     }
+    
+
 }

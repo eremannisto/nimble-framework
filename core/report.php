@@ -1,7 +1,4 @@
-<?php
-
-// Dependencies:
-// Not Allowed
+<?php declare(strict_types=1);
 
 /**
  * Report class handles all logging related methods, such as writing
@@ -14,11 +11,6 @@
  * @subpackage  Reports
  */
 class Report {
-
-    /**
-     * If set to true, debug messages will be logged.
-     */
-    public static bool $DEBUG = TRUE;
 
     /**
      * Stores the report data, such as file name, line number,
@@ -121,8 +113,8 @@ class Report {
      * @return void
      * Returns nothing.
      */
-    public static function debug(string $message): void {
-        Report::$DEBUG === TRUE ? Report::write('debug', $message, 'debug', 0) : NULL;
+    public static function debug(string $message, bool $switch = true): void {
+        $switch === true ? Report::write('debug', $message, 'debug', 0) : null;
     }
 
     /**

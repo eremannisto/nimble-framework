@@ -1,8 +1,4 @@
-<?php
-
-// Dependancies:
-if (!class_exists('Config')) require_once (__DIR__ . '/config.php');
-if (!class_exists('Path'))   require_once (__DIR__ . '/path.php');
+<?php declare(strict_types=1);
 
 /**
  * Directories class handles all directories related methods,

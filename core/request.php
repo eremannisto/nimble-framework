@@ -1,8 +1,4 @@
-<?php
-
-// Dependancies:
-if (!class_exists('Config')) require_once(__DIR__ . '/config.php');
-if (!class_exists('Report')) require_once(__DIR__ . '/report.php');
+<?php declare(strict_types=1);
 
 /**
  * The Request class provides methods to retrieve and 

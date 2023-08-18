@@ -5,7 +5,7 @@ $title       = sprintf("<strong class='error-code'>%s</strong> - %s", $error['co
 $description = $error['description'];
 
 Head::render([
-    "title"         => $title,
+    "title"         => sprintf("%s - %s", $error['code'], $error['title']),
     "description"   => $description
 ]); ?>
 

@@ -1,10 +1,4 @@
-<?php
-
-// Dependencies:
-if (!class_exists('JSON'))   require_once(__DIR__ . '/json.php');
-if (!class_exists('Report')) require_once(__DIR__ . '/report.php');
-if (!class_exists('Folder')) require_once(__DIR__ . '/folder.php');
-if (!class_exists('File'))   require_once(__DIR__ . '/file.php');
+<?php declare(strict_types=1);
 
 /**
  * This class handles how the favicon is displayed,
@@ -38,7 +32,7 @@ class Favicon {
      * The favicon data.
      */
     public static function get(?string $location = ""): mixed {
-        $folder = sprintf("%s%s", Folder::getPath("favicon"), self::$file);
+        $folder = Folder::getPath("favicon") . self::$file;
         return JSON::get($location, $folder, get_called_class());
     }
 

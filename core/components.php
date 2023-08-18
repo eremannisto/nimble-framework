@@ -1,21 +1,71 @@
-<?php
-
+<?php declare(strict_types=1);
+ 
+/**
+ * Components class handles all component related methods,
+ * such as loading components and their associated stylesheets
+ * and scripts.
+ *
+ * @version     1.0.0
+ * @package     Ombra
+ * @subpackage  Components
+ */
 class Components {
 
-    public static function require(string $component): void {
+    /**
+     * Loads the specified components and their associated 
+     * stylesheets and scripts.
+     *
+     * @param mixed $components 
+     * The components to load. Can be a string or an array of strings.
+     * 
+     * @return void
+     */
+    public static function require(mixed $components): void {
 
-        // Get the path to the 'components' folder and construct the full
-        // path to the requested component file
+        // Get the path to the 'components' folder so we can
+        // construct the full path to the requested component file
+        // in the foreach loop
         $folder = Folder::getPath('components', Path::root());
-        $file = sprintf("%s/%s/%s.php", $folder, $component, $component);
 
-        // If the requested file does not exist
-        if (!file_exists($file)) {
-            Report::warning("Component '$component' does not exist");
+        // If components is not an array, convert it to an array
+        if (!is_array($components)) {
+            $components = [$components];
         }
 
-        // Include the requested component file
-        require_once $file;
-    }
+        // Loop through each component in the array
+        foreach ($components as $component) {
 
+            // Construct the full path to the requested component file
+            $file = "$folder/$component/$component";
+    
+            // If the requested file does not exist
+            if (!file_exists("$file.php")) {
+                Report::warning("Component '$component' does not exist");
+                continue;
+            }
+    
+            // Add the component stylesheet to the stylesheet array
+            if (file_exists("$file.css")) {
+                File::add([
+                    "mode"       => "server",                   // Get the file from the server 
+                    "path"       => "components/$component",    // Automatically will add from src/->
+                    "type"       => "text/css",                 // Type is CSS
+                    "conditions" => null,                       // No conditions
+                ]);
+            }   
+    
+            // Add the component script to the scripts array
+            if (file_exists("$file.js")) {
+                File::add([
+                    "mode"       => "server",                   // Get the file from the server 
+                    "path"       => "components/$component",    // Automatically will add from src/->
+                    "type"       => "text/javascript",          // Type is JS
+                    "conditions" => null,                       // No conditions
+                ]);
+            }
+
+            // Include the requested component file
+            require_once "$file.php";
+        }
+    }
 }

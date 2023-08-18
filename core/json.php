@@ -1,7 +1,4 @@
-<?php
-
-// Depencencies
-if (!class_exists('Report')) require_once(__DIR__ . '/report.php');
+<?php declare(strict_types=1);
 
 /**
  * The JSON class is responsible for managing JSON files by performing tasks
@@ -161,6 +158,7 @@ class JSON {
         // Get the path to the JSON file, and
         // return NULL if the file does not exist.
         $file = dirname(__DIR__, 1) . $file;
+
         if (!JSON::exists($file)) 
             return NULL; 
 
