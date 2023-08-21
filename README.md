@@ -15,47 +15,64 @@ Below is a visualisation how a project would look while using this framework:
 
 ```
 projectName
+│   
 ├── core                            [Framework files]
 │   ├── FrameworkClass1.php
 │   ├── FrameworkClass2.php
 │   ├── ...
+│   │   
 │   └── reports                     [All logs are stored here]
 │       └── {}
 │
 ├── src
-│   ├── widgets
+│   │   
+│   ├── widgets                     [All the widgets are stored here]
 │   │   ├── Widget1.php             [Widgets file, for example authentication]
 │   │   ├── Widget2.php             [Widgets file, for example sessions]
 │   │   └── ...
+│   │   
 │   ├── components                  [All the components are stored here]
-│   │   ├── Component1                      
-│   │   │   ├── Component1.php      [Component template file]
-│   │   │   ├── Component1.css      [Component specific css file]
-│   │   │   └── Component1.js       [Component specific js file]
-│   │   ├── Component2                      
-│   │   │   ├── Component2.php      [Component template file]
-│   │   │   ├── Component2.css      [Component specific css file]
-│   │   │   └── Component2.js       [Component specific js file]
+│   │   │   
+│   │   ├── Component1              [Component]    
+│   │   │   ├── Component1.php      [ - component template file]
+│   │   │   ├── Component1.css      [ - component specific css file]
+│   │   │   └── Component1.js       [ - component specific js file]
+│   │   │   
+│   │   ├── Component2              [Component]        
+│   │   │   ├── Component2.php      [ - component template file]
+│   │   │   ├── Component2.css      [ - component specific css file]
+│   │   │   └── Component2.js       [ - component specific js file]
 │   │   └── ...
+│   │   
 │   └── pages                       [All the pages are stored here]
-│       ├── Page1
-│       │   ├── Page1.php           [Page template file]
-│       │   ├── Page1.css           [Page specific css file]
-│       │   └── Page1.js            [Page specific js file]
-│       ├── Page2
-│       │   ├── Page2.php           [Page template file]
-│       │   ├── Page2.css           [Page specific css file]
-│       │   └── Page2.js            [Page specific js file]
-│       └── pages.json              [Pages whitelist and config file]
+│   │   │ 
+│   │   ├── Page1                   [Page]
+│   │   │   ├── Page1.php           [ - page template file]
+│   │   │   ├── Page1.css           [ - page specific css file]
+│   │   │   └── Page1.js            [ - page specific js file]
+│   │   │ 
+│   │   ├── Page2                   [Page]
+│   │   │   ├── Page2.php           [ - page template file]
+│   │   │   ├── Page2.css           [ - page specific css file]
+│   │   │   └── Page2.js            [ - page specific js file]
+│   │   │ 
+│   │   └── pages.json              [Pages whitelist and config file]
+│   │   
+│   └── widgets
+│       ├── Widget1.php             [Widgets file, for example authentication]
+│       ├── Widget2.php             [Widgets file, for example sessions]
+│       └── ...
 │
 ├── public                          [Root folder]
+│   │   
 │   ├── index.php                   [The front controller]
+│   │   
 │   ├── assets                      [All the publicly available assets, such as:]
-│   │   ├── favicon                     [ - favicons and its config file]
-│   │   ├── images                      [ - images]
-│   │   ├── scripts                     [ - javascripts]
-│   │   ├── styles                      [ - stylesheets]
-│   │   └── ...                         [ - more!]
+│   │   ├── favicon                 [ - favicons and its config file]
+│   │   ├── images                  [ - images]
+│   │   ├── scripts                 [ - javascripts]
+│   │   ├── styles                  [ - stylesheets]
+│   │   └── ...                     [ - more!]
 │   │   
 │   └── .htaccess                   [Handles the front-controller Re-Writing]
 │
