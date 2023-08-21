@@ -4,7 +4,7 @@
  * This class handles how the favicon is displayed,
  * and also how the favicon is generated.
  * 
- * @version     0.0.1
+ * @version     1.0.0
  * @package     Ombra
  * @subpackage  Favicon
  */

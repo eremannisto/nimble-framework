@@ -26,7 +26,7 @@ class Server {
      * Get the current scheme.
      *
      * @param mixed $value
-     * The value to validate. If set to TRUE, the current
+     * The value to validate. If set to true, the current
      * scheme will be returned. If a custom value is provided,
      * it will be validated and returned if valid ('http' or 'https').
      * Otherwise, an empty string will be returned.
@@ -34,27 +34,27 @@ class Server {
      * @return string
      * The current scheme, either 'http' or 'https'.
      */
-    public static function scheme(mixed $value = TRUE): string {
+    public static function scheme(mixed $value = true): string {
 
         // Make sure scheme is either 'http' or 'https'.
         $validate = function($scheme) {
-            return in_array($scheme, ['http', 'https'], TRUE) 
-                ?: (Report::warning('URL validation failed: Invalid SCHEME') && FALSE);
+            return in_array($scheme, ['http', 'https'], true) 
+                ?: (Report::warning('URL validation failed: Invalid SCHEME') && false);
 
         };
 
-        // If value is set to TRUE, return the current scheme.
-        if ($value === TRUE) {
+        // If value is set to true, return the current scheme.
+        if ($value === true) {
             return isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on'
             ? 'https' : 'http';
         }
 
         // If value is not false and it is valid, return it.
-        else if ($value !== FALSE) {
+        else if ($value !== false) {
             return $validate($value) ? (string)$value : '';
         }
 
-        // Otherwise the value is set to FALSE, so we
+        // Otherwise the value is set to false, so we
         // return an empty string.
         return '';
     }
@@ -63,7 +63,7 @@ class Server {
      * Get the current host name, for example: example.com.
      *
      * @param mixed $value
-     * The value to validate. If set to TRUE, the current
+     * The value to validate. If set to true, the current
      * host name will be returned. If a custom value is
      * provided, it will be validated and returned if valid.
      * Otherwise, an empty string will be returned.
@@ -71,29 +71,29 @@ class Server {
      * @return string 
      * The current host name.
      */
-    public static function host(mixed $value = TRUE): string {
+    public static function host(mixed $value = true): string {
         
         // Define a regular expression pattern for a valid host name.
         $pattern = "/^([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,}$/";
 
         // Make sure host is a valid host name.
         $validate = function($host) use ($pattern) {
-            return (preg_match($pattern, $host) === 1) 
-                ?: (Report::warning('URL validation failed: Invalid HOST.') && FALSE);
+            return ($host === 'localhost' || 'localhost:'.Server::port() || preg_match($pattern, $host) === 1) 
+                ?: (Report::warning("URL validation failed: Invalid HOST: $host") && false);
         };
 
-        // If value is set to TRUE, return the current host name.
-        if ($value === TRUE) 
+        // If value is set to true, return the current host name.
+        if ($value === true) 
             return $validate(Config::get('application/router/host')) 
                 ? Config::get('application/router/host')
                 : ($_SERVER['HTTP_HOST'] ?? '');
             
-        // If value is not FALSE and it is valid, return it.
-        else if ($value !== FALSE) {
+        // If value is not false and it is valid, return it.
+        else if ($value !== false) {
             return $validate($value) ? (string)$value : '';
         }
         
-        // Otherwise the value is set to FALSE, so we
+        // Otherwise the value is set to false, so we
         // return an empty string.
         return '';
     }
@@ -102,7 +102,7 @@ class Server {
      * Get the current port.
      * 
      * @param mixed $value
-     * The value to validate. If set to TRUE, the current
+     * The value to validate. If set to true, the current
      * port will be returned. If a custom value is provided,
      * it will be validated and returned if valid. Otherwise,
      * an empty string will be returned.
@@ -110,26 +110,31 @@ class Server {
      * @return string
      * The current port.
      */
-    public static function port(mixed $value = TRUE): string {
+    public static function port(mixed $value = true): string {
 
         // Make sure port is a valid integer between 0 and 65535.
         $validate = function($port) {
-            return (is_int($port) && $port >= 0 && $port <= 65535) 
-                ?: (Report::warning('URL validation failed: Invalid PORT.') && false);
+            if (is_numeric($port) && $port >= 0 && $port <= 65535) {
+                return true;
+            } 
+            else {
+                Report::warning("URL validation failed: Invalid PORT: $port");
+                return false;
+            }
         };
 
-        // If value is set to TRUE, return the current port.
-        if ($value === TRUE) {
+        // If value is set to true, return the current port.
+        if ($value === true) {
             return $validate($_SERVER['SERVER_PORT']) 
                 ? $_SERVER['SERVER_PORT'] : '';
         }
     
         // If value is not false and it is valid, return it.
-        else if ($value !== FALSE) {
+        else if ($value !== false) {
             return $validate($value) ? (string)$value : '';
         }
 
-        // Otherwise the value is set to FALSE, so we 
+        // Otherwise the value is set to false, so we 
         // return an empty string.
         return '';
     }
@@ -138,7 +143,7 @@ class Server {
      * Get the current path from the $_SERVER superglobal array.
      *
      * @param mixed $value
-     * The value to validate. If set to TRUE, the current
+     * The value to validate. If set to true, the current
      * path will be returned. If a custom value is provided,
      * it will be validated and returned if valid. Otherwise,
      * an empty string will be returned.
@@ -146,7 +151,7 @@ class Server {
      * @return string
      * The current path.
      */
-    public static function path(mixed $value = TRUE): string {
+    public static function path(mixed $value = true): string {
 
         // Define a regular expression pattern for a valid path segment.
         $pattern = '/^[-_a-zA-Z0-9\/\.]*$/';
@@ -154,21 +159,21 @@ class Server {
         // Validate the path against the pattern.
         $validate = function($path) use ($pattern) {
             return (preg_match($pattern, $path) === 1) 
-                ?: (Report::warning('URL validation failed: Invalid PATH.') && FALSE);
+                ?: (Report::warning('URL validation failed: Invalid PATH.') && false);
         };
 
-        // If value is set to TRUE, return the current path.
-        if ($value === TRUE) {
+        // If value is set to true, return the current path.
+        if ($value === true) {
             $path = $_SERVER['REQUEST_URI'];
             return $validate($path) ? $path : '';
         }
 
         // If value is not false and it is valid, return it.
-        else if ($value !== FALSE) {
+        else if ($value !== false) {
             return $validate($value) ? (string)$value : '';
         }
 
-        // Otherwise the value is set to FALSE, so we
+        // Otherwise the value is set to false, so we
         // return an empty string.
         return '';
     }
@@ -177,7 +182,7 @@ class Server {
      * Returns the query string portion of the URL.
      *
      * @param mixed $value
-     * The value to validate. If set to TRUE, the current
+     * The value to validate. If set to true, the current
      * query string will be returned. If a custom value is provided,
      * it will be validated and returned if valid. Otherwise,
      * an empty string will be returned.
@@ -185,30 +190,32 @@ class Server {
      * @return string
      * The query string portion of the URL.
      */
-    public static function query(mixed $value = TRUE): string {
+    public static function query(mixed $value = true): string {
 
-        // Define a regular expression pattern for a valid query string.
-        $pattern = '/^[!$&\'()*+,\\-.\/:;=?@\\[\\]_a-zA-Z0-9%]*$/';
-
-        // Validate the query string against the pattern.
-        $validate = function($query) use ($pattern) {
-            return (preg_match($pattern, $query) === 1) 
-                ?: (Report::warning('URL validation failed: Invalid QUERY.') && FALSE);
+        // Validation function for query strings, simple REGEX pattern.
+        $validate = function($query) {
+            $pattern = '/^[^#]*$/';
+            return preg_match($pattern, $query) === 1;
         };
-
-        // If value is set to TRUE, return the current query string.
-        if ($value === TRUE) {
+    
+        $build = function($query) {
+            return(is_array($query) ? http_build_query($query) : $query);
+        };
+    
+        // If value is set to true, return the current query string.
+        if ($value === true) {
             $query = $_SERVER['QUERY_STRING'];
             return $validate($query) ? $query : '';
         }
-
+    
         // If value is not false and it is valid, return it.
-        else if ($value !== FALSE) {
-            return $validate($value) ? (string)$value : '';
+        else if ($value !== false) {
+            $query = $build($value);
+            return $validate($query) ? $query : '';
         }
-
-        // Otherwise the value is set to FALSE, so we
-        // return an empty string.
+    
+        // Otherwise the value is set to false, so we
+        // return an empty string.  
         return '';
     }
 

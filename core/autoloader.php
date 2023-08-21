@@ -12,6 +12,9 @@ class AutoLoader {
 
     /**
      * Autoloads all classes in the core directory.
+     * 
+     * @return void
+     * Returns nothing.
      */
     public static function load(): void {
 

@@ -4,7 +4,7 @@
  * This class handles how the pages are displayed,
  * and also how the pages are generated.
  * 
- * @version     0.0.1
+ * @version     1.0.0
  * @package     Ombra
  * @subpackage  Pages
  */
@@ -32,7 +32,7 @@ class Pages {
      * The pages data.
      */
     public static function get(?string $location = ""): mixed {
-        $folder = self::$file;
+        $folder = Folder::getPath("pages") . self::$file;
         return JSON::get($location, $folder, get_called_class());
     }
 
@@ -115,21 +115,21 @@ class Pages {
 
         // Add the component stylesheet to the master stylesheet array
         if (file_exists("$file.css")) {
-            File::add([
-                "mode"       => "server",           // Get the file from the server 
-                "path"       => "pages/$page",      // Automatically will add from src/->
-                "type"       => "text/css",         // Type is CSS
-                "conditions" => null,               // No conditions
+            Link::add([
+                "mode"       => "server",                 // Get the file from the server 
+                "path"       => "pages/$page/$page.css",  // Automatically will add from src/->
+                "type"       => "text/css",               // Type is CSS
+                "conditions" => null,                     // No conditions
             ]);
         }   
 
         // Add the component script to the master scripts array
         if (file_exists("$file.js")) {
-            File::add([
-                "mode"       => "server",           // Get the file from the server 
-                "path"       => "pages/$page",      // Automatically will add from src/->
-                "type"       => "text/javascript",  // Type is JS
-                "conditions" => null,               // No conditions
+            Link::add([
+                "mode"       => "server",                // Get the file from the server 
+                "path"       => "pages/$page/$page.js",  // Automatically will add from src/->
+                "type"       => "text/javascript",       // Type is JS
+                "conditions" => null,                    // No conditions
             ]);
         }
 

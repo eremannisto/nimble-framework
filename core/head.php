@@ -82,8 +82,8 @@ class Head {
             $output
         ));
 
-        // Flush the output buffer:
-        ob_flush();
+        // Get the output buffer contents:
+        echo ob_get_contents();
     }
 
 
@@ -278,14 +278,14 @@ class Head {
                     "conditions" => $style["conditions"],
                     "type"       => "text/css"
                 ];
-                File::add($data);
+                Link::add($data);
             }
         }
 
         $output = '<!-- Stylesheets: -->';
-
-        // Not implemented yet
-        $output .= '<link rel="stylesheet" href="http://localhost:8888/?mode=fetch&src=pages&asset=home&type=text/css">';
+        foreach (Link::$styles as $style) {
+            $output .= Link::tag($style);
+        }
 
         return $output;
     }
@@ -307,12 +307,14 @@ class Head {
                     "conditions" => $script["conditions"],
                     "type"       => "text/javascript"
                 ];
-                File::add($data);
+                Link::add($data);
             }
         }
 
         $output = '<!-- Scripts: -->';
-        // Not implemented yet
+        foreach (Link::$scripts as $script) {
+            $output .= Link::tag($script);
+        }
 
         return $output;
     }

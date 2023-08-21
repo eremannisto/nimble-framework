@@ -11,6 +11,14 @@
  */
 class Controller {
 
+    /**
+     * Initializes the controller by setting the timezone and locale,
+     * and checking if the requested page is a client file.
+     *
+     * @return void
+     *
+     * @throws Exception If the timezone is invalid.
+     */
     public static function init(): void {
 
         // Set timezone and locale:

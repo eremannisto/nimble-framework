@@ -19,6 +19,7 @@ class Components {
      * The components to load. Can be a string or an array of strings.
      * 
      * @return void
+     * Returns nothing.
      */
     public static function require(mixed $components): void {
 
@@ -46,21 +47,21 @@ class Components {
     
             // Add the component stylesheet to the stylesheet array
             if (file_exists("$file.css")) {
-                File::add([
-                    "mode"       => "server",                   // Get the file from the server 
-                    "path"       => "components/$component",    // Automatically will add from src/->
-                    "type"       => "text/css",                 // Type is CSS
-                    "conditions" => null,                       // No conditions
+                Link::add([
+                    "mode"       => "server",                                // Get the file from the server 
+                    "path"       => "components/$component/$component.css",  // Automatically will add from src/->
+                    "type"       => "text/css",                              // Type is CSS
+                    "conditions" => null,                                    // No conditions
                 ]);
             }   
     
             // Add the component script to the scripts array
             if (file_exists("$file.js")) {
-                File::add([
-                    "mode"       => "server",                   // Get the file from the server 
-                    "path"       => "components/$component",    // Automatically will add from src/->
-                    "type"       => "text/javascript",          // Type is JS
-                    "conditions" => null,                       // No conditions
+                Link::add([
+                    "mode"       => "server",                                // Get the file from the server 
+                    "path"       => "components/$component/$component.js",   // Automatically will add from src/->
+                    "type"       => "text/javascript",                       // Type is JS
+                    "conditions" => null,                                    // No conditions
                 ]);
             }
 

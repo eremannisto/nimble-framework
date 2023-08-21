@@ -102,5 +102,4 @@ class Path {
         }
         return $directory;
     }
-
 }

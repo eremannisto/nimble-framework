@@ -18,13 +18,13 @@ Head::global([
     ],
 
     "scripts" => [
-        "assets/styles/global.js" => [
+        "/assets/scripts/global.js" => [
             "conditions" => NULL,
         ],
     ],
 
     "styles" => [
-        "assets/styles/global.css" => [
+        "/assets/styles/global.css" => [
             "conditions" => NULL
         ],
     ]

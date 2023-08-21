@@ -3,7 +3,7 @@
 /**
  * This class handles the foot area of the page.
  * 
- * @version     0.0.1
+ * @version     1.0.0
  * @package     Ombra
  * @subpackage  Foot
  */
@@ -21,10 +21,16 @@ class Foot {
      * Returns nothing.
      */
     public static function render(): void {
-        ?>
-        </body>
-        </html>
-        <?php
+
+        // Start the output buffer
+        ob_start(); ?>
+
+            </body>
+            </html>
+            
+        <?php 
+        // Get the output buffer contents
+        echo ob_get_contents();
     }
 
 

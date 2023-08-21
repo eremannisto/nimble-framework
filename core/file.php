@@ -11,24 +11,6 @@
 class File {
 
     /**
-     * The array of stylesheet files to include.
-     * Key is the path to the file, and value is the condition under which the file
-     * should be included.
-     * 
-     * @var array
-     */
-    public static array $styles = [];
-
-    /**
-     * The array of javascript files to include.
-     * Key is the path to the file, and value is the condition under which the file
-     * should be included.
-     * 
-     * @var array
-     */
-    public static array $scripts = [];
-
-    /**
      * Fetch a client file content, for example a component or page
      * stylesheet or a script, that is outside of the public root folder.
      * 
@@ -43,21 +25,15 @@ class File {
      */
     public static function getClientFile(): void {
 
-        $asset = ucfirst(Request::req("GET", "asset"));
         $type  = Request::req("GET", "type");
-        $src   = Request::req("GET", "src");
+        $path  = Request::req("GET", "path"); 
 
         // List of allowed files:
         $allowed = [
-            "src"  => ['components', 'pages'],
-            "type" => ['text/css',   'text/javascript']
+            "path" => ['components', 'pages'],
+            "type" => ['text/css',   'text/javascript'],
+            "ext"  => ['css',        'js']
         ];
-
-        // Validate the asset:
-        if (empty($asset) || strpos($asset, ' ') !== FALSE) {
-            Report::warning("Invalid asset '$asset' for a client file request.");
-            return;
-        }
 
         // Validate the type:
         if (!in_array($type, $allowed['type'])) {
@@ -65,21 +41,23 @@ class File {
             return;
         }
 
-        // Validate the source:
-        if (!in_array($src, $allowed['src'])) {
-            Report::warning("Invalid source '$src' for a file request.");
+        // Validate the source folder:
+        $exploded = explode('/', $path);
+        if (!in_array($exploded[0], $allowed['path'])) {
+            Report::warning("Invalid path '$path' for a file request.");
             return;
         }
 
-        // Set the file extension based on the type and get the file name:
-        $extension = ($type === 'text/css') ? 'css' : 'js';
-        $file = sprintf("%s.%s", $asset, $extension);
+        // Get the extension from the path name by getting
+        // the last word after the last dot, and validate it:
+        $extension = explode('.', $path);
+        if (!in_array($extension[count($extension) - 1], $allowed['ext'])) {
+            Report::warning("Invalid extension for file '$path'.");
+            return;
+        }
 
         // Get the path to the file:
-        $path = Folder::getPath($src, Path::root());
-        $path = sprintf("%s/%s/%s", $path, $asset, $file);
-
-        // If the file does not exist, return null:
+        $path = sprintf("%s/%s", Folder::getPath("src", Path::root()), $path);
         if (!file_exists($path)) {
             Report::warning("The file '$path' does not exist.");
             return;
@@ -89,21 +67,6 @@ class File {
         header("Content-Type: $type");
         echo(file_get_contents($path));
         return;
-    }
-
-
-    /**
-     * Get the mod time of a file.
-     * 
-     * @param string $path
-     * The path to the file.
-     * 
-     * @return int|null
-     * The file mod time, or null if the file does not exist.
-     */
-    public static function modtime(string $path): ?int {
-        $path = Path::root() . $path;
-        return file_exists($path) ? filemtime($path) : NULL;
     }
 
     /**
@@ -117,7 +80,7 @@ class File {
      */
     public static function size(string $path): ?int {
         $path = Path::root() . $path;
-        return file_exists($path) ? filesize($path) : NULL;
+        return file_exists($path) ? filesize($path) : null;
     }
 
     /**
@@ -131,7 +94,7 @@ class File {
      */
     public static function mime(string $path): ?string {
         $path = Path::root() . $path;
-        return file_exists($path) ? mime_content_type($path) : NULL;
+        return file_exists($path) ? mime_content_type($path) : null;
     }
 
     /**
@@ -145,7 +108,21 @@ class File {
      */
     public static function contents(string $path): ?string {
         $path = Path::root() . $path;
-        return file_exists($path) ? file_get_contents($path) : NULL;
+        return file_exists($path) ? file_get_contents($path) : null;
+    }
+
+    /**
+     * Get the mod time of a file.
+     * 
+     * @param string $path
+     * The path to the file.
+     * 
+     * @return int|null
+     * The file mod time, or null if the file does not exist.
+     */
+    public static function modtime(string $path): ?int {
+        $path = Path::root() . $path;
+        return file_exists($path) ? filemtime($path) : null;
     }
 
     /**
@@ -159,7 +136,7 @@ class File {
      */
     public static function version(string $path): ?string {
         $modified = File::modtime($path);
-        return $modified !== NULL ? sprintf("%s?version=%d", $path, $modified) : NULL;
+        return $modified !== null ? sprintf("%s?version=%d", $path, $modified) : null;
     }
 
     /**
@@ -173,7 +150,7 @@ class File {
      */
     public static function extension(string $path): ?string {
         $path = Path::root() . $path;
-        return file_exists($path) ? pathinfo($path, PATHINFO_EXTENSION) : NULL;
+        return file_exists($path) ? pathinfo($path, PATHINFO_EXTENSION) : null;
     }
 
     /**
@@ -215,155 +192,13 @@ class File {
     }
 
     /**
-     * Method to check if the set file should be included on the current page.
-     * 
-     * @param string $condition
-     * The condition to check.
-     * 
-     * @return bool
-     * True if the file should be included, false otherwise.
+     * Load a file and get its contents. Works for images and
+     * other files that are not PHP files. Restricts moving backwords
+     * in the directory structure.
      */
-    private static function filter(string $condition = NULL): bool {
-
-        // If no condition is specified, return true (include on every page)
-        if ($condition === NULL) return TRUE;
-
-        // If the condition starts with an exclamation point, call itself
-        // again with the exclamation point removed (exclude on specific pages)
-        if (strpos($condition, "!") === 0) return !File::filter(substr($condition, 1)); 
-
-        // Return true if the current page matches the include condition; otherwise, 
-        // return false (include on specific pages)
-        return Request::current() === $condition;
+    public static function load(): void {
+        // Not implemented yet
     }
-
-    /**
-     * Method to generate a file reference based on the specified file name, type,
-     * and conditions.
-     * 
-     * @param string $file
-     * The file name.
-     * 
-     * @param string $type
-     * The file type.
-     * 
-     * @param string|null $conditions
-     * The conditions under which the file should be included.
-     * 
-     * @return string
-     * The HTML code for the file reference.
-     */
-    private static function link(string $file, string $type, ?string $conditions = NULL): mixed {
-        
-        // Get the file version and filter the conditions, this also makes sure the
-        // file exists:
-        $version    = File::version($file);
-        $conditions = is_array($conditions) ? $conditions : [$conditions];
-
-        // Loop through the conditions and check if the file should be included:
-        foreach ($conditions as $condition) {
-            if (!File::filter($condition) || $version === NULL) continue; 
-        
-            // Check the file type and generate the link:
-            // if($type == "text/css"){
-            //     if($method = "client"){
-            //         $output = sprintf('<link rel="stylesheet" type="text/css" href="%s" media="all">', $version);
-            //     }
-            //     else{
-            //         $output = sprintf('<link rel="stylesheet" type="text/css" href="%s" media="all">', $version);
-            //     }
-            // }
-            switch ($type) {
-                case $type == 'css' || $type == 'text/css'::
-                    $output = sprintf('<link rel="stylesheet" type="text/css" href="%s" media="all">', $version);
-                    break;
-
-                case $type == 'js' || $type == 'text/javascript':
-                    $output = sprintf('<script defer type="text/javascript" src="%s"></script>', $version);
-                    break;
-
-                default:
-                    Report::warning("Invalid type '$type' for file '$file'.");
-                    break;
-            }
-        
-            return $output;
-        }
-        
-        return NULL;
-    }
-
-    /**
-     * Add a key/value pair to the either the stylesheets, scripts array variables.
-     * 
-     * @param string $file
-     * The file to add.
-     * 
-     * @param array|null $condition
-     * The condition under which the file should be included.
-     * 
-     * @param bool $public
-     * Whether the file is public or not.
-     */
-    public static function add(array $data): void {
-
-        switch ($data['type']) {
-            case 'text/css':
-                File::$styles[] = $data;
-                break;
-
-            case 'text/javascript':
-                File::$scripts[] = $data;
-                break;
-
-            default:
-                Report::warning("Invalid file type: '$data[type]'.");
-                break;
-        }
-    }
-
 }
 
-    // /**
-    //  * Open a requested file.
-    //  * 
-    //  * @param string $file
-    //  * The file to open.
-    //  * 
-    //  * @param string $folder
-    //  * The folder where the file is located.
-    //  * 
-    //  * @return bool
-    //  * True if the file was opened successfully, false otherwise.
-    //  */
-    // public static function open(string $file, string $folder = ''): bool {
-
-    //     // Path to the file, this currently only picks
-    //     // files from the uploads folder:
-    //     $path = dirname(__DIR__, 2) . "/uploads/$folder/$file";
-    //     Report::notice("Opening the file '$file' from the '$folder' folder.");
-
-    //     // If the file does not exist, return false:
-    //     if (!file_exists($path)) {
-    //         Report::warning("The file '$file' does not exist in the '$folder' folder.");
-    //         return false;
-    //     }
-
-    //     // Get the file extension, this is used to set the mime type:
-    //     $extension = pathinfo($path, PATHINFO_EXTENSION);
-
-    //     // Get the mime type:
-    //     $mime = mime_content_type($path);
-
-    //     // Set the headers:
-    //     header("Content-Type: $mime");
-    //     header("Content-Disposition: inline; filename=$file");
-    //     header("Content-Length: " . filesize($path));
-
-    //     // Read the file:
-    //     readfile($path);
-
-    //     // Return true:
-    //     return true;
-    // }
 

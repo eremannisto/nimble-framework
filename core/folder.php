@@ -4,7 +4,7 @@
  * Directories class handles all directories related methods,
  * such as getting and setting the path of the directories.
  * 
- * @version     0.0.1
+ * @version     1.0.0
  * @package     Ombra
  * @subpackage  Folder
  */

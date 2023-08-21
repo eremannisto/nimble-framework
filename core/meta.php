@@ -59,7 +59,7 @@ class Meta {
                     ?:   Config::get("application/meta/image")     // Try to use the default image.
                     ?:   "";                                       // Use fallback image.
                 return !empty($image) 
-                    ? File::version(Folder::getPath("images") . $image)
+                    ? File::version(Folder::getPath("images") . '/' . $image)
                     : $image;
 
             case 'robots':

@@ -22,3 +22,4 @@ Options -Indexes
     Order Allow,Deny
     Deny from all
 </Files>
+

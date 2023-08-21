@@ -9,8 +9,8 @@
         "updated"       : "01.01.2023 00:00:00",
 
         "router"            : {
-            "host"          : "example.com",
-            "base"          : "https://example.com",
+            "host"          : "localhost",
+            "base"          : "https://localhost:8888",
             "index"         : "home",
             "error"         : "error",
             "controller"    : "index",
@@ -37,7 +37,8 @@
             "reports"           : "/core/reports",
             "src"               : "/src",
             "pages"             : "/src/pages",
-            "components"        : "/src/components"
+            "components"        : "/src/components",
+            "actions"           : "/src/actions"
         },
 
         "time"          : {

@@ -205,7 +205,7 @@ class JSON {
      * @return bool
      * Returns TRUE if the file exists, FALSE otherwise.
      */
-    private static function exists(string $file): bool {
+    public static function exists(string $file): bool {
 
         // If the file does not exist, report an error and 
         // return FALSE.
@@ -271,7 +271,7 @@ class JSON {
      * The decoded JSON string as an object, or NULL if the string 
      * could not be decoded.
      */
-    private static function decode(string $json): ?object {
+    public static function decode(string $json): ?object {
 
         // Decode the JSON string and return NULL if the string
         // could not be decoded.
@@ -293,7 +293,7 @@ class JSON {
      * The encoded JSON object as a string, or NULL if the object 
      * could not be encoded.
      */
-    private static function encode(mixed $object, int $options = JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE): ?string {
+    public static function encode(mixed $object, int $options = JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE): ?string {
 
         // Encode the JSON object and return NULL if the object
         // could not be encoded.

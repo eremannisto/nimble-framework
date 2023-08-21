@@ -95,11 +95,11 @@ class Response {
      * @return void
      * Returns nothing.
      */
-    public static function setStatus(int $code): void {
+    public static function setStatus(mixed $code): void {
 
         // Check if the code is valid:
-        $validate = function (int $code): bool {
-            return(is_int($code) && $code >= 100 && $code <= 599);
+        $validate = function (mixed $code): bool {
+            return(is_numeric($code) && $code >= 100 && $code <= 599);
         };
 
         // If the code is invalid, report it and set the code to 500:
@@ -109,6 +109,7 @@ class Response {
         }
 
         // Set the given code:
+        $code = (int)$code;
         http_response_code($code); 
     }
 

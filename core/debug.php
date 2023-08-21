@@ -3,7 +3,7 @@
 /**
  * This class handles debugging.
  * 
- * @version     0.0.1
+ * @version     1.0.0
  * @package     Ombra
  * @subpackage  Debug
  */
