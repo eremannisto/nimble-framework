@@ -1,6 +1,9 @@
 ![Ombra - Personal PHP Framework](https://github.com/eremannisto/ombra-framework/blob/main/public/assets/images/social.png)
-# Ombra - Simple PHP Framework (V1.0.0)
-Ombra is my personal, simple PHP framework project to simplify some of my projects while learning how to create a custom framework. I will try my best to keep the code well documented and updated. This is not meant for production, but any suggestions are always welcome.
+# Ombra - Simple PHP Framework (B1.0.0)
+Ombra is a personal PHP framework project designed to streamline my projects and facilitate the learning process of crafting custom frameworks. My intention is to maintain thorough documentation and regular updates to ensure the code's quality and relevance.
+
+## How to get started
+Get the newest version of the repository and edit the `config.json` file. It's initially set up for the `localhost` environment. Don't forget to add a `.env` file in the project folder for everything to work smoothly. For more details, check out the `Environment` & `Configuration` section. 
 
 ## Structure
 The framework utilizes a well-organized file structure to enhance the development process. At the core of this structure is the `public` folder, which acts as the main entry point for the project. All pages are accessed through a front-controller (`index.php`), while the `pages`, `components`, and `widgets` are sourced from the `src` folder located outside the root directory.
@@ -81,33 +84,94 @@ projectName
 ```
 
 ## Configurations
-All the data about the website will be stored in the config.json. There is an inbuilt functions to make changes to these.
+Most data in this framework is stored in various `JSON` files, and thus we have a lot of tools to retrieve and manipulate these files. Here is how your `config.json` may look on an empty project:
+```json
+{
+    "application"       : {                                 // Application data:           
 
-### `Config::get()`
-The `Config::get()` method is used to retrieve configuration data from the config.json file.
+        "PHP"           : "8.0.0",                          // Required PHP version        
+        "version"       : "1.0.0",                          // Version number              
+        "name"          : "Application name",               // Your application name       
+        "description"   : "Application description",        // Your application description
+        "project"       : "project-name",                   // Your project folder name    
+        "created"       : "01.01.2023 00:00:00",            // Optional: created at        
+        "updated"       : "01.01.2023 00:00:00",            // Optional: updated at        
 
-#### Parameters
-`$path` (optional): A string representing the path to the configuration data. The path should be in the format key/subkey/subsubkey, where each key represents a top-level key in the configuration object, and each subkey represents a nested key. If the $path parameter is not specified, the entire configuration object will be returned.
-`$file` (optional): A string representing the path to the configuration file. The default value is /config.json, which assumes that the config.json file is located in the root directory of the project.
+        "router"        : {                                 // Router data:                
+            "host"          : "localhost",                  // - host name                 
+            "base"          : "https://localhost:8888",     // - base name                 
+            "index"         : "home",                       // - index PAGE name           
+            "error"         : "error",                      // - error PAGE name           
+            "controller"    : "index",                      // - controller name           
+            "parameter"     : "page"                        // - page parameter name       
+        },
 
-#### Return Value
-The `Config::get()` method returns the configuration data specified by the $path parameter, or the entire configuration object if the $path parameter is not specified.
+        "meta"          : {                                 // Meta data:                  
+            "language"      : "en",                         // - default language          
+            "title"         : "The default title",          // - default page title        
+            "description"   : "The default description",    // - default page description  
+            "type"          : "website",                    // - default page type         
+            "image"         : "social.png",                 // - default page image file   
+            "robots"        : "index, follow"               // - default robots            
+        },
 
-#### Example Usage
+        "folders"       : {                                 // Structural data:            
+            "root"          : "/public",                    // - root folder               
+            "assets"        : "/public/assets",             // - assets folder             
+            "favicon"       : "/public/assets/favicon",     // - favicon folder            
+            "images"        : "/public/assets/images",      // - images folder             
+            "styles"        : "/public/assets/styles",      // - styles folder             
+            "scripts"       : "/public/assets/scripts",     // - scripts folder            
+            "framework"     : "/core",                      // - framework folder          
+            "src"           : "/src",                       // - src folder                
+            "pages"         : "/src/pages",                 // - pages folder              
+            "components"    : "/src/components",            // - components folder         
+            "snippets"      : "/src/snippets"               // - snippets folder           
+        },
+
+        "time"          : {                                 // Time data                   
+            "format"        : "d.m.Y H:i:s",                // - time format               
+            "zone"          : "Europe/Helsinki",            // - time zone                 
+            "locale"        : "fi_FI",                      // - current locale            
+            "restriction"   : {                             // - restrictions:  (Not implemented yet)
+                "start"         : null,                     // - - start time   (Not implemented yet)
+                "end"           : null                      // - - end time     (Not implemented yet)
+            }
+        }
+    }
+}
+```
+
+### Getting data
+Getting data from the `config.json` can be done using the core class `Config`. For example:
 ```php
-<?php
 // Get the entire configuration object
-$config = Config::get();
+$config  = Config::get();
 
 // Get the value of the 'application/name' key
-$name = Config::get('application/name');
+$name    = Config::get('application/name');
 
 // Get the value of the 'application/version' key
 $version = Config::get('application/version');
 
-// Get the value of the 'time/restriction/start' key
-$start = Config::get('time/restriction/start');
-?>
+// Get the value of the 'application/time/restriction/start' key
+$start   = Config::get('appliaction/time/restriction/start');
 ```
 
-In this example, the `Config::get()` method is used to retrieve configuration data from the `config.json` file. The first call to `Config::get()` retrieves the entire configuration object. The subsequent calls retrieve the values of specific keys in the configuration object by specifying the path to the key as the `$path` parameter.
+### Setting data
+Setting data from the `config.json` can be fone using the core class `Config`. If the object doesn't exist, create it, otherwise overwrite it. For example:
+```php
+// Set the entire configuration object
+Config::set();
+
+// Set the new value of the 'application/name' key
+Config::set('application/name', 'My new name');
+
+// Set the new value of the 'application/version' key
+Config::set('application/version', '1.0.1');
+
+// Set the new value of the 'application/time/restriction/start' key
+Config::set('appliaction/time/restriction/start', "01.01.2024");
+```
+
+Continues...
