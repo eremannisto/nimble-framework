@@ -117,7 +117,7 @@ projectName
 
 ## Configurations
 Most data in this framework is stored in various `JSON` files, and thus we have a lot of tools to retrieve and manipulate these files. Here is how your `config.json` may look on an empty project:
-```json
+```
 {
     "application"       : {                                 // Application data:           
 
