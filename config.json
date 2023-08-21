@@ -38,7 +38,7 @@
             "src"               : "/src",
             "pages"             : "/src/pages",
             "components"        : "/src/components",
-            "actions"           : "/src/actions"
+            "snippets"          : "/src/snippets"
         },
 
         "time"          : {

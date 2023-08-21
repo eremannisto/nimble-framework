@@ -3,7 +3,39 @@
 Ombra is a personal PHP framework project designed to streamline my projects and facilitate the learning process of crafting custom frameworks. My intention is to maintain thorough documentation and regular updates to ensure the code's quality and relevance.
 
 ## How to get started
-Get the newest version of the repository and edit the `config.json` file. It's initially set up for the `localhost` environment. Don't forget to add a `.env` file in the project folder for everything to work smoothly. For more details, check out the `Environment` & `Configuration` section. 
+Get the newest version of the repository and edit the `config.json` file. It's initially set up for the `localhost` environment. Don't forget to add a `.env` file in the project folder for everything to work smoothly. For more details about those check out the `Environment` & `Configuration` section. 
+
+Open up your `Home` page file from `/src/pages/Home/Home.php` and start programming your home page:
+
+```php
+<?php
+// Always list all your components on the top of the page:
+Components::require('Notification');
+
+// Server-side rendering:
+// Add any check ups here, e.g. if the user is logged in, etc.
+
+// Render the header component, add any overwrites 
+// (e.g. title, description, etc.) as an key/value array, if needed.
+// You can also add any custom CSS or JS files here.
+Head::render([
+    "title" => "My title overwrite"
+]);
+
+// Render the cookie consent component:
+// CookieConsent::render();
+
+
+// Add your page content here: ?>
+<div class="container">
+    <h1>Hello World (Homepage)!</h1>
+    <?php Notification::render(); ?>
+</div> <?php
+
+// Render the footer component, add any overwrites
+// (e.g. custom JS files, etc.) as an array, if needed.
+Foot::render();
+```
 
 ## Structure
 The framework utilizes a well-organized file structure to enhance the development process. At the core of this structure is the `public` folder, which acts as the main entry point for the project. All pages are accessed through a front-controller (`index.php`), while the `pages`, `components`, and `widgets` are sourced from the `src` folder located outside the root directory.
@@ -29,9 +61,9 @@ projectName
 │
 ├── src
 │   │   
-│   ├── widgets                     [All the widgets are stored here]
-│   │   ├── Widget1.php             [Widgets file, for example authentication]
-│   │   ├── Widget2.php             [Widgets file, for example sessions]
+│   ├── snippets                    [All the snippets are stored here]
+│   │   ├── Snippet.php             [Snippet file, for example authentication]
+│   │   ├── Snippet.php             [Snippet file, for example sessions]
 │   │   └── ...
 │   │   
 │   ├── components                  [All the components are stored here]
