@@ -1,9 +1,67 @@
 ![Ombra - Personal PHP Framework](https://github.com/eremannisto/ombra-framework/blob/main/public/assets/images/social.png)
-# Ombra - Simple PHP Framework (in progress)
+# Ombra - Simple PHP Framework (V1.0.0)
 Ombra is my personal, simple PHP framework project to simplify some of my projects while learning how to create a custom framework. I will try my best to keep the code well documented and updated. This is not meant for production, but any suggestions are always welcome.
 
-## Front Controller
-(...)
+## Structure
+The framework utilizes a well-organized file structure to enhance the development process. At the core of this structure is the `public` folder, which acts as the main entry point for the project. All pages are accessed through a front-controller (`index.php`), while the `pages`, `components`, and `widgets` are sourced from the `src` folder located outside the root directory.
+
+The `core` folder contains essential framework classes and methods that are required for the framework to function properly. Additionally, within this folder, you'll find the `reports` directory where all the logs are stored, aiding in debugging and maintenance.
+
+Within the `public` folder, an `assets` directory is present. This directory serves as a repository for publicly accessible files, including `images`, `favicons`, `scripts`, and `styles`.
+
+At the project level, there are two important files. The `config.json` file holds more general public data, while the `.env` file contains more sensitive data that is used on the website and more data can be stored in these, more about this later.
+
+Below is a visualisation how a project would look while using this framework:
+
+```
+projectName
+├── core                            [Framework files]
+│   ├── FrameworkClass1.php
+│   ├── FrameworkClass2.php
+│   ├── ...
+│   └── reports                     [All logs are stored here]
+│       └── {}
+│
+├── src
+│   ├── widgets
+│   │   ├── Widget1.php             [Widgets file, for example authentication]
+│   │   ├── Widget2.php             [Widgets file, for example sessions]
+│   │   └── ...
+│   ├── components                  [All the components are stored here]
+│   │   ├── Component1                      
+│   │   │   ├── Component1.php      [Component template file]
+│   │   │   ├── Component1.css      [Component specific css file]
+│   │   │   └── Component1.js       [Component specific js file]
+│   │   ├── Component2                      
+│   │   │   ├── Component2.php      [Component template file]
+│   │   │   ├── Component2.css      [Component specific css file]
+│   │   │   └── Component2.js       [Component specific js file]
+│   │   └── ...
+│   └── pages                       [All the pages are stored here]
+│       ├── Page1
+│       │   ├── Page1.php           [Page template file]
+│       │   ├── Page1.css           [Page specific css file]
+│       │   └── Page1.js            [Page specific js file]
+│       ├── Page2
+│       │   ├── Page2.php           [Page template file]
+│       │   ├── Page2.css           [Page specific css file]
+│       │   └── Page2.js            [Page specific js file]
+│       └── pages.json              [Pages whitelist and config file]
+│
+├── public                          [Root folder]
+│   ├── index.php                   [The front controller]
+│   ├── assets                      [All the publicly available assets, such as:]
+│   │   ├── favicon                     [ - favicons and its config file]
+│   │   ├── images                      [ - images]
+│   │   ├── scripts                     [ - javascripts]
+│   │   ├── styles                      [ - stylesheets]
+│   │   └── ...                         [ - more!]
+│   │   
+│   └── .htaccess                   [Handles the front-controller Re-Writing]
+│
+├── .htaccess                       [Handles the root folder and error handling]
+└── config.json                     [Configurations]
+```
 
 ## Configurations
 All the data about the website will be stored in the config.json. There is an inbuilt functions to make changes to these.
