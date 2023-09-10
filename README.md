@@ -22,10 +22,6 @@ Head::render([
     "title" => "My title overwrite"
 ]);
 
-// Render the cookie consent component:
-// CookieConsent::render();
-
-
 // Add your page content here: ?>
 <div class="container">
     <h1>Hello World (Homepage)!</h1>
