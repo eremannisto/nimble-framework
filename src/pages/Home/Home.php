@@ -7,7 +7,7 @@ Components::require('Notification');
 // Add any check ups here, e.g. if the user is logged in, etc.
 
 // Render the header component, add any overwrites 
-// (e.g. title, description, etc.) as an array, if needed.
+// (e.g. title, description, etc.) as an key/value array, if needed.
 // You can also add any custom CSS or JS files here.
 Head::render();
 

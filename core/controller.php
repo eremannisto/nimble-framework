@@ -11,6 +11,8 @@
  */
 class Controller {
 
+    public static array $cache = [];
+
     /**
      * Initializes the controller by setting the timezone and locale,
      * and checking if the requested page is a client file.
@@ -30,5 +32,18 @@ class Controller {
             File::getClientFile();
             exit();
         }   
+    }
+
+    /**
+     * Sets the global cache data for the Head class.
+     *
+     * @param array $data 
+     * The cache data to be set.
+     * 
+     * @return void
+     * Returns nothing.
+     */
+    public static function global(array $data): void {
+        Controller::$cache = $data;
     }
 }

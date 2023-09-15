@@ -75,6 +75,7 @@ class Favicon {
     public static function generate(): ?string {
         $favicons  = Favicon::get();
         $directory = Folder::getPath("favicon");
+        $public    = Folder::getPath("root");
 
         if (empty($favicons) || !Folder::exists("favicon")) {
             Report::warning("The favicon JSON or directory is missing");
@@ -85,7 +86,8 @@ class Favicon {
 
         // Go through each favicon and generate the link tag:
         foreach ($favicons as $favicon) {
-            $href = File::version($directory .'/'. $favicon->href);
+            $version = File::version($directory .'/'. $favicon->href);
+            $href = str_replace($public, '', $version);
             $rel  = $favicon->rel  ?? null;
             $type = $favicon->type ?? null;
             $size = $favicon->size ?? null;

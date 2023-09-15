@@ -37,18 +37,18 @@ class Link{
      * @return bool
      * True if the file should be included, false otherwise.
      */
-    private static function filter(string $condition = null): bool {
+    public static function filterCondition(string $condition = null): bool {
 
         // If no condition is specified, return true (include on every page)
         if ($condition === null) return true;
 
         // If the condition starts with an exclamation point, call itself
         // again with the exclamation point removed (exclude on specific pages)
-        if (strpos($condition, "!") === 0) return !Link::filter(substr($condition, 1)); 
+        if (strpos($condition, "!") === 0) return !Link::filterCondition(substr($condition, 1)); 
 
         // Return true if the current page matches the include condition; otherwise, 
         // return false (include on specific pages)
-        return Request::current() === $condition;
+        return Request::current() === $condition || Request::current() === Config::get("application/router/index");
     }
 
 
@@ -131,7 +131,7 @@ class Link{
         $version    = File::version($root . $path);
 
         foreach ($conditions as $condition) {
-            if (!Link::filter($condition) || empty($version)) {
+            if (!Link::filterCondition($condition) || empty($version)) {
                 continue;
             }
 

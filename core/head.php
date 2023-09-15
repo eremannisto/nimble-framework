@@ -15,17 +15,7 @@ class Head {
      * 
      * @var array|null
      */
-    private static ?array $cache = null;
-
-    /**
-     * This is used to store any preloaded data that will be used to render the page.
-     * For example, if you want to preload third-party scripts
-     * or stylesheets, you can do so by calling the Head::preload() method in
-     * the controller, and then render the head tags in the view.
-     */
-    public static function global(?array $data): void {
-        Head::$cache = $data;
-    }
+    public static ?array $cache = null;
 
     /**
      * Render the head tags and their contents. You can also
@@ -43,6 +33,9 @@ class Head {
      * 
      */
     public static function render(?array $meta = null): void {
+
+        // Require all global components:
+        Components::requireGlobal();
 
         // Start output buffer:
         ob_start();
@@ -77,15 +70,17 @@ class Head {
         $output .= Head::scripts();
         
         // Initiate the document:
-        echo(Head::init(
+        Head::init(
             Head::language($meta['language']), 
             $output
-        ));
+        );
+
+        // Render any head components that need to be rendered on every page:
+        Components::renderGlobal(get_called_class());
 
         // Get the output buffer contents:
-        echo ob_get_contents();
+        ob_get_contents();
     }
-
 
     /**
      * Returns the opening HTML tags for the document with the 
@@ -94,15 +89,16 @@ class Head {
      * @param string|null $language 
      * The language of the document.
      * 
-     * @return string 
+     * @return void 
      * The opening HTML tags for the document.
      */
-    private static function init(?string $language, ?string $data): string {
+    private static function init(?string $language, ?string $data): void {
+        $current = Request::current();
         $output  = "<!DOCTYPE html>";
         $output .= "<html lang=$language>";
         $output .= "<head>$data</head>";
-        $output .= "<body>";
-        return $output;
+        $output .= "<body data-page='$current'>";
+        echo $output;
     }
 
     /**
@@ -225,7 +221,7 @@ class Head {
 
         // Add Twitter meta tags if at least one of title, description, or image is non-empty
         if (!empty($meta['title']) || !empty($meta['description']) || !empty($meta['image'])) {
-            $output .= '<meta name="twitter:card" content="summary_large_image">';
+            $output .= '<meta name="twitter:card" content="summary">';
             $output .= '<meta name="twitter:site" content="@twitter">';
             $output .= '<meta name="twitter:creator" content="@twitter">';
         }
@@ -253,9 +249,9 @@ class Head {
      * The HTML code for third-party links and scripts.
      */
     private static function vendor(): string {
-        if (!empty(Head::$cache['third-party']) && is_array(Head::$cache['third-party'])) {
+        if (!empty(Controller::$cache['third-party']) && is_array(Controller::$cache['third-party'])) {
             $output = '<!-- Third-party links and scripts: -->';
-            foreach (Head::$cache['third-party'] as $link) {
+            foreach (Controller::$cache['third-party'] as $link) {
                 $output .= $link;
             }
         }
@@ -269,7 +265,7 @@ class Head {
      * The HTML code for stylesheets.
      */
     private static function stylesheets(): string {
-        $styles = Head::$cache['styles'];
+        $styles = Controller::$cache['styles'];
         if(!empty($styles) && is_array($styles)) {
             foreach ($styles as $path => $style) {
                 $data = [
@@ -298,7 +294,7 @@ class Head {
      * The HTML code for scripts.
      */
     private static function scripts(): string {
-        $scripts = Head::$cache['scripts'];
+        $scripts = Controller::$cache['scripts'];
         if(!empty($scripts) && is_array($scripts)) {
             foreach ($scripts as $path => $script) {
                 $data = [
