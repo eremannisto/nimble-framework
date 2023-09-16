@@ -21,53 +21,69 @@ class Components {
      * @return void
      * Returns nothing.
      */
-    public static function require(mixed $components): void {
+    public static function require(string $page = null): void {
+    
+        // If parameter is empty, use the current page, otherwise
+        // use the requested page. Get also the current HTTP response
+        // status code in case the requested page does not exist
+        $status         = Request::req("GET", "error") ?? Response::getStatus();
+        $pageRequest    = ucfirst($pageRequest ?? Request::current());
+        $pageParts      = explode('/', $pageRequest);
+        $pageName       = end($pageParts);
 
-        // Get the path to the 'components' folder so we can
-        // construct the full path to the requested component file
-        // in the foreach loop
-        $folder = Folder::getPath('components', Path::root());
+        // Get the path to the 'pages' folder and construct the full
+        // path to the requested page file
+        $folder = Folder::getPath('pages', Path::root());
+        $file = "$folder/$pageRequest/$pageName";
 
-        // If components is not an array, convert it to an array
-        if (!is_array($components)) {
-            $components = [$components];
+        Debug::log("Current page requested: $file");
+
+        // If page parameter is empty, use the index page
+        if (empty($pageRequest)) {
+            $pageRequest = ucfirst(Config::get("application/router/index"));
+            $file = "$folder/$pageRequest/$pageRequest";
         }
 
-        // Loop through each component in the array
-        foreach ($components as $component) {
-
-            // Construct the full path to the requested component file
-            $file = "$folder/$component/$component";
-    
-            // If the requested file does not exist
-            if (!file_exists("$file.php")) {
-                Report::warning("Component '$component' does not exist");
-                continue;
-            }
-    
-            // Add the component stylesheet to the stylesheet array
-            if (file_exists("$file.css")) {
-                Link::add([
-                    "mode"       => "server",                                // Get the file from the server 
-                    "path"       => "components/$component/$component.css",  // Automatically will add from src/->
-                    "type"       => "text/css",                              // Type is CSS
-                    "conditions" => null,                                    // No conditions
-                ]);
-            }   
-    
-            // Add the component script to the scripts array
-            if (file_exists("$file.js")) {
-                Link::add([
-                    "mode"       => "server",                                // Get the file from the server 
-                    "path"       => "components/$component/$component.js",   // Automatically will add from src/->
-                    "type"       => "text/javascript",                       // Type is JS
-                    "conditions" => null,                                    // No conditions
-                ]);
-            }
-
-            // Include the requested component file
-            require_once "$file.php";
+        // Check if status code is between 400 and 599. If it is,
+        // redirect to the error page with the same status code:
+        if (($status >= 400 && $status < 600)){
+            $errorPage = ucfirst(Config::get("application/router/error"));
+            $file = "$folder/$errorPage/$errorPage";
+            Response::setStatus($status);
         }
+        
+        // Get pages object:
+
+        // If the requested file does not exist or is not part of the
+        // pages.json, redirect to the error page with a 404 status code:
+        if (!file_exists("$file.php") || !array_key_exists($pageRequest, (array)Pages::get())) {
+            $errorPage = ucfirst(Config::get("application/router/error"));
+            $file = "$folder/$errorPage/$errorPage";
+            Response::setStatus(404);
+        }
+
+        // Add the component stylesheet to the master stylesheet array
+        if (file_exists("$file.css")) {
+            Link::add([
+                "mode"       => "server",                               // Get the file from the server 
+                "path"       => "pages/$pageRequest/$pageName.css",  // Automatically will add from src/->
+                "type"       => "text/css",                             // Type is CSS
+                "conditions" => null,                                   // No conditions
+            ]);
+        }   
+
+        // Add the component script to the master scripts array
+        if (file_exists("$file.js")) {
+            Link::add([
+                "mode"       => "server",                               // Get the file from the server 
+                "path"       => "pages/$pageRequest/$pageName.js",   // Automatically will add from src/->
+                "type"       => "text/javascript",                      // Type is JS
+                "conditions" => null,                                   // No conditions
+            ]);
+        }
+
+        // Include the requested component file
+        require_once "$file.php";
     }
 
 
