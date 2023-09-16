@@ -72,7 +72,12 @@ projectName
 │   │   ├── Component2              [Component]        
 │   │   │   ├── Component2.php      [ - component template file]
 │   │   │   ├── Component2.css      [ - component specific css file]
-│   │   │   └── Component2.js       [ - component specific js file]
+│   │   │   ├── Component2.js       [ - component specific js file]
+│   │   │   │ 
+│   │   │   └── Component3          [Nested Component]
+│   │   │       ├── Component3.php  [ - component template file]
+│   │   │       ├── Component3.css  [ - component specific css file]
+│   │   │       └── Component3.js   [ - component specific js file]
 │   │   └── ...
 │   │   
 │   └── pages                       [All the pages are stored here]
@@ -85,7 +90,12 @@ projectName
 │   │   ├── Page2                   [Page]
 │   │   │   ├── Page2.php           [ - page template file]
 │   │   │   ├── Page2.css           [ - page specific css file]
-│   │   │   └── Page2.js            [ - page specific js file]
+│   │   │   ├── Page2.js            [ - page specific js file]
+│   │   │   │
+│   │   │   └── Page3               [Nested Page]
+│   │   │       ├── Page3.php       [ - page template file]
+│   │   │       ├── Page3.css       [ - page specific css file]
+│   │   │       └── Page3.js        [ - page specific js file]
 │   │   │ 
 │   │   └── pages.json              [Pages whitelist and config file]
 │   │   
