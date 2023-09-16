@@ -1,5 +1,5 @@
 ![Ombra - Personal PHP Framework](https://github.com/eremannisto/ombra-framework/blob/main/public/assets/images/social.png)
-# Ombra - Simple PHP Framework (B1.0.0)
+# Simple PHP Framework (B1.0.0)
 Ombra is a personal PHP framework project designed to streamline my projects and facilitate the learning process of crafting custom frameworks. My intention is to maintain thorough documentation and regular updates to ensure the code's quality and relevance.
 
 ## How to get started
