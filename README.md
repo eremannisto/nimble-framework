@@ -1,6 +1,6 @@
 ![Ombra - Personal PHP Framework](https://github.com/eremannisto/ombra-framework/blob/main/public/assets/images/social.png)
 # Simple PHP Framework (B1.0.0)
-Ombra is a personal PHP framework project designed to streamline my projects and facilitate the learning process of crafting custom frameworks. My intention is to maintain thorough documentation and regular updates to ensure the code's quality and relevance.
+Simple is a PHP framework project designed to streamline my projects and facilitate the learning process of crafting custom frameworks.
 
 ## How to get started
 Get the newest version of the repository and edit the `config.json` file. It's initially set up for the `localhost` environment. Don't forget to add a `.env` file in the project folder for everything to work smoothly. For more details about those check out the `Environment` & `Configuration` section. 
