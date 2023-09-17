@@ -1,6 +1,6 @@
 ![Ombra - Personal PHP Framework](https://github.com/eremannisto/ombra-framework/blob/main/public/assets/images/social.png)
-# Ombra - Simple PHP Framework (B1.0.0)
-Ombra is a personal PHP framework project designed to streamline my projects and facilitate the learning process of crafting custom frameworks. My intention is to maintain thorough documentation and regular updates to ensure the code's quality and relevance.
+# Simple PHP Framework (B1.0.0)
+Simple is a PHP framework project designed to streamline my projects and facilitate the learning process of crafting custom frameworks.
 
 ## How to get started
 Get the newest version of the repository and edit the `config.json` file. It's initially set up for the `localhost` environment. Don't forget to add a `.env` file in the project folder for everything to work smoothly. For more details about those check out the `Environment` & `Configuration` section. 
@@ -82,26 +82,26 @@ projectName
 │   │   
 │   └── pages                       [All the pages are stored here]
 │   │   │ 
-│   │   ├── Page1                   [Page]
-│   │   │   ├── Page1.php           [ - page template file]
-│   │   │   ├── Page1.css           [ - page specific css file]
-│   │   │   └── Page1.js            [ - page specific js file]
+│   │   ├── page1                   [Page]
+│   │   │   ├── page1.php           [ - page template file]
+│   │   │   ├── page1.css           [ - page specific css file]
+│   │   │   └── page1.js            [ - page specific js file]
 │   │   │ 
-│   │   ├── Page2                   [Page]
-│   │   │   ├── Page2.php           [ - page template file]
-│   │   │   ├── Page2.css           [ - page specific css file]
-│   │   │   ├── Page2.js            [ - page specific js file]
+│   │   ├── page2                   [Page]
+│   │   │   ├── page2.php           [ - page template file]
+│   │   │   ├── page2.css           [ - page specific css file]
+│   │   │   ├── page2.js            [ - page specific js file]
 │   │   │   │
-│   │   │   └── Page3               [Nested Page]
-│   │   │       ├── Page3.php       [ - page template file]
-│   │   │       ├── Page3.css       [ - page specific css file]
-│   │   │       └── Page3.js        [ - page specific js file]
+│   │   │   └── page3               [Nested Page]
+│   │   │       ├── page3.php       [ - page template file]
+│   │   │       ├── page3.css       [ - page specific css file]
+│   │   │       └── page3.js        [ - page specific js file]
 │   │   │ 
 │   │   └── pages.json              [Pages whitelist and config file]
 │   │   
 │   └── widgets
-│       ├── Widget1.php             [Widgets file, for example authentication]
-│       ├── Widget2.php             [Widgets file, for example sessions]
+│       ├── widget1.php             [Widgets file, for example authentication]
+│       ├── widget2.php             [Widgets file, for example sessions]
 │       └── ...
 │
 ├── public                          [Root folder]
