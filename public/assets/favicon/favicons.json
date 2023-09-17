@@ -18,19 +18,5 @@
         "rel":      "icon",
         "type":     "image/svg+xml",
         "size":     "any"
-    },
-
-    "192"           :{
-        "href":     "favicon-192.png",
-        "rel":      "icon",
-        "type":     "image/png",
-        "size":     "192x192"
-    },
-    
-    "512"           :{
-        "href":     "favicon-512.png",
-        "rel":      "icon",
-        "type":     "image/png",
-        "size":     "512x512"
     }
 }

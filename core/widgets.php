@@ -9,7 +9,7 @@
  * @package     Ombra
  * @subpackage  Snippets
  */
-class Snippets {
+class Widgets {
 
     /**
      * Loads the specified snippets.

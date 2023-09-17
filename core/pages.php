@@ -80,41 +80,40 @@ class Pages {
         // use the requested page. Get also the current HTTP response
         // status code in case the requested page does not exist
         $status         = Request::req("GET", "error") ?? Response::getStatus();
-        $pageRequest    = ucfirst($pageRequest ?? Request::current());
+        $pageRequest    = $pageRequest ?? Request::current();
         $pageParts      = explode('/', $pageRequest);
         $pageName       = end($pageParts);
 
         // Get the path to the 'pages' folder and construct the full
         // path to the requested page file
         $folder = Folder::getPath('pages', Path::root());
-        $file = "$folder/$pageRequest/$pageName";
-
-        Debug::log("Current page requested: $file");
 
         // If page parameter is empty, use the index page
         if (empty($pageRequest)) {
-            $pageRequest = ucfirst(Config::get("application/router/index"));
-            $file = "$folder/$pageRequest/$pageRequest";
+            $pageRequest = Config::get("application/router/index");
+            $pageName    = $pageRequest;
         }
 
         // Check if status code is between 400 and 599. If it is,
         // redirect to the error page with the same status code:
         if (($status >= 400 && $status < 600)){
-            $errorPage = ucfirst(Config::get("application/router/error"));
-            $file = "$folder/$errorPage/$errorPage";
+            $errorPage = Config::get("application/router/error");
+            $pageRequest = $errorPage;
+            $pageName    = $errorPage;
             Response::setStatus($status);
         }
         
         // If the requested file does not exist or is not part of the
         // pages.json, redirect to the error page with a 404 status code:
-        if (!file_exists("$file.php") || !array_key_exists($pageRequest, (array)Pages::get())) {
-            $errorPage = ucfirst(Config::get("application/router/error"));
-            $file = "$folder/$errorPage/$errorPage";
+        if (!file_exists("$folder/$pageRequest/$pageName.php") || !array_key_exists($pageRequest, (array)Pages::get())) {
+            $errorPage   = Config::get("application/router/error");
+            $pageRequest = $errorPage;
+            $pageName    = $errorPage;
             Response::setStatus(404);
         }
 
         // Add the component stylesheet to the master stylesheet array
-        if (file_exists("$file.css")) {
+        if (file_exists("$folder/$pageRequest/$pageName.css")) {
             Link::add([
                 "mode"       => "server",                               // Get the file from the server 
                 "path"       => "pages/$pageRequest/$pageName.css",     // Automatically will add from src/->
@@ -124,7 +123,7 @@ class Pages {
         }   
 
         // Add the component script to the master scripts array
-        if (file_exists("$file.js")) {
+        if (file_exists("$folder/$pageRequest/$pageName.js")) {
             Link::add([
                 "mode"       => "server",                               // Get the file from the server 
                 "path"       => "pages/$pageRequest/$pageName.js",      // Automatically will add from src/->
@@ -134,7 +133,7 @@ class Pages {
         }
 
         // Include the requested component file
-        require_once "$file.php";
+        require_once "$folder/$pageRequest/$pageName.php";
     }
     
 
