@@ -22,7 +22,7 @@ Components::require('Notification');
 // You can also add any custom CSS or JS files here.
 Head::render([
     "title"       => "My title overwrite",
-    "description" => "My description overwrite"
+    "description" => "My description overwrite",
     "..."         => "Add other meta overwrites"
 ]);
 
@@ -52,7 +52,7 @@ At the project level, there are two important files. The `config.json` file hold
 Below is a visualisation how a project would look while using this framework:
 
 ```
-projectName
+public_html
 │   
 ├── core                            [Framework files]
 │   ├── FrameworkClass1.php
