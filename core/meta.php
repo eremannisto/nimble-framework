@@ -26,8 +26,6 @@ class Meta {
         // Get current page:
         $currentPage     = Request::current();
 
-        Debug::log("Title: " . Pages::get("{$currentPage}->title"));
-
         // Get meta data:
         switch ($parameter) {
 
