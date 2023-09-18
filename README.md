@@ -1,6 +1,8 @@
 ![Simple - PHP Framework](https://github.com/eremannisto/ombra-framework/blob/main/public/assets/images/social.png)
 # Simple PHP Framework (B2.0.0)
-Simple is a PHP framework project designed to streamline my projects and facilitate the learning process of crafting custom frameworks.
+Simple Framework — a lightweight, `component-based` `server-side rendering (SSR)` framework created in `PHP`. Designed with a *do-it-yourself* spirit for small-scale projects where you want to roll up your sleeves and create something unique, all on your own.
+
+This project is also the culmination of my academic journey, serving as my thesis project.
 
 ## How to get started
 Get the newest version of the repository and edit the `config.json` file. It's initially set up for the `localhost` environment. Open up your `Home` page file from `/src/pages/home/home.php` and start programming your home page:
