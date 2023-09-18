@@ -52,7 +52,7 @@ At the project level, there are two important files. The `config.json` file hold
 Below is a visualisation how a project would look while using this framework:
 
 ```
-projectName
+public_html
 │   
 ├── core                            [Framework files]
 │   ├── FrameworkClass1.php
