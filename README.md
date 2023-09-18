@@ -1,26 +1,28 @@
-![Ombra - Personal PHP Framework](https://github.com/eremannisto/ombra-framework/blob/main/public/assets/images/social.png)
-# Simple PHP Framework (B1.0.0)
+![Simple - PHP Framework](https://github.com/eremannisto/ombra-framework/blob/main/public/assets/images/social.png)
+# Simple PHP Framework (B2.0.0)
 Simple is a PHP framework project designed to streamline my projects and facilitate the learning process of crafting custom frameworks.
 
 ## How to get started
-Get the newest version of the repository and edit the `config.json` file. It's initially set up for the `localhost` environment. Don't forget to add a `.env` file in the project folder for everything to work smoothly. For more details about those check out the `Environment` & `Configuration` section. 
-
-Open up your `Home` page file from `/src/pages/Home/Home.php` and start programming your home page:
+Get the newest version of the repository and edit the `config.json` file. It's initially set up for the `localhost` environment. Open up your `Home` page file from `/src/pages/home/home.php` and start programming your home page:
 
 ```php
 <?php
+
 // Always list all your components on the top of the page:
 Components::require('Notification');
 
-// Server-side rendering:
+// Server-side:
 // Add any check ups here, e.g. if the user is logged in, etc.
 
 // Render the header component, add any overwrites 
 // (e.g. title, description, etc.) as an key/value array, if needed.
 // You can also add any custom CSS or JS files here.
 Head::render([
-    "title" => "My title overwrite"
+    "title"       => "My title overwrite",
+    "description" => "My description overwrite"
+    "..."         => "Add other meta overwrites"
 ]);
+
 
 // Add your page content here: ?>
 <div class="container">
@@ -28,10 +30,12 @@ Head::render([
     <?php Notification::render(); ?>
 </div> <?php
 
+
 // Render the footer component, add any overwrites
 // (e.g. custom JS files, etc.) as an array, if needed.
 Foot::render();
 ```
+
 
 ## Structure
 The framework utilizes a well-organized file structure to enhance the development process. At the core of this structure is the `public` folder, which acts as the main entry point for the project. All pages are accessed through a front-controller (`index.php`), while the `pages`, `components`, and `widgets` are sourced from the `src` folder located outside the root directory.
@@ -164,7 +168,8 @@ Most data in this framework is stored in various `JSON` files, and thus we have 
             "src"           : "/src",                       // - src folder                
             "pages"         : "/src/pages",                 // - pages folder              
             "components"    : "/src/components",            // - components folder         
-            "snippets"      : "/src/snippets"               // - snippets folder           
+            "widgets"       : "/src/widgets"                // - widgets folder
+            "..."                                           // - add more folders!
         },
 
         "time"          : {                                 // Time data                   
@@ -183,17 +188,21 @@ Most data in this framework is stored in various `JSON` files, and thus we have 
 ### Getting data
 Getting data from the `config.json` can be done using the core class `Config`. For example:
 ```php
-// Get the entire configuration object
+// Example 01: Get the entire configuration object
 $config  = Config::get();
 
-// Get the value of the 'application/name' key
-$name    = Config::get('application/name');
+// Example 02: Get the value of the application name
+$name    = Config::get('application->name');
 
-// Get the value of the 'application/version' key
-$version = Config::get('application/version');
+// Example 03: Get the value of the version number
+$version = Config::get('application->version');
 
-// Get the value of the 'application/time/restriction/start' key
-$start   = Config::get('appliaction/time/restriction/start');
+// Example 04: Get the value of the restriction starting time
+$start   = Config::get('appliaction->time->restriction->start');
+
+// Example 05: Get the components folder value by using a variable
+$folderName = "components"
+$start   = Config::get("appliaction->folders->{$folderName}");
 ```
 
 ### Setting data
@@ -203,13 +212,13 @@ Setting data from the `config.json` can be fone using the core class `Config`. I
 Config::set();
 
 // Set the new value of the 'application/name' key
-Config::set('application/name', 'My new name');
+Config::set('application->name', 'My new name');
 
 // Set the new value of the 'application/version' key
-Config::set('application/version', '1.0.1');
+Config::set('application->version', '1.0.1');
 
 // Set the new value of the 'application/time/restriction/start' key
-Config::set('appliaction/time/restriction/start', "01.01.2024");
+Config::set('appliaction->time->restriction->start', "01.01.2024");
 ```
 
 Continues...
