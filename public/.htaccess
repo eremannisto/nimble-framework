@@ -7,15 +7,11 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI} !^/index\.php
 RewriteRule ^([^/]+)/?$ index.php?page=$1 [QSA,NC,L]
 
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
-
 # Index file
 DirectoryIndex index.php
 
 # Remove index listing
 Options -Indexes
-
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
 # Deny access to .htaccess
 <Files ".htaccess">
