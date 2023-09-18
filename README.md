@@ -22,7 +22,7 @@ Components::require('Notification');
 // You can also add any custom CSS or JS files here.
 Head::render([
     "title"       => "My title overwrite",
-    "description" => "My description overwrite"
+    "description" => "My description overwrite",
     "..."         => "Add other meta overwrites"
 ]);
 
