@@ -79,8 +79,8 @@ class Request {
      * The current page name.
      */
     public static function current(): string {
-        return htmlspecialchars(Request::req("GET", Config::get('application/router/parameter'))
-            ??  Config::get('application/router/index'));
+        return htmlspecialchars(Request::req("GET", Config::get('application->router->parameter'))
+            ??  Config::get('application->router->index'));
     }
 
     /**

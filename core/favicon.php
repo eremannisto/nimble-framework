@@ -87,10 +87,10 @@ class Favicon {
         // Go through each favicon and generate the link tag:
         foreach ($favicons as $favicon) {
             $version = File::version($directory .'/'. $favicon->href);
-            $href = str_replace($public, '', $version);
-            $rel  = $favicon->rel  ?? null;
-            $type = $favicon->type ?? null;
-            $size = $favicon->size ?? null;
+            $href    = str_replace($public, '', $version);
+            $rel     = $favicon->rel  ?? null;
+            $type    = $favicon->type ?? null;
+            $size    = $favicon->size ?? null;
 
             $link = sprintf('href="%s" rel="%s"', $href, $rel);
             if (isset($type)) $link .= sprintf(' type="%s"', $type);

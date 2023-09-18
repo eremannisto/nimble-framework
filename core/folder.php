@@ -16,7 +16,7 @@ class Folder {
      * 
      * @var string $base
      */
-    private static string $base = 'application/folders/';
+    private static string $base = 'application->folders->';
 
     /**
      * Returns the path of a directory based on its name and an optional subpath.

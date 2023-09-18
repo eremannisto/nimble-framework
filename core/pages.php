@@ -79,7 +79,7 @@ class Pages {
         // If parameter is empty, use the current page, otherwise
         // use the requested page. Get also the current HTTP response
         // status code in case the requested page does not exist
-        $status         = Request::req("GET", "error") ?? Response::getStatus();
+        $status         = Request::req("GET", "res") ?? Response::getStatus();
         $pageRequest    = $pageRequest ?? Request::current();
         $pageParts      = explode('/', $pageRequest);
         $pageName       = end($pageParts);
@@ -90,14 +90,14 @@ class Pages {
 
         // If page parameter is empty, use the index page
         if (empty($pageRequest)) {
-            $pageRequest = Config::get("application/router/index");
+            $pageRequest = Config::get("application->router->index");
             $pageName    = $pageRequest;
         }
 
         // Check if status code is between 400 and 599. If it is,
         // redirect to the error page with the same status code:
         if (($status >= 400 && $status < 600)){
-            $errorPage = Config::get("application/router/error");
+            $errorPage = Config::get("application->router->error");
             $pageRequest = $errorPage;
             $pageName    = $errorPage;
             Response::setStatus($status);
@@ -106,7 +106,7 @@ class Pages {
         // If the requested file does not exist or is not part of the
         // pages.json, redirect to the error page with a 404 status code:
         if (!file_exists("$folder/$pageRequest/$pageName.php") || !array_key_exists($pageRequest, (array)Pages::get())) {
-            $errorPage   = Config::get("application/router/error");
+            $errorPage   = Config::get("application->router->error");
             $pageRequest = $errorPage;
             $pageName    = $errorPage;
             Response::setStatus(404);
@@ -133,6 +133,7 @@ class Pages {
         }
 
         // Include the requested component file
+        Debug::log("Loading page '$folder/$pageRequest/$pageName.php'");
         require_once "$folder/$pageRequest/$pageName.php";
     }
     

@@ -48,7 +48,7 @@ class Link{
 
         // Return true if the current page matches the include condition; otherwise, 
         // return false (include on specific pages)
-        return Request::current() === $condition || Request::current() === Config::get("application/router/index");
+        return Request::current() === $condition || Request::current() === Config::get("application->router->index");
     }
 
 

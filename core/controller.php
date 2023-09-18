@@ -24,8 +24,8 @@ class Controller {
     public static function init(): void {
 
         // Set timezone and locale:
-        date_default_timezone_set(Config::get('application/time/zone'));
-        setlocale(LC_ALL, Config::get('application/time/locale'));
+        date_default_timezone_set(Config::get('application->time->zone'));
+        setlocale(LC_ALL, Config::get('application->time->locale'));
 
         // Check if the requested page is a client file
         if (Request::isClientFileFetch()){

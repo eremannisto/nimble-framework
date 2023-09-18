@@ -18,7 +18,7 @@ class Server {
      * The current base path.
      */
     public static function base(): string {
-        return Config::get('application/router/base')       // Get the base path from the configuration file.
+        return Config::get('application->router->base')       // Get the base path from the configuration file.
         ?: Server::scheme() . '://' . Server::host();     // Otherwise, get it from the current protocol and host.
     }
 
@@ -84,8 +84,8 @@ class Server {
 
         // If value is set to true, return the current host name.
         if ($value === true) 
-            return $validate(Config::get('application/router/host')) 
-                ? Config::get('application/router/host')
+            return $validate(Config::get('application->router->host')) 
+                ? Config::get('application->router->host')
                 : ($_SERVER['HTTP_HOST'] ?? '');
             
         // If value is not false and it is valid, return it.

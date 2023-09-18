@@ -11,6 +11,8 @@
  */
 class JSON {
 
+    private static string $divider = '->';
+
     /**
      * Get the value of a nested property in an object using a path string.
      *
@@ -91,10 +93,10 @@ class JSON {
     
         // If the path is empty or has a single slash,
         // clear the entire JSON data and create an empty object.
-        if ($path === '' || $path === '/') { $json = new stdClass; } 
+        if ($path === '' || $path === JSON::$divider) { $json = new stdClass; } 
 
         // If the path ends with a slash:
-        elseif (substr($path, -1) === '/') {
+        elseif (substr($path, -1) === JSON::$divider) {
 
             // Remove the trailing slash from the path, and
             // traverse the JSON data to get the target.
@@ -116,7 +118,7 @@ class JSON {
 
         // Traverse the json data and remove the property at the path.
         else {
-            $keys    = explode('/', $path);
+            $keys    = explode(JSON::$divider, $path);
             $current = &$json;
             foreach ($keys as $key) {
                 if (is_object($current) && isset($current->$key)) {
@@ -323,7 +325,7 @@ class JSON {
         if ($path === NULL || $path === "") { return $object; }
 
         // Split the path string into an array of keys.
-        $keys = explode('/', $path);
+        $keys = explode(JSON::$divider, $path);
 
         // Traverse the object using the keys. If the key 
         // is not found in the object, return NULL. Otherwise,
@@ -354,7 +356,7 @@ class JSON {
      */
     private static function update(mixed &$object, mixed $data, string $location = ''): mixed {
         // Split the location into an array of keys:
-        $keys = explode('/', $location);
+        $keys = explode(JSON::$divider, $location);
     
         // Traverse the JSON object to the location of the value 
         // to update and update it with the new data:

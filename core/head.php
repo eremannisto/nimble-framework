@@ -95,7 +95,7 @@ class Head {
     private static function init(?string $language, ?string $data): void {
         $current = Request::current();
         $output  = "<!DOCTYPE html>";
-        $output .= "<html lang=$language>";
+        $output .= "<html lang='$language'>";
         $output .= "<head>$data</head>";
         $output .= "<body data-page='$current'>";
         echo $output;
