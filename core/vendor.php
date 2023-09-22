@@ -3,10 +3,6 @@
 /**
  * This class handles how the different third-party
  * libraries are loaded into the application.
- * 
- * @version     x.x.x
- * @package     Ombra
- * @subpackage  Vendor
  */
 class Vendor {
 
