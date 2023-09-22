@@ -3,10 +3,6 @@
 /**
  * This class provides methods to read and update the 
  * config.json file.
- *
- * @version     1.0.0
- * @package     Ombra
- * @subpackage  Config
  */
 class Config {
 
