@@ -5,10 +5,6 @@
  * building a path to a directory or file, getting the
  * root folder of the project, and getting the relative
  * path to the caller's location.
- *
- * @version     1.0.0
- * @package     Ombra
- * @subpackage  Path
  */
 class Path {
 
