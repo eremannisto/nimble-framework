@@ -3,10 +3,6 @@
 /**
  * This class handles how the favicon is displayed,
  * and also how the favicon is generated.
- * 
- * @version     1.0.0
- * @package     Ombra
- * @subpackage  Favicon
  */
 class Favicon {
 
