@@ -4,10 +4,6 @@
 /**
  * Database class handles all database related methods, such as reading and writing
  * the database host, name and user. It also handles the database connection.
- * 
- * @version     1.0.0
- * @package     Ombra
- * @subpackage  Database
  */
 class Database {
 
