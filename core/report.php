@@ -5,10 +5,6 @@
  * to log files, handling exceptions, errors, warnings and notices.
  * Note that this file can't use any dependencies, as it is used
  * by the dependencies themselves.
- * 
- * @version     1.0.0
- * @package     Ombra
- * @subpackage  Reports
  */
 class Report {
 
