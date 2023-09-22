@@ -4,10 +4,6 @@
  * Components class handles all component related methods,
  * such as loading components and their associated stylesheets
  * and scripts.
- *
- * @version     1.0.0
- * @package     Ombra
- * @subpackage  Components
  */
 class Components {
 
