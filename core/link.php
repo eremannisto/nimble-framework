@@ -3,10 +3,6 @@
 /**
  * The Link class handles all link related methods, such as
  * generating stylesheets and scripts links.
- *
- * @version     1.0.0
- * @package     Ombra
- * @subpackage  Link
  */
 class Link{
 
