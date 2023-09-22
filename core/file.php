@@ -3,10 +3,6 @@
 /** 
  * This class provides file related methods, such as getting 
  * the file mod time, size, mime type, contents, and version.
- *
- * @version     1.0.0
- * @package     Ombra
- * @subpackage  File
  */
 class File {
 
