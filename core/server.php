@@ -4,10 +4,6 @@
  * The Server class provides methods to retrieve information about the
  * current server, such as the current base path, scheme, host, port, path,
  * and query string.
- *
- * @version     1.0.0
- * @package     Ombra
- * @subpackage  Server
  */
 class Server {
 
