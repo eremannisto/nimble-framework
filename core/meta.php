@@ -4,10 +4,6 @@
  * Meta class handles all meta related methods,
  * such as getting and setting the meta title, description,
  * and OG-data.
- * 
- * @version     1.0.0
- * @package     Ombra
- * @subpackage  Meta
  */
 class Meta {
 
