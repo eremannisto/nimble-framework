@@ -3,10 +3,6 @@
 /**
  * The Request class provides methods to retrieve and 
  * manipulate HTTP request data.
- *
- * @version     1.0.0
- * @package     Ombra
- * @subpackage  Request
  */
 class Request {
 
