@@ -3,10 +3,6 @@
 /**
  * The Response class provides methods for working 
  * with HTTP response codes and headers.
- * 
- * @version     1.0.0
- * @package     Ombra
- * @subpackage  Response
  */
 class Response {
 
