@@ -7,6 +7,11 @@
 class Link{
 
     /**
+     * Environment variable.
+     */
+    public static bool $env = false;
+
+    /**
      * The array of stylesheet files to include.
      * Key is the path to the file, and value is the condition under which the file
      * should be included.
@@ -96,7 +101,7 @@ class Link{
         }
 
         $url = urldecode(URL::get([
-            "PORT"  => TRUE,
+            "PORT"  => URL::$env,
             "QUERY" => [
                 "mode" => "server",
                 "path" => $path,
