@@ -4,10 +4,6 @@
  * The Controller class is responsible for initializing the application 
  * by setting the timezone and locale. It also checks if the requested page
  * is a client file and fetches it if it is.
- *
- * @version     1.0.0
- * @package     Ombra
- * @subpackage  Controller
  */
 class Controller {
 
