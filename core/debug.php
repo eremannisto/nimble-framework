@@ -2,10 +2,6 @@
 
 /**
  * This class handles debugging.
- * 
- * @version     1.0.0
- * @package     Ombra
- * @subpackage  Debug
  */
 class Debug {
 
