@@ -3,10 +3,6 @@
 /**
  * Head class handles all head related methods,
  * such as rendering the head tags and their contents.
- * 
- * @version     1.0.0
- * @package     Ombra
- * @subpackage  Head
  */
 class Head {
 
