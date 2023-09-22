@@ -3,10 +3,6 @@
 /**
  * URL class provides a method to build a URL string based on the given 
  * options.
- *
- * @version     1.0.0
- * @package     Ombra
- * @subpackage  URL
  */
 class URL {
 
