@@ -3,10 +3,6 @@
 /**
  * This class handles how the pages are displayed,
  * and also how the pages are generated.
- * 
- * @version     1.0.0
- * @package     Ombra
- * @subpackage  Pages
  */
 class Pages {
     
