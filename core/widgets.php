@@ -1,46 +1,42 @@
 <?php declare(strict_types=1);
  
 /**
- * The Snippets class provides methods to require snippets,
+ * The Widgets class provides methods to require widgets,
  * which are basically PHP functions that can be called
  * from everywhere in the application.
- * 
- * @version     1.0.0
- * @package     Ombra
- * @subpackage  Snippets
  */
 class Widgets {
 
     /**
-     * Loads the specified snippets.
+     * Loads the specified widgets.
      *
-     * @param mixed $snippets 
-     * The snippets to load. Can be a string or an array of strings.
+     * @param mixed $widgets 
+     * The widgets to load. Can be a string or an array of strings.
      * 
      * @return void
      * Returns nothing.
      */
-    public static function require(mixed $snippets): void {
+    public static function require(mixed $widgets): void {
 
-        // Get the path to the 'snippets' folder so we can
+        // Get the path to the 'widgets' folder so we can
         // construct the full path to the requested snippet file
         // in the foreach loop
-        $folder = Folder::getPath('snippets', Path::root());
+        $folder = Folder::getPath('widgets', Path::root());
 
-        // If snippets is not an array, convert it to an array
-        if (!is_array($snippets)) {
-            $snippets = [$snippets];
+        // If widgets is not an array, convert it to an array
+        if (!is_array($widgets)) {
+            $widgets = [$widgets];
         }
 
-        // Loop through each snippets in the array
-        foreach ($snippets as $snippet) {
+        // Loop through each widgets in the array
+        foreach ($widgets as $widget) {
 
             // Construct the full path to the requested snippet file
-            $file = "$folder/$snippet/$snippet";
+            $file = "$folder/$widget/$widget";
     
             // If the requested file does not exist
-            if (!file_exists("$snippet.php")) {
-                Report::warning("Snippet '$snippet' does not exist");
+            if (!file_exists("$widget.php")) {
+                Report::warning("Widget '$widget' does not exist");
                 continue;
             }
 
