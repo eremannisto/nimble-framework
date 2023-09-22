@@ -3,10 +3,6 @@
 /**
  * The Environment class provides methods to retrieve secret 
  * information from the environment file.
- *
- * @version     1.0.0
- * @package     Ombra
- * @subpackage  Environment
  */
 class Environment {
 
