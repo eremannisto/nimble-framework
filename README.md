@@ -45,134 +45,130 @@ Below is a visualisation how a project would look while using this framework:
 ```
 public_html
 │   
-├── core                            [Framework files]
-│   ├── FrameworkClass1.php
-│   ├── FrameworkClass2.php
+├── framework                            [Framework files]
+│   ├── class-1.php
+│   ├── class-2.php
 │   ├── ...
 │   │   
 │   └── reports                     [All logs are stored here]
 │       └── {}
 │
 ├── src
-│   │   
-│   ├── snippets                    [All the snippets are stored here]
-│   │   ├── Snippet.php             [Snippet file, for example authentication]
-│   │   ├── Snippet.php             [Snippet file, for example sessions]
-│   │   └── ...
-│   │   
 │   ├── components                  [All the components are stored here]
-│   │   │   
-│   │   ├── Component1              [Component]    
-│   │   │   ├── Component1.php      [ - component template file]
-│   │   │   ├── Component1.css      [ - component specific css file]
-│   │   │   └── Component1.js       [ - component specific js file]
-│   │   │   
-│   │   ├── Component2              [Component]        
-│   │   │   ├── Component2.php      [ - component template file]
-│   │   │   ├── Component2.css      [ - component specific css file]
-│   │   │   ├── Component2.js       [ - component specific js file]
+│   │   ├── ComponentA              [Component]    
+│   │   │   ├── ComponentA.php      [ - component template file]
+│   │   │   ├── ComponentA.css      [ - component specific css file]
+│   │   │   └── ComponentA.js       [ - component specific js file]
+│   │   ├── ComponentB              [Component]        
+│   │   │   ├── ComponentB.php      [ - component template file]
+│   │   │   ├── ComponentB.css      [ - component specific css file]
+│   │   │   ├── ComponentB.js       [ - component specific js file]
 │   │   │   │ 
-│   │   │   └── Component3          [Nested Component]
-│   │   │       ├── Component3.php  [ - component template file]
-│   │   │       ├── Component3.css  [ - component specific css file]
-│   │   │       └── Component3.js   [ - component specific js file]
+│   │   │   └── ComponentC          [Nested Component]
+│   │   │       ├── ComponentC.php  [ - component template file]
+│   │   │       ├── ComponentC.css  [ - component specific css file]
+│   │   │       └── ComponentC.js   [ - component specific js file]
 │   │   └── ...
 │   │   
-│   └── pages                       [All the pages are stored here]
-│   │   │ 
-│   │   ├── page1                   [Page]
-│   │   │   ├── page1.php           [ - page template file]
-│   │   │   ├── page1.css           [ - page specific css file]
-│   │   │   └── page1.js            [ - page specific js file]
-│   │   │ 
-│   │   ├── page2                   [Page]
-│   │   │   ├── page2.php           [ - page template file]
-│   │   │   ├── page2.css           [ - page specific css file]
-│   │   │   ├── page2.js            [ - page specific js file]
-│   │   │   │
-│   │   │   └── page3               [Nested Page]
-│   │   │       ├── page3.php       [ - page template file]
-│   │   │       ├── page3.css       [ - page specific css file]
-│   │   │       └── page3.js        [ - page specific js file]
-│   │   │ 
-│   │   └── pages.json              [Pages whitelist and config file]
-│   │   
-│   └── widgets
-│       ├── widget1.php             [Widgets file, for example authentication]
-│       ├── widget2.php             [Widgets file, for example sessions]
+│   ├── pages                       [All the pages are stored here]
+│   │   ├── page-1                  [Page]
+│   │   │   ├── page-1.php          [ - page template file]
+│   │   │   ├── page-1.css          [ - page specific css file]
+│   │   │   └── page-1.js           [ - page specific js file]
+│   │   ├── page-2                  [Page]
+│   │   │   ├── page-2.php          [ - page template file]
+│   │   │   ├── page-2.css          [ - page specific css file]
+│   │   │   ├── page-2.js           [ - page specific js file]
+│   │   │   └── page-3              [Nested Page]
+│   │   │       ├── page-3.php      [ - page template file]
+│   │   │       ├── page-3.css      [ - page specific css file]
+│   │   │       └── page-3.js       [ - page specific js file]
+│   │   ├── ...                     
+│   │   └── pages.json
+│   │
+│   └── snippets                    [All the snippets are stored here]
+│       ├── Snippet.php             [Snippet file, for example authentication]
+│       ├── Snippet.php             [Snippet file, for example sessions]
 │       └── ...
-│
+│   
 ├── public                          [Root folder]
-│   │   
 │   ├── index.php                   [The front controller]
-│   │   
 │   ├── assets                      [All the publicly available assets, such as:]
 │   │   ├── favicon                 [ - favicons and its config file]
 │   │   ├── images                  [ - images]
 │   │   ├── scripts                 [ - javascripts]
 │   │   ├── styles                  [ - stylesheets]
 │   │   └── ...                     [ - more!]
-│   │   
 │   └── .htaccess                   [Handles the front-controller Re-Writing]
-│
+│   
 ├── .htaccess                       [Handles the root folder and error handling]
 └── config.json                     [Configurations]
 ```
 
 ## Configurations
 Most data in this framework is stored in various `JSON` files, and thus we have a lot of tools to retrieve and manipulate these files. Here is how your `config.json` may look on an empty project:
-```
+```json
 {
-    "application"       : {                                 // Application data:           
+    "application"       : {
+        "development"   : false,
+        "version"       : "1.0.0",
+        "name"          : "Name of the application",
+        "description"   : "Description of the application",
+        "project"       : "project-folder-name",
+        "created"       : "01.08.2023 00:00:00",
+        "updated"       : "01.08.2023 00:00:00",
 
-        "PHP"           : "8.0.0",                          // Required PHP version        
-        "version"       : "1.0.0",                          // Version number              
-        "name"          : "Application name",               // Your application name       
-        "description"   : "Application description",        // Your application description
-        "project"       : "project-name",                   // Your project folder name    
-        "created"       : "01.01.2023 00:00:00",            // Optional: created at        
-        "updated"       : "01.01.2023 00:00:00",            // Optional: updated at        
+        "languages"     : [
+            "en"
+        ],
 
-        "router"        : {                                 // Router data:                
-            "host"          : "localhost",                  // - host name                 
-            "base"          : "https://localhost:8888",     // - base name                 
-            "index"         : "home",                       // - index PAGE name           
-            "error"         : "error",                      // - error PAGE name           
-            "controller"    : "index",                      // - controller name           
-            "parameter"     : "page"                        // - page parameter name       
+        "router"            : {
+            "host"          : "example.com",
+            "base"          : "https://example.com",
+            "index"         : "home",
+            "error"         : "error",
+            "controller"    : "index",
+            "parameter"     : "page",
+            "errors"        : [400, 401, 403, 404, 418, 405, 500, 501, 503]
         },
 
-        "meta"          : {                                 // Meta data:                  
-            "language"      : "en",                         // - default language          
-            "title"         : "The default title",          // - default page title        
-            "description"   : "The default description",    // - default page description  
-            "type"          : "website",                    // - default page type         
-            "image"         : "social.png",                 // - default page image file   
-            "robots"        : "index, follow"               // - default robots            
+        "meta"              : {
+            "default"           : {
+                "language"      : "en",
+                "title"         : "This is the default title",
+                "description"   : "This is the default description",
+                "type"          : "website",
+                "image"         : "social.png",
+                "robots"        : "index, follow",
+                "theme"         : "#181B25",
+                "manifest"      : "/manifest.json"
+            }
         },
 
-        "folders"       : {                                 // Structural data:            
-            "root"          : "/public",                    // - root folder               
-            "assets"        : "/public/assets",             // - assets folder             
-            "favicon"       : "/public/assets/favicon",     // - favicon folder            
-            "images"        : "/public/assets/images",      // - images folder             
-            "styles"        : "/public/assets/styles",      // - styles folder             
-            "scripts"       : "/public/assets/scripts",     // - scripts folder            
-            "framework"     : "/core",                      // - framework folder          
-            "src"           : "/src",                       // - src folder                
-            "pages"         : "/src/pages",                 // - pages folder              
-            "components"    : "/src/components",            // - components folder         
-            "widgets"       : "/src/widgets"                // - widgets folder
-            "..."                                           // - add more folders!
+        "directories"       : {
+            "framework"         : {},
+            "public"            : {
+                "assets"            : {
+                    "favicons"          : {},
+                    "images"            : {},
+                    "styles"            : {},
+                    "scripts"           : {}
+                }
+            },
+            "src"               : {
+                "pages"             : {},
+                "components"        : {},
+                "snippets"          : {}
+            }
         },
 
-        "time"          : {                                 // Time data                   
-            "format"        : "d.m.Y H:i:s",                // - time format               
-            "zone"          : "Europe/Helsinki",            // - time zone                 
-            "locale"        : "fi_FI",                      // - current locale            
-            "restriction"   : {                             // - restrictions:  (Not implemented yet)
-                "start"         : null,                     // - - start time   (Not implemented yet)
-                "end"           : null                      // - - end time     (Not implemented yet)
+        "time"          : {
+            "format"        : "d.m.Y H:i:s",
+            "zone"          : "Europe/Helsinki",
+            "locale"        : "fi_FI",
+            "restriction"   : {
+                "start"         : null,
+                "end"           : null
             }
         }
     }
