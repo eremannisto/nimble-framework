@@ -35,21 +35,6 @@
             }
         },
 
-        "folders"               : {
-            "root"              : "/public",
-            "assets"            : "/public/assets",
-            "favicon"           : "/public/assets/favicon",
-            "images"            : "/public/assets/images",
-            "styles"            : "/public/assets/styles",
-            "scripts"           : "/public/assets/scripts",
-            "framework"         : "/core",
-            "reports"           : "/core/reports",
-            "src"               : "/src",
-            "pages"             : "/src/pages",
-            "components"        : "/src/components",
-            "snippets"          : "/src/snippets"
-        },
-
         "directories"       : {
             "framework"         : {},
             "public"            : {
