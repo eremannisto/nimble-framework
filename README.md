@@ -10,32 +10,23 @@ Get the newest version of the repository and edit the `config.json` file. It's i
 
 ```php
 <?php
-
-// Always list all your components on the top of the page:
-Components::require('Notification');
-
-// Server-side:
-// Add any check ups here, e.g. if the user is logged in, etc.
-
-// Render the header component, add any overwrites 
-// (e.g. title, description, etc.) as an key/value array, if needed.
-// You can also add any custom CSS or JS files here.
-Head::render([
-    "title"       => "My title overwrite",
-    "description" => "My description overwrite",
-    "..."         => "Add other meta overwrites"
+// Require any components
+Components::require([
+    'Notification'
 ]);
 
+// Add the head content, here we can override any
+// of the head content, such as the title, description, etc.
+Head::render();
 
-// Add your page content here: ?>
-<div class="container">
-    <h1>Hello World (Homepage)!</h1>
-    <?php Notification::render(); ?>
-</div> <?php
+// Add the page content:
+class Content {
+    public static function render(): void { 
+        Notification::render();
+    }
+};
 
-
-// Render the footer component, add any overwrites
-// (e.g. custom JS files, etc.) as an array, if needed.
+// Add the foot content, here we can override any
 Foot::render();
 ```
 
