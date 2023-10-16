@@ -6,7 +6,7 @@ Simple — a lightweight, `component-based` `server-side rendering (SSR)` framew
 This project is also the culmination of my academic journey, serving as my thesis project.
 
 ## Documentation
-Documentation can be found here: [Documentation](https://www.notion.so/eremannisto/2a619f43d52945ce9a0efce68d94c671?v=2b2639d2919a470ab88cd114873ec6b1&pvs=4).
+Documentation can be found here: [Documentation](https://eremannisto.notion.site/2a619f43d52945ce9a0efce68d94c671?v=4955d370936548a8817f8902fb4972c2&pvs=4).
 
 ## Structure
 Below is a visualisation how a project would look while using this framework:
