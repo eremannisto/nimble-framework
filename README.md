@@ -178,7 +178,7 @@ Most data in this framework is stored in various `JSON` files, and thus we have 
 ### Class: JSON
 | Method name | Description | Argument |
 | :---------------- | --- | --- |
-| get() | Get the value of a nested property in an object using a path string. | $path (string = ""): The path to the nested property. $file (string): The path to the JSON file. $class (string): The name of the class. |
+| get() | Get the value of a nested property in an object using a path string. | `$path` (string = ""): The path to the nested property.<br>`$file` (string): The path to the JSON file.<br> `$class` (string): The name of the class. |
 | set() | Updates the JSON data at the specified location in the given file. | $path (string): The location of the data to be updated. 
 
 $data (mixed): The updated data. 
