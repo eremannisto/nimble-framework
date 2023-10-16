@@ -35,13 +35,6 @@ class Assets {
      */
     private static int $cacheTime = 31536000;
 
-
-    /**
-     * === === === === STEP 1 === === === === 
-     * Add and build the assets and store them in the 
-     * assets array.
-     */
-
     /**
      * Sets the global cache data for the Head class.
      *
