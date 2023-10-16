@@ -21,7 +21,7 @@ class JSON {
      * @return mixed|null 
      * The value of the nested property or null if not found.
      */
-    public static function get(?string $path = null, string $file, string $class): mixed {
+    public static function get(?string $path, string $file, string $class): mixed {
         $class::$cache = $class::$cache ?? JSON::read($file);
         return JSON::traverse($class::$cache, $path);
     }
