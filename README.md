@@ -175,40 +175,28 @@ Most data in this framework is stored in various `JSON` files, and thus we have 
 }
 ```
 
-### Getting data
-Getting data from the `config.json` can be done using the core class `Config`. For example:
-```php
-// Example 01: Get the entire configuration object
-$config  = Config::get();
+### Class: JSON
+| Method name | Description | Argument |
+| --- | --- | --- |
+| get() | Get the value of a nested property in an object using a path string. | $path (string = ""): The path to the nested property.
 
-// Example 02: Get the value of the application name
-$name    = Config::get('application->name');
+$file (string): The path to the JSON file. 
 
-// Example 03: Get the value of the version number
-$version = Config::get('application->version');
+$class (string): The name of the class. |
+| set() | Updates the JSON data at the specified location in the given file. | $path (string): The location of the data to be updated. 
 
-// Example 04: Get the value of the restriction starting time
-$start   = Config::get('appliaction->time->restriction->start');
+$data (mixed): The updated data. 
 
-// Example 05: Get the components folder value by using a variable
-$folderName = "components"
-$start   = Config::get("appliaction->folders->{$folderName}");
-```
+$file (string): The path of the JSON file. 
 
-### Setting data
-Setting data from the `config.json` can be fone using the core class `Config`. If the object doesn't exist, create it, otherwise overwrite it. For example:
-```php
-// Set the entire configuration object
-Config::set();
+$class (string): The name of the class. |
+| remove() | Removes a property from a JSON file. | $path (string): The path to the property to remove. - $file (string): The path to the JSON file. - $class (string): The name of the class. |
+| read() | Reads and decodes a JSON file. | $file (string): The path to the JSON file. |
+| write() | Encodes and writes JSON data to a file. | $file (string): The path to the file to write the JSON data to. - $data (mixed): The data to encode and write to the file. |
+| exists() | Check whether a JSON file exists at the specified location. | $file (string): The path to the JSON file. |
+| delete() | Delete a JSON file. | $file (string): The path to the JSON file. |
+| create() | Creates a new JSON file at the specified location. | $file (string): The path and filename of the JSON file to create. |
+| decode() | Decodes a JSON string. | $json (string): The JSON string to decode. |
+| encode() | Encodes a JSON object. | $object (mixed): The object to encode. 
 
-// Set the new value of the 'application/name' key
-Config::set('application->name', 'My new name');
-
-// Set the new value of the 'application/version' key
-Config::set('application->version', '1.0.1');
-
-// Set the new value of the 'application/time/restriction/start' key
-Config::set('appliaction->time->restriction->start', "01.01.2024");
-```
-
-Continues...
+$options (int, optional): Encoding options. |
