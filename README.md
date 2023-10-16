@@ -5,8 +5,9 @@ Simple — a lightweight, `component-based` `server-side rendering (SSR)` framew
 
 This project is also the culmination of my academic journey, serving as my thesis project.
 
-## How to get started
-Get the newest version of the repository and edit the `config.json` file. It's initially set up for the `localhost` environment. Open up your `home` page file from `/src/pages/home/home.php` and start programming your home page:
+## Documentation
+Documentation can be found here: [Documentation](https://www.notion.so/eremannisto/2a619f43d52945ce9a0efce68d94c671?v=2b2639d2919a470ab88cd114873ec6b1&pvs=4).
+
 
 ```php
 <?php
@@ -105,94 +106,5 @@ public_html
 └── config.json                     [Configurations]
 ```
 
-## Configurations
-Most data in this framework is stored in various `JSON` files, and thus we have a lot of tools to retrieve and manipulate these files. Here is how your `config.json` may look on an empty project:
-```json
-{
-    "application"       : {
-        "development"   : false,
-        "version"       : "1.0.0",
-        "name"          : "Name of the application",
-        "description"   : "Description of the application",
-        "project"       : "project-folder-name",
-        "created"       : "01.08.2023 00:00:00",
-        "updated"       : "01.08.2023 00:00:00",
 
-        "languages"     : [
-            "en"
-        ],
 
-        "router"            : {
-            "host"          : "example.com",
-            "base"          : "https://example.com",
-            "index"         : "home",
-            "error"         : "error",
-            "controller"    : "index",
-            "parameter"     : "page",
-            "errors"        : [400, 401, 403, 404, 418, 405, 500, 501, 503]
-        },
-
-        "meta"              : {
-            "default"           : {
-                "language"      : "en",
-                "title"         : "This is the default title",
-                "description"   : "This is the default description",
-                "type"          : "website",
-                "image"         : "social.png",
-                "robots"        : "index, follow",
-                "theme"         : "#181B25",
-                "manifest"      : "/manifest.json"
-            }
-        },
-
-        "directories"       : {
-            "framework"         : {},
-            "public"            : {
-                "assets"            : {
-                    "favicons"          : {},
-                    "images"            : {},
-                    "styles"            : {},
-                    "scripts"           : {}
-                }
-            },
-            "src"               : {
-                "pages"             : {},
-                "components"        : {},
-                "snippets"          : {}
-            }
-        },
-
-        "time"          : {
-            "format"        : "d.m.Y H:i:s",
-            "zone"          : "Europe/Helsinki",
-            "locale"        : "fi_FI",
-            "restriction"   : {
-                "start"         : null,
-                "end"           : null
-            }
-        }
-    }
-}
-```
-
-### Class: JSON
-| Method name | Description | Argument |
-| :---------------- | --- | --- |
-| `get()` | Get the value of a nested property in an object using a path string. | `$path` (string = ""): The path to the nested property.<br><br>`$file` (string): The path to the JSON file.<br><br> `$class` (string): The name of the class. |
-| set() | Updates the JSON data at the specified location in the given file. | $path (string): The location of the data to be updated. 
-
-$data (mixed): The updated data. 
-
-$file (string): The path of the JSON file. 
-
-$class (string): The name of the class. |
-| remove() | Removes a property from a JSON file. | $path (string): The path to the property to remove. - $file (string): The path to the JSON file. - $class (string): The name of the class. |
-| read() | Reads and decodes a JSON file. | $file (string): The path to the JSON file. |
-| write() | Encodes and writes JSON data to a file. | $file (string): The path to the file to write the JSON data to. - $data (mixed): The data to encode and write to the file. |
-| exists() | Check whether a JSON file exists at the specified location. | $file (string): The path to the JSON file. |
-| delete() | Delete a JSON file. | $file (string): The path to the JSON file. |
-| create() | Creates a new JSON file at the specified location. | $file (string): The path and filename of the JSON file to create. |
-| decode() | Decodes a JSON string. | $json (string): The JSON string to decode. |
-| encode() | Encodes a JSON object. | $object (mixed): The object to encode. 
-
-$options (int, optional): Encoding options. |
