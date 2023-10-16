@@ -1,0 +1,455 @@
+{
+	"400": {
+		"en": {
+			"title":        "Bad Request",
+			"description":  "The request could not be understood due to invalid syntax."
+		},
+		"fi": {
+			"title":        "Virheellinen pyyntö",
+			"description":  "Pyyntöä ei voitu ymmärtää virheellisen syntaksin vuoksi."
+		}
+	},
+    
+	"401":{
+        "en": {
+            "title":        "Unauthorized",
+            "description":  "You need to authenticate yourself to access the requested content."
+        },
+        "fi": {
+            "title":        "Tunnistamaton pyyntö",
+            "description":  "Sinun tulee tunnistautua päästäksesi haluamaasi sisältöön."
+        }
+	},
+
+
+	"402":{
+        "en": {
+            "title":        "Payment Required",
+            "description":  "Payment is required to access this resource."
+        },
+        "fi": {
+            "title":        "Maksu vaaditaan",
+            "description":  "Tämän resurssin käyttäminen edellyttää maksua."
+        }
+	},
+
+
+	"403":{
+        "en":{
+            "title":        "Forbidden",
+            "description":  "You are not allowed to access the requested resource."
+        },
+        "fi":{
+            "title":        "Pääsy kielletty",
+            "description":  "Sinulla ei ole oikeutta pyytämääsi resurssiin."
+        }
+	},
+
+
+	"404":{
+        "en":{
+            "title":        "Page Not Found",
+            "description":  "The page you are looking for could not be found."
+        },
+        "fi":{
+            "title":        "Sivua ei löytynyt",
+            "description":  "Etsimääsi sivua ei löytynyt."
+        }
+	},
+
+	"405": {
+        "en":{
+            "title":        "Method Not Allowed",
+            "description":  "The method specified in the request is not allowed for this resource."
+        },
+        "fi":{
+            "title":        "Menetelmä ei ole sallittu",
+            "description":  "Pyyntöön määritelty menetelmä ei ole sallittu tälle resurssille."
+        }
+	},
+
+	"406":{
+        "en":{
+            "title":        "Not Acceptable",
+            "description":  "The resource cannot generate content that matches the request's accept headers."
+        },
+        "fi":{
+            "title":        "Ei hyväksyttävä pyyntö",
+            "description":  "Resurssi ei voi luoda sisältöä, joka vastaa pyynnön hyväksymisotsikoita."
+        }
+	},
+
+	"407":{
+        "en":{
+            "title":        "Proxy Authentication Required",
+            "description":  "You must authenticate with the proxy server before accessing this resource."
+        },
+        "fi":{
+            "title":        "Välityspalvelimen tunnistautuminen vaaditaan",
+            "description":  "Sinun tulee tunnistautua välityspalvelimeen päästäksesi haluamaasi sisältöön."
+        }
+	},
+
+	"408":{
+        "en":{
+            "title":        "Request Timeout",
+            "description":  "The server did not receive a timely request from the client."
+        },
+        "fi":{
+            "title":        "Pyyntö aikakatkaistiin",
+            "description":  "Palvelin ei saanut ajoissa pyyntöä asiakkaalta."
+        }
+	},
+
+	"409":{
+        "en":{
+            "title":        "Conflict",
+            "description":  "The request could not be completed due to a conflict with the current state of the resource."
+        },
+        "fi":{
+            "title":        "Ristiriitainen pyyntö",
+            "description":  "Pyyntöä ei voitu suorittaa resurssin nykyisen tilan vuoksi."
+        }
+	},
+
+	"410":{
+        "en":{
+            "title":        "Gone",
+            "description":  "The requested resource is no longer available, and there is no forwarding address."
+        },
+        "fi":{
+            "title":        "Resurssi ei ole enää saatavilla",
+            "description":  "Pyydetty resurssi ei ole enää saatavilla, eikä sille ole uutta osoitetta."
+        }
+	},
+
+	"411":{
+        "en":{
+            "title":        "Length Required",
+            "description":  "The server requires a Content-Length header for this request."
+        },
+        "fi":{
+            "title":        "Pituus vaaditaan",
+            "description":  "Palvelin vaatii Pituus-otsikon tälle pyynnölle."
+        }
+	},
+
+	"412":{
+        "en":{
+            "title":        "Precondition Failed",
+            "description":  "One or more conditions in the request headers were not met."
+        },
+        "fi":{
+            "title":        "Ennakkoehto ei täyttynyt",
+            "description":  "Yksi tai useampi pyynnön otsikoissa määritellyistä ehdoista ei täyttynyt."
+        }
+	},
+
+	"413":{
+        "en":{
+            "title":        "Request Entity Too Large",
+            "description":  "The request entity is too large for the server to process."
+        },
+        "fi":{
+            "title":        "Pyyntöyksikkö on liian suuri",
+            "description":  "Pyyntöyksikkö on liian suuri palvelimen käsiteltäväksi."
+        }
+	},
+
+	"414":{
+        "en":{
+            "title":        "Request-URI Too Long",
+            "description":  "The request URI is too long for the server to interpret."
+        },
+        "fi":{
+            "title":        "Pyyntö-URI on liian pitkä",
+            "description":  "Pyyntö-URI on liian pitkä palvelimen tulkittavaksi."
+        }
+	},
+    
+	"415":{
+        "en":{
+            "title":        "Unsupported Media Type",
+            "description":  "The entity format in the request is not supported by the server."
+        },
+        "fi":{
+            "title":        "Tiedostotyyppiä ei tueta",
+            "description":  "Pyyntöyksikön muotoa ei tueta palvelimella."
+        }
+	},
+
+	"416":{
+        "en":{
+            "title":        "Requested Range Not Satisfiable",
+            "description":  "The requested byte range cannot be supplied by the server."
+        },
+        "fi":{
+            "title":        "Pyydetty alue ei ole tyydyttävä",
+            "description":  "Pyydettyä tavualue ei ole saatavilla palvelimelta."
+        }
+	},
+    
+	"417":{
+        "en":{
+            "title":        "Expectation Failed",
+            "description":  "The server cannot meet the expectations set in the request's Expect header."
+        },
+        "fi":{
+            "title":        "Odotus epäonnistui",
+            "description":  "Palvelin ei voi täyttää pyynnön Odotus-otsikossa määriteltyjä odotuksia."
+        }
+	},
+
+	"418":{
+        "en":{
+            "title":        "I'm a teapot",
+            "description":  "I was asked to brew coffee, but I'm just a teapot."
+        },
+        "fi":{
+            "title":        "Olen teepannu",
+            "description":  "Minulta pyydettiin kahvin keittämistä, mutta olen vain teepannu."
+        }
+	},
+
+	"421":{
+        "en":{
+            "title":        "Misdirected Request",
+            "description":  "The request was directed at a server that cannot respond."
+        },
+        "fi":{
+            "title":        "Väärin ohjattu pyyntö",
+            "description":  "Pyyntö ohjattiin palvelimelle, joka ei voi vastata siihen."
+        }
+	},
+
+	"422":{
+        "en":{
+            "title":        "Unprocessable Entity",
+            "description":  "The request was well-formed but has semantic errors preventing its processing."
+        },
+        "fi":{
+            "title":        "Käsittely epäonnistui",
+            "description":  "Pyyntö oli muodoltaan oikein, mutta siinä oli semanttisia virheitä, jotka estivät sen käsittelyn."
+        }
+	},
+
+	"423":{
+        "en":{
+            "title":        "Locked",
+            "description":  "The requested resource is locked and unavailable for access."
+        },
+        "fi":{
+            "title":        "Lukittu",
+            "description":  "Pyydetty resurssi on lukittu eikä sitä voi käyttää."
+        }
+	},
+
+	"424":{
+        "en":{
+            "title":        "Failed Dependency",
+            "description":  "A previous request's failure prevents the server from fulfilling this request."
+        },
+        "fi":{
+            "title":        "Riippuvuus epäonnistui",
+            "description":  "Aikaisemman pyynnön epäonnistuminen estää palvelinta täyttämästä tätä pyyntöä."
+        }
+	},
+
+	"425":{
+        "en":{
+            "title":        "Unordered Collection",
+            "description":  "The server cannot process a request that is part of an unrelated set."
+        },
+        "fi":{
+            "title":        "Epäjärjestetty kokoelma",
+            "description":  "Palvelin ei voi käsitellä pyyntöä, joka on osa epäjärjestettyä joukkoa."
+        }
+	},
+
+	"426":{
+        "en":{
+            "title":        "Upgrade Required",
+            "description":  "The server requires a protocol upgrade for this request."
+        },
+        "fi":{
+            "title":        "Päivitys vaaditaan",
+            "description":  "Palvelin vaatii protokollan päivityksen tälle pyynnölle."
+        }
+	},
+
+	"428":{
+        "en":{
+            "title":        "Precondition Required",
+            "description":  "The server requires a precondition to fulfill the request."
+        },
+        "fi":{
+            "title":        "Ennakkoehto vaaditaan",
+            "description":  "Palvelin vaatii ennakkoehtoa täyttääkseen pyynnön."
+        }
+	},
+
+	"429":{
+        "en":{
+            "title":        "Too Many Requests",
+            "description":  "You have sent too many requests within a short time span."
+        },
+        "fi":{
+            "title":        "Liian monta pyyntöä",
+            "description":  "Olet lähettänyt liian monta pyyntöä lyhyen ajan sisällä."
+        }
+	},
+
+	"431":{
+        "en":{
+            "title":        "Request Header Fields Too Large",
+            "description":  "The server cannot process the request due to large header fields."
+        },
+        "fi":{
+            "title":        "Pyyntöotsikoiden kentät ovat liian suuria",
+            "description":  "Palvelin ei voi käsitellä pyyntöä, koska otsikkokentät ovat liian suuria."
+        }
+	},
+
+	"451":{
+        "en":{
+            "title":        "Unavailable For Legal Reasons",
+            "description":  "Access to the resource is denied due to legal restrictions."
+        },
+        "fi":{
+            "title":        "Ei saatavilla oikeudellisista syistä",
+            "description":  "Pääsy resurssiin on estetty oikeudellisten rajoitusten vuoksi."
+        }
+	},
+
+	"500":{
+        "en":{
+            "title":        "Internal Server Error",
+            "description":  "The server encountered an unexpected issue preventing it from fulfilling the request."
+        },
+        "fi":{
+            "title":        "Sisäinen palvelinvirhe",
+            "description":  "Palvelin kohtasi odottamattoman ongelman, joka esti pyynnön täyttämisen."
+        }
+	},
+
+	"501":{
+        "en":{
+            "title":        "Not Implemented",
+            "description":  "The server does not support the functionality needed to complete the request."
+        },
+        "fi":{
+            "title":        "Ei toteutettu",
+            "description":  "Palvelin ei tue toiminnallisuutta, jota tarvitaan pyynnön täyttämiseen."
+        }
+	},
+
+	"502":{
+        "en":{
+            "title":        "Bad Gateway",
+            "description":  "The server received an invalid response from an upstream server while acting as a gateway or proxy."
+        },
+        "fi":{
+            "title":        "Virheellinen välityspalvelin",
+            "description":  "Palvelin sai virheellisen vastauksen ylävirtapalvelimelta toimiessaan välityspalvelimena."
+        }
+	},
+
+	"503":{
+        "en":{
+            "title":        "Service Unavailable",
+            "description":  "The server is currently unable to handle the request due to temporary overloading or maintenance."
+        },
+        "fi":{
+            "title":        "Palvelu ei ole käytettävissä",
+            "description":  "Palvelin ei voi käsitellä pyyntöä tilapäisen ylikuormituksen tai huollon vuoksi."
+        }
+	},
+
+	"504":{
+        "en":{
+            "title":        "Gateway Timeout",
+            "description":  "The server did not receive a timely response from an upstream server while acting as a gateway or proxy."
+        },
+        "fi":{
+            "title":        "Välityspalvelimen aikakatkaistu",
+            "description":  "Palvelin ei saanut ajoissa vastausta ylävirtapalvelimelta toimiessaan välityspalvelimena."
+        }
+	},
+
+	"505":{
+        "en":{
+            "title":        "HTTP Version Not Supported",
+            "description":  "The server does not support the HTTP protocol version used in the request."
+        },
+        "fi":{
+            "title":        "HTTP-versiota ei tueta",
+            "description":  "Palvelin ei tue pyynnössä käytettyä HTTP-protokollan versiota."
+        }
+	},
+
+	"506":{
+        "en":{
+            "title":        "Variant Also Negotiates",
+            "description":  "Transparent content negotiation for the request resulted in a circular reference."
+        },
+        "fi":{
+            "title":        "Variantti neuvottelee myös",
+            "description":  "Pyyntöön liittyvä läpinäkyvä sisällönneuvottelu johti kiertävään viittaukseen."
+        }
+	},
+
+	"507":{
+        "en":{
+            "title":        "Insufficient Storage",
+            "description":  "The server cannot store the representation needed to complete the request."
+        },
+        "fi":{
+            "title":        "Varastointitila ei riitä",
+            "description":  "Palvelin ei voi varastoida pyynnön täyttämiseen tarvittavaa esitystä."
+        }
+	},
+
+	"508":{
+        "en":{
+            "title":        "Loop Detected",
+            "description":  "The server detected an infinite loop while processing the request."
+        },
+        "fi":{
+            "title":        "Silmukka havaittu",
+            "description":  "Palvelin havaitsee äärettömän silmukan käsitellessään pyyntöä."
+        }
+	},
+
+	"510":{
+        "en":{
+            "title":        "Not Extended",
+            "description":  "The server requires further extensions to fulfill the request."
+        },
+        "fi":{
+            "title":        "Ei laajennettu",
+            "description":  "Palvelin vaatii lisälaajennuksia täyttääkseen pyynnön."
+        }
+	},
+
+	"511":{
+        "en":{
+            "title":        "Network Authentication Required",
+            "description":  "You need to authenticate to access the network."
+        },
+        "fi":{
+            "title":        "Verkon tunnistautuminen vaaditaan",
+            "description":  "Sinun tulee tunnistautua päästäksesi verkkoon."
+        }
+	},
+
+	"520":{
+        "en":{
+            "title":        "Unknown Error",
+            "description":  "The server encountered an unexpected error, listing various triggers."
+        },
+        "fi":{
+            "title":        "Tuntematon virhe",
+            "description":  "Palvelin kohtasi odottamattoman virheen, jossa luetellaan erilaisia laukaisimia."
+        }
+	}
+}

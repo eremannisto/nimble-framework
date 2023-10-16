@@ -8,7 +8,7 @@ AutoLoader::load();
 Controller::init();
 
 // Add global third-party libraries, scripts and styles
-Head::global([
+Controller::global([
 
     "third-party" => [
         '<link rel="preconnect" href="https://fonts.googleapis.com">',

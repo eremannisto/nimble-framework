@@ -1,0 +1,69 @@
+.view {
+    position:                   relative;
+    display:                    grid;
+    grid-template-columns:      var(--margin) 1fr var(--margin);
+    align-items:                flex-start;
+    height:                     100%;
+    max-width:                  var(--max-width);
+    margin:                     0 auto;
+    overflow:                   initial;
+}
+
+main.content{
+    grid-column:                2;
+    grid-row:                   1;
+    min-height:                 calc(100vh - (var(--margin) * 4));
+    justify-content:            center;
+    padding-bottom:             1vh;
+}
+
+#error{
+    display:                    flex;
+    justify-content:            center;
+    align-items:                center;
+    gap:                        1.6rem;
+    flex-flow:                  column;
+}
+
+.error-code{
+    font-size:                  8rem;
+    font-weight:                600;
+    color:                      hsl(var(--color-primary-3));
+    font-family:                var(--ff-mono);
+    text-align:                 center;
+}
+
+.error-title{
+    font-size:                  4.2rem;
+    font-weight:                600;
+    color:                      hsl(var(--color-white-3));
+    text-align:                 center;
+    letter-spacing:             -0.25px;
+    word-spacing:               -1px;
+}
+
+.error-description{
+    font-size:                  2.4rem;
+    font-weight:                400;
+    color:                      hsl(var(--color-white-5));
+    text-align:                 center;
+    max-width:                  30ch;
+}
+
+.error-button{
+    font-size:                  1.6rem;
+    font-weight:                500;
+    font-family:                var(--ff-mono);
+    color:                      hsl(var(--color-primary-2));
+    text-transform:             uppercase;
+    text-align:                 center;
+    max-width:                  50ch;
+    padding:                    1.2rem 2.4rem;
+    border-radius:              var(--br-medium);
+    background:                 hsla(var(--color-white-1), 10%);
+    transition:                 opacity 0.3s ease-in-out;
+    cursor:                     pointer;
+    border:                     2px solid hsl(var(--color-primary-2));
+    margin-top:                 2.4rem;
+    display:                    flex;
+}

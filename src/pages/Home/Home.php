@@ -1,26 +1,24 @@
 <?php
 
-// Always list all your components on the top of the page:
-Components::require('Notification');
+// Require any components
+Components::require([
+    'Notification'
+]);
 
-// Server-side rendering:
-// Add any check ups here, e.g. if the user is logged in, etc.
+Snippets::require([
+    'example'
+]);
 
-// Render the header component, add any overwrites 
-// (e.g. title, description, etc.) as an key/value array, if needed.
-// You can also add any custom CSS or JS files here.
+// Add the head content, here we can override any
+// of the head content, such as the title, description, etc.
 Head::render();
 
-// Render the cookie consent component:
-// CookieConsent::render();
+// Add the page content:
+class Content {
+    public static function render(): void { 
+        Notification::render();
+    }
+};
 
-
-// Add your page content here: ?>
-<div class="container">
-    <h1>Hello World (Homepage)!</h1>
-    <?php Notification::render(); ?>
-</div> <?php
-
-// Render the footer component, add any overwrites
-// (e.g. custom JS files, etc.) as an array, if needed.
+// Add the foot content, here we can override any
 Foot::render();

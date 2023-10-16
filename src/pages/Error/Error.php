@@ -1,18 +1,37 @@
 <?php
 
-$error       = Response::error();
-$title       = sprintf("<strong class='error-code'>%s</strong> - %s", $error['code'], $error['title']);
-$description = $error['description'];
+$error = Response::error();
 
 Head::render([
-    "title"         => sprintf("%s - %s", $error['code'], $error['title']),
-    "description"   => $description
-]); ?>
+    "title"         => sprintf("Error %s - %s", $error['code'], $error['title']),
+    "description"   => $error['description']
+]);
 
-<div class="container">
-    <h1 class="error-title"><?php echo($title); ?></h1>
-    <p class="error-description"><?php echo($description);?></p>
-    <button class="error-button">Return</button>
-</div> <?php
+class Content { 
+    public static function render(): void {
+
+        $error = Response::error(); ?>
+
+            <section id="error" data-observed>
+                <div data-fade="bottom" data-delay="200">
+                    <span class="error-code"><?=$error['code']; ?></span>
+                </div>
+
+                <div data-fade="bottom" data-delay="400">
+                    <h1 class="error-title"><?=$error['title']; ?></h1>
+                </div>
+
+                <div data-fade="bottom" data-delay="600">
+                    <p class="error-description"><?= $error['description']; ?></p>
+                </div>
+
+                <div data-fade="bottom" data-delay="800">
+                    <a href="/" class="error-button">Return to Homepage</a>
+                </div>
+            </section>
+
+        <?php
+    }
+}
 
 Foot::render();

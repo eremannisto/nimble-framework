@@ -1,29 +1,38 @@
 {
     "application"       : {
-        "PHP"           : "8.0.0",
+        "development"   : false,
         "version"       : "1.0.0",
-        "name"          : "Application name",
-        "description"   : "Application description",
-        "project"       : "ombra-framework",
-        "created"       : "01.01.2023 00:00:00",
-        "updated"       : "01.01.2023 00:00:00",
+        "name"          : "Name of the application",
+        "description"   : "Description of the application",
+        "project"       : "project-folder-name",
+        "created"       : "01.08.2023 00:00:00",
+        "updated"       : "01.08.2023 00:00:00",
+
+        "languages"     : [
+            "en"
+        ],
 
         "router"            : {
-            "host"          : "localhost",
-            "base"          : "https://localhost:8888",
+            "host"          : "example.com",
+            "base"          : "https://example.com",
             "index"         : "home",
             "error"         : "error",
             "controller"    : "index",
-            "parameter"     : "page"
+            "parameter"     : "page",
+            "errors"        : [400, 401, 403, 404, 418, 405, 500, 501, 503]
         },
 
         "meta"              : {
-            "language"      : "en",
-            "title"         : "The default title",
-            "description"   : "The default description",
-            "type"          : "website",
-            "image"         : "social.png",
-            "robots"        : "index, follow"
+            "default"           : {
+                "language"      : "en",
+                "title"         : "This is the default title",
+                "description"   : "This is the default description",
+                "type"          : "website",
+                "image"         : "social.png",
+                "robots"        : "index, follow",
+                "theme"         : "#181B25",
+                "manifest"      : "/manifest.json"
+            }
         },
 
         "folders"               : {
@@ -39,6 +48,23 @@
             "pages"             : "/src/pages",
             "components"        : "/src/components",
             "snippets"          : "/src/snippets"
+        },
+
+        "directories"       : {
+            "framework"         : {},
+            "public"            : {
+                "assets"            : {
+                    "favicons"          : {},
+                    "images"            : {},
+                    "styles"            : {},
+                    "scripts"           : {}
+                }
+            },
+            "src"               : {
+                "pages"             : {},
+                "components"        : {},
+                "snippets"          : {}
+            }
         },
 
         "time"          : {
