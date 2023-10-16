@@ -17,6 +17,33 @@ class Directories {
     private static array $directories = [];
 
     /**
+     * Returns the path to a directory in the application.
+     *
+     * @param string $directory 
+     * The name of the directory to find.
+     * 
+     * @return string 
+     * The path to the directory, or an empty string if the 
+     * directory is not found.
+     */
+    public static function get(string $directory): string {
+        
+        // If the directories array is empty, map the directories
+        if (empty(Directories::$directories)) {
+            Directories::map();
+        }
+
+        // Check if the directory exists
+        if (!isset(Directories::$directories[$directory])) {
+            Report::warning("Directory '$directory' not found.");
+            return "";
+        }
+
+        // Return the path to the directory
+        return Directories::$directories[$directory];
+    }
+
+    /**
      * Map all the directories in the application and store them in an array.
      * This way we can easily access the directories from anywhere in the application, without
      * having to traverse the directory tree every time we need to access a directory.
@@ -48,33 +75,6 @@ class Directories {
                 Directories::$directories[$dir] = $prefix . '/' . $dir;
             }
         }
-    }
-
-    /**
-     * Returns the path to a directory in the application.
-     *
-     * @param string $directory 
-     * The name of the directory to find.
-     * 
-     * @return string 
-     * The path to the directory, or an empty string if the 
-     * directory is not found.
-     */
-    public static function get(string $directory): string {
-        
-        // If the directories array is empty, map the directories
-        if (empty(Directories::$directories)) {
-            Directories::map();
-        }
-
-        // Check if the directory exists
-        if (!isset(Directories::$directories[$directory])) {
-            Report::warning("Directory '$directory' not found.");
-            return "";
-        }
-
-        // Return the path to the directory
-        return Directories::$directories[$directory];
     }
 
     /**
