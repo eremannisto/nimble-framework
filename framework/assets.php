@@ -126,7 +126,7 @@ class Assets {
      * @return array
      * The validated asset.
      */
-    public static function validate(array $asset): array {
+    private static function validate(array $asset): array {
          
         // First we make sure that all the required asset
         // values are set. If not, we return an empty array.
