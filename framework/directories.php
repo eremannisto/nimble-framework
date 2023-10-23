@@ -60,12 +60,12 @@ class Directories {
         $stack    = [$directories];
         $preStack = [''];
     
-        while (!empty($stack)) {
+        while(!empty($stack)) {
+            
             $sub    = array_pop($stack);
             $prefix = array_pop($preStack);
     
             foreach ($sub as $dir => $sub) {
-                // If the directory is not empty, push it onto the stack to process its sub
                 if (!empty($sub)) {
                     $stack[]    = $sub;
                     $preStack[] = $prefix . '/' . $dir;
