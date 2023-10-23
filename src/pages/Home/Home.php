@@ -5,10 +5,6 @@ Components::require([
     'Notification'
 ]);
 
-Snippets::require([
-    'example'
-]);
-
 // Add the head content, here we can override any
 // of the head content, such as the title, description, etc.
 Head::render();
