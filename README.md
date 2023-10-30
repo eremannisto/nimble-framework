@@ -1,14 +1,14 @@
-![Simple - PHP Framework](https://github.com/eremannisto/ombra-framework/blob/main/public/assets/images/social.png)
+![Simple - PHP Framework](https://github.com/eremannisto/ombra-framework/blob/main/public/assets/images/banner.png)
 
 # Simple PHP Framework (B4.0.0)
-Simple — a lightweight, `component-based` `server-side rendering (SSR)` framework created in `PHP`. Designed with a *do-it-yourself* spirit for small-scale projects where you want to roll up your sleeves and create something unique, all on your own.
+Simple is a `component-based` `server-side rendering (SSR)` framework created in `PHP`. Designed with a **do-it-yourself** spirit for small-scale projects where you want to roll up your sleeves and create something unique, all on your own.
 
 This project is also the culmination of my academic journey, serving as my thesis project.
 
 ## Documentation
-Documentation can be found here: [Documentation](https://eremannisto.notion.site/2a619f43d52945ce9a0efce68d94c671?v=4955d370936548a8817f8902fb4972c2&pvs=4).
+Documentation can be found here: [**Simple Documentation**](https://eremannisto.notion.site/2a619f43d52945ce9a0efce68d94c671?v=4955d370936548a8817f8902fb4972c2&pvs=4).
 
-## Structure
+<!-- ## Structure
 Below is a visualisation how a project would look while using this framework:
 
 ```
@@ -74,5 +74,5 @@ public_html
 └── config.json                     [Configurations]
 ```
 
-
+ -->
 
