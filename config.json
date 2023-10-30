@@ -28,7 +28,7 @@
                 "title"         : "This is the default title",
                 "description"   : "This is the default description",
                 "type"          : "website",
-                "image"         : "social.png",
+                "image"         : "banner.png",
                 "robots"        : "index, follow",
                 "theme"         : "#181B25",
                 "manifest"      : "/manifest.json"
