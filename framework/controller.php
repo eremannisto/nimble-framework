@@ -30,12 +30,6 @@ class Controller {
             exit();
         }
 
-        // Check if the requested page is a client file
-        // if (Request::isClientFileFetch()){
-        //     File::getClientFile();
-        //     exit();
-        // }   
-
         // If page supports multiple languages and user goes to the landing page,
         // redirect to the correct language. Otherwise, redirect to the index page.
         $language = Language::current();

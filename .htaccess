@@ -1,28 +1,26 @@
-# Turn on URL rewriting:
 RewriteEngine On
 
-# Redirect:
-RewriteEngine On
+# Redirect WWW to HTTPS:
 RewriteCond %{HTTP_HOST} ^www.example.com$ [NC]
 RewriteRule ^(.*)$ https://example.com/$1 [R=301,L]
 
 # Make the new root directory. Remember to change the
 # correct address if you are not using localhost
-RewriteCond %{HTTP_HOST} ^example.com$ [NC]
+RewriteCond %{HTTP_HOST} ^localhost:8888$ [NC]
 RewriteCond %{REQUEST_URI} !/public/
 RewriteRule (.*) /public/$1 [L]
 
 # Handle CLIENT errors with custom redirects
-ErrorDocument 400 https://example.com/error/?res=400
-ErrorDocument 401 https://example.com/error/?res=401
-ErrorDocument 403 https://example.com/error/?res=403
-ErrorDocument 404 https://example.com/?res=404
-ErrorDocument 405 https://example.com/error/?res=405
-ErrorDocument 406 https://example.com/error/?res=406
+ErrorDocument 400 localhost:8888/error/?res=400
+ErrorDocument 401 localhost:8888/error/?res=401
+ErrorDocument 403 localhost:8888/error/?res=403
+ErrorDocument 404 localhost:8888/?res=404
+ErrorDocument 405 localhost:8888/error/?res=405
+ErrorDocument 406 localhost:8888/error/?res=406
 
 # Handle SERVER errors with custom redirects
-ErrorDocument 500 https://example.com/error/?res=500
-ErrorDocument 501 https://example.com/error/?res=501
-ErrorDocument 502 https://example.com/error/?res=502
-ErrorDocument 503 https://example.com/error/?res=503
-ErrorDocument 504 https://example.com/error/?res=504
+ErrorDocument 500 localhost:8888/error/?res=500
+ErrorDocument 501 localhost:8888/error/?res=501
+ErrorDocument 502 localhost:8888/error/?res=502
+ErrorDocument 503 localhost:8888/error/?res=503
+ErrorDocument 504 localhost:8888/error/?res=504

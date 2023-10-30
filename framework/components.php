@@ -67,4 +67,30 @@ class Components {
         }
     }
 
+
+
+    public static function requireGlobal(): void {
+        if (!empty(Controller::$cache['components']) && is_array(Controller::$cache['components'])) {
+            foreach (Controller::$cache['components'] as $class => $components) {
+                foreach ($components as $component => $condition) {
+                    if (Link::filterCondition($condition)) {
+                        Components::require(ucfirst($component));
+                    }
+                }
+            }
+        }
+    }
+
+    public static function renderGlobal(string $class){
+        if (!empty(Controller::$cache['components']) && is_array(Controller::$cache['components'])) {
+            foreach (Controller::$cache['components'] as $componentClass => $components) {      
+                if ($componentClass !== $class) continue;
+                foreach ($components as $component => $condition) {
+                    if (Link::filterCondition($condition)) {
+                        $component::render();
+                    }
+                }
+            }
+        }
+    }
 }

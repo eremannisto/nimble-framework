@@ -1,5 +1,6 @@
 <?php
 
+// Get the error data for the header:
 $error = Response::error();
 
 Head::render([
@@ -7,10 +8,20 @@ Head::render([
     "description"   => $error['description']
 ]);
 
-class Content { 
+class Content {
+
     public static function render(): void {
 
-        $error = Response::error(); ?>
+        // Get the error data for the page: 
+        $error  = Response::error();
+
+        // Button text
+        $button = [
+            "en" => "Return to Homepage",
+            "fi" => "Palaa etusivulle"
+        ];
+        
+        ?>
 
             <section id="error" data-observed>
                 <div data-fade="bottom" data-delay="200">
@@ -26,7 +37,7 @@ class Content {
                 </div>
 
                 <div data-fade="bottom" data-delay="800">
-                    <a href="/" class="error-button">Return to Homepage</a>
+                    <a href="/" class="error-button"><?= $button[$error['language']] ?></a>
                 </div>
             </section>
 

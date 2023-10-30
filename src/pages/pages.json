@@ -1,11 +1,16 @@
 {
-    "home"              :{
-        "slug"          : "home",
-        "title"         : "Simple PHP Framework",
-        "description"   : "Welcome to the Ombra PHP Framework. Ombra is a simple PHP framework that allows you to create web applications quickly and easily."
+    "error"             :{
+        "slug"          : "error",
+        "title"         : "Error 404 - Page Not Found",
+        "description"   : "The page you are looking for could not be found.",
+        "robots"        : "noindex, nofollow"
     },
 
-    "error"             :{
-        "slug"          : "error"
+    "home"           :{
+        "slug"          : "home",
+        "title"         : "Simple - PHP Framework",
+        "description"   : "Simple is a component-based server-side rendering (SSR) framework created in PHP. Designed with a do-it-yourself spirit for small-scale projects where you want to roll up your sleeves and create something unique, all on your own.",
+        "language"      : "en",
+        "robots"        : "index, follow"
     }
 }

@@ -1,0 +1,199 @@
+:root{ 
+
+    /** Using: https://www.colourblender.io/ to mix the colors */
+
+    --hsl-white-h:          230deg;
+    --hsl-white-s:          020%;
+    --hsl-white-l:          100%;
+
+    --hsl-black-h:          230deg;
+    --hsl-black-s:          020%;       /* 010% */
+    --hsl-black-l:          012%;       /* 012% */
+
+    --hsl-primary-h:        120deg;
+    --hsl-primary-s:        060%;
+    --hsl-primary-l:        060%;
+    
+    --hsl-secondary-h:      235deg;
+    --hsl-secondary-s:      100%;
+    --hsl-secondary-l:      050%;
+
+    /* Blended White */
+    --color-white-0:    var(--hsl-white-h), calc(var(--hsl-white-s) - 000%), calc(var(--hsl-white-l) - 002%);
+    --color-white-1:    var(--hsl-white-h), calc(var(--hsl-white-s) - 010%), calc(var(--hsl-white-l) - 004%);
+    --color-white-2:    var(--hsl-white-h), calc(var(--hsl-white-s) - 012%), calc(var(--hsl-white-l) - 006%);
+    --color-white-3:    var(--hsl-white-h), calc(var(--hsl-white-s) - 014%), calc(var(--hsl-white-l) - 008%);
+    --color-white-4:    var(--hsl-white-h), calc(var(--hsl-white-s) - 016%), calc(var(--hsl-white-l) - 012%);
+    --color-white-5:    var(--hsl-white-h), calc(var(--hsl-white-s) - 018%), calc(var(--hsl-white-l) - 016%);
+
+    /* Blended Black */
+    --color-black-0:    var(--hsl-black-h), calc(var(--hsl-black-s) - 000%), calc(var(--hsl-black-l) + 000%);
+    --color-black-1:    var(--hsl-black-h), calc(var(--hsl-black-s) - 005%), calc(var(--hsl-black-l) + 005%);
+    --color-black-2:    var(--hsl-black-h), calc(var(--hsl-black-s) - 007%), calc(var(--hsl-black-l) + 007%);
+    --color-black-3:    var(--hsl-black-h), calc(var(--hsl-black-s) - 009%), calc(var(--hsl-black-l) + 011%);
+    --color-black-4:    var(--hsl-black-h), calc(var(--hsl-black-s) - 010%), calc(var(--hsl-black-l) + 014%);
+    --color-black-5:    var(--hsl-black-h), calc(var(--hsl-black-s) - 011%), calc(var(--hsl-black-l) + 019%);
+
+    /* Blended Primary */
+    --color-primary-0:  var(--hsl-primary-h), calc(var(--hsl-primary-s) - 010%), calc(var(--hsl-primary-l) - 010%);
+    --color-primary-1:  var(--hsl-primary-h), calc(var(--hsl-primary-s) - 005%), calc(var(--hsl-primary-l) - 005%);
+    --color-primary-2:  var(--hsl-primary-h), calc(var(--hsl-primary-s) - 000%), calc(var(--hsl-primary-l) + 000%);
+    --color-primary-3:  var(--hsl-primary-h), calc(var(--hsl-primary-s) - 000%), calc(var(--hsl-primary-l) + 005%);
+    --color-primary-4:  var(--hsl-primary-h), calc(var(--hsl-primary-s) - 000%), calc(var(--hsl-primary-l) + 010%);
+    --color-primary-5:  var(--hsl-primary-h), calc(var(--hsl-primary-s) - 000%), calc(var(--hsl-primary-l) + 015%);
+
+    --color-secondary-0: ;
+    --color-secondary-1: ;
+    --color-secondary-2: ;
+    --color-secondary-3: ;
+    --color-secondary-4: ;
+    --color-secondary-5: ;
+
+    /* Blended Black  */
+    --col-black:        hsl(000, 000%, 000%);
+    --col-black-0:      var(--hsl-primary-h), 000%, 000%;           /* 100% */
+    --col-black-1:      var(--hsl-primary-h), 000%, 005%;           /* 095% */ 
+    --col-black-2:      var(--hsl-primary-h), 002%, 010%;           /* 090% */ 
+    --col-black-3:      var(--hsl-primary-h), 003%, 015%;           /* 085% */ 
+    --col-black-4:      var(--hsl-primary-h), 002%, 019%;           /* 080% */
+    --col-black-5:      var(--hsl-primary-h), 002%, 024%;           /* 075% */ 
+    --col-black-6:      var(--hsl-primary-h), 003%, 029%;           /* 070% */
+    --col-black-7:      var(--hsl-primary-h), 002%, 034%;           /* 065% */
+    --col-black-8:      var(--hsl-primary-h), 003%, 039%;           /* 060% */
+    --col-black-9:      var(--hsl-primary-h), 003%, 044%;           /* 055% */
+    --col-black-10:     calc(var(--hsl-primary-h) - 5), 003%, 048%; /* 050% */
+
+    --col-white:        rgb(241, 242, 254);
+    --col-white-0:      000, 000%, 100%; /* 100% */
+    --col-white-1:      var(--hsl-primary-h), 086%, 097%; /* 095% */
+    --col-white-2:      var(--hsl-primary-h), 093%, 095%; /* 090% */
+    --col-white-3:      var(--hsl-primary-h), 090%, 092%; /* 085% */
+    --col-white-4:      var(--hsl-primary-h), 092%, 090%; /* 080% */
+    --col-white-5:      var(--hsl-primary-h), 091%, 087%; /* 075% */
+    --col-white-6:      var(--hsl-primary-h), 093%, 084%; /* 070% */
+    --col-white-7:      var(--hsl-primary-h), 091%, 082%; /* 065% */
+    --col-white-8:      var(--hsl-primary-h), 092%, 079%; /* 060% */
+    --col-white-9:      var(--hsl-primary-h), 092%, 076%; /* 055% */
+    --col-white-10:     var(--hsl-primary-h), 092%, 074%; /* 050% */
+
+    /* Blended Primary */
+    --col-primary:      hsl(240, 100%, 048%);
+    --col-primary-0:    var(--hsl-primary-h), var(--hsl-primary-s), var(--hsl-primary-l);                        /* 100% */
+    --col-primary-1:    var(--hsl-primary-h), calc(var(--hsl-primary-s) - 8%), calc(var(--hsl-primary-l) + 2%);  /* 095% */
+    --col-primary-2:    var(--hsl-primary-h), calc(var(--hsl-primary-s) - 8%), calc(var(--hsl-primary-l) + 5%);  /* 090% */
+    --col-primary-3:    var(--hsl-primary-h), calc(var(--hsl-primary-s) - 8%), calc(var(--hsl-primary-l) + 8%);  /* 085% */
+    --col-primary-4:    var(--hsl-primary-h), calc(var(--hsl-primary-s) - 8%), calc(var(--hsl-primary-l) + 10%); /* 080% */
+    --col-primary-5:    var(--hsl-primary-h), calc(var(--hsl-primary-s) - 8%), calc(var(--hsl-primary-l) + 13%); /* 075% */
+    --col-primary-6:    var(--hsl-primary-h), calc(var(--hsl-primary-s) - 8%), calc(var(--hsl-primary-l) + 16%); /* 070% */
+    --col-primary-7:    var(--hsl-primary-h), calc(var(--hsl-primary-s) - 8%), calc(var(--hsl-primary-l) + 18%); /* 065% */
+    --col-primary-8:    var(--hsl-primary-h), calc(var(--hsl-primary-s) - 8%), calc(var(--hsl-primary-l) + 21%); /* 060% */
+    --col-primary-9:    var(--hsl-primary-h), calc(var(--hsl-primary-s) - 8%), calc(var(--hsl-primary-l) + 23%); /* 055% */
+    --col-primary-10:   var(--hsl-primary-h), calc(var(--hsl-primary-s) - 8%), calc(var(--hsl-primary-l) + 26%); /* 050% */
+
+    /* Blended Secondary */
+    --col-secondary:    hsl(120, 100%, 060%);
+    --col-secondary-0:  var(--hsl-secondary-base), 100%, 060%;            /* 100% */
+    --col-secondary-1:  calc(var(--hsl-secondary-base) + 4), 090%, 057%;  /* 095% */
+    --col-secondary-2:  calc(var(--hsl-secondary-base) + 8), 081%, 055%;  /* 090% */
+    --col-secondary-3:  calc(var(--hsl-secondary-base) + 12), 073%, 052%; /* 085% */
+    --col-secondary-4:  calc(var(--hsl-secondary-base) + 17), 068%, 049%; /* 080% */
+    --col-secondary-5:  calc(var(--hsl-secondary-base) + 22), 068%, 047%; /* 075% */
+    --col-secondary-6:  calc(var(--hsl-secondary-base) + 29), 069%, 044%; /* 070% */
+    --col-secondary-7:  calc(var(--hsl-secondary-base) + 35), 069%, 042%; /* 065% */
+    --col-secondary-8:  calc(var(--hsl-secondary-base) + 42), 070%, 039%; /* 060% */
+    --col-secondary-9:  calc(var(--hsl-secondary-base) + 51), 070%, 036%; /* 055% */
+    --col-secondary-10: calc(var(--hsl-secondary-base) + 60), 071%, 034%; /* 050% */
+
+    /* Blended Accent */
+    --col-accent:       hsl(60, 100%, 60%);
+    --col-accent-0:     060, 100%, 060%; /* 100% */
+    --col-accent-1:     061, 089%, 060%; /* 095% */
+    --col-accent-2:     061, 079%, 059%; /* 090% */
+    --col-accent-3:     063, 068%, 059%; /* 085% */
+    --col-accent-4:     064, 059%, 059%; /* 080% */
+    --col-accent-5:     066, 049%, 059%; /* 075% */
+    --col-accent-6:     069, 038%, 059%; /* 070% */
+    --col-accent-7:     075, 029%, 058%; /* 065% */
+    --col-accent-8:     083, 019%, 058%; /* 060% */
+    --col-accent-9:     114, 009%, 058%; /* 055% */
+    --col-accent-10:    180, 009%, 054%; /* 050% */
+    
+    /* Blended Semantics: Info */
+    --col-info: hsl(220, 100%, 045%);
+    --col-info-0:       ; /* 100% */
+    --col-info-1:       ; /* 090% */
+    --col-info-2:       ; /* 080% */
+    --col-info-3:       ; /* 070% */
+    --col-info-4:       ; /* 060% */
+    --col-info-5:       ; /* 050% */
+
+    /* Blended Semantics: Success */
+    --col-success: hsl(088, 085%, 037%);
+    --col-success-0:    ; /* 100% */
+    --col-success-1:    ; /* 090% */
+    --col-success-2:    ; /* 080% */
+    --col-success-3:    ; /* 070% */
+    --col-success-4:    ; /* 060% */
+    --col-success-5:    ; /* 050% */
+
+    /* Blended Semantics: Warning */
+    --col-warning: hsl(045, 100%, 050%);
+    --col-warning-0:    ; /* 100% */
+    --col-warning-1:    ; /* 090% */
+    --col-warning-2:    ; /* 080% */
+    --col-warning-3:    ; /* 070% */
+    --col-warning-4:    ; /* 060% */
+    --col-warning-5:    ; /* 050% */
+
+    /* Blended Semantics: Error */
+    --col-error: hsl(346, 100%, 050%);
+    --col-error-0:  ; /* 100% */
+    --col-error-1:  ; /* 090% */
+    --col-error-2:  ; /* 080% */
+    --col-error-3:  ; /* 070% */
+    --col-error-4:  ; /* 060% */
+    --col-error-5:  ; /* 050% */
+
+    /* Assigned colors: */
+    --col-background:   hsl(var(--col-white-1));
+    --col-text:         hsl(var(--col-black-3));
+
+    /* Box shadows: */
+    --shadow-tiny:      0 1px 1px   hsla(var(--col-white-2), 0.11), 
+                        0 2px 2px   hsla(var(--col-white-2), 0.08), 
+                        0 3px 3px   hsla(var(--col-white-2), 0.05);
+
+    --shadow-short:     0 1px 1px   hsla(var(--col-white-2), 0.11), 
+                        0 2px 2px   hsla(var(--col-white-2), 0.11), 
+                        0 4px 4px   hsla(var(--col-white-2), 0.11), 
+                        0 6px 8px   hsla(var(--col-white-2), 0.11), 
+                        0 8px 16px  hsla(var(--col-white-2), 0.11);
+
+    --shadow-long:      0 2px 1px   hsla(var(--col-white-2), 0.09), 
+                        0 4px 2px   hsla(var(--col-white-2), 0.09), 
+                        0 8px 4px   hsla(var(--col-white-2), 0.09), 
+                        0 16px 8px  hsla(var(--col-white-2), 0.09),
+                        0 32px 16px hsla(var(--col-white-2), 0.09);
+
+    --shadow-dreamy:    0 1px 2px   hsla(var(--col-white-2), 0.07), 
+                        0 2px 4px   hsla(var(--col-white-2), 0.07), 
+                        0 4px 8px   hsla(var(--col-white-2), 0.07), 
+                        0 8px 16px  hsla(var(--col-white-2), 0.07),
+                        0 16px 32px hsla(var(--col-white-2), 0.07), 
+                        0 32px 64px hsla(var(--col-white-2), 0.07);
+
+    --shadow-sharp:     0 1px 1px   hsla(var(--col-white-2), 0.25), 
+                        0 2px 2px   hsla(var(--col-white-2), 0.20), 
+                        0 4px 4px   hsla(var(--col-white-2), 0.15), 
+                        0 8px 8px   hsla(var(--col-white-2), 0.10),
+                        0 16px 16px hsla(var(--col-white-2), 0.05);
+
+    --shadow-diffuse:   0 1px 1px   hsla(var(--col-white-2), 0.08), 
+                        0 2px 2px   hsla(var(--col-white-2), 0.12), 
+                        0 4px 4px   hsla(var(--col-white-2), 0.16), 
+                        0 8px 8px   hsla(var(--col-white-2), 0.20);
+}
+
+/* Selection color: */
+::-moz-selection {      background: hsla(var(--color-white-4), 60%); }
+     ::selection {      background: hsla(var(--color-white-4), 60%); }

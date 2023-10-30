@@ -1,0 +1,115 @@
+:root{
+
+    /* Document: */
+    --margin:               3rem;
+    --max-width:            100rem;
+    --min-height:           calc(100vh - (var(--margin) * 2));
+
+    /* Border radius: */
+    --border-radius-large:  12px;
+    --border-radius-medium: 8px;
+    --border-radius-small:  6px;
+    --border:               1px solid hsla(var(--color-white-1), 10%);
+
+    --br-tiny:              4px;
+    --br-small:             6px;
+    --br-medium:            8px;
+    --br-large:             12px;
+    --br-huge:              16px;
+
+    /* Opacities: */
+    --opacity-full:         100%;
+    --opacity-high:         90%;
+    --opacity-medium:       75%;
+    --opacity-low:          40%;
+    --opacity-none:         00%;
+
+}
+
+*, 
+*::after, 
+*::before{
+    box-sizing:         border-box;
+    padding:            0;
+    margin:             0;
+}
+
+html, 
+body {
+    min-height:         var(--min-height);
+    font-family:        var(--ff-sans);
+    min-height:         100%;
+}
+
+body {
+    background:         hsl(var(--color-white-0));
+    color:              hsl(var(--color-black-3));
+    margin:             0 calc(var(--margin) * 1);
+    overflow-x:         hidden;
+    scroll-behavior:    smooth;
+}
+
+main{
+    width:              100%;
+    max-width:          var(--max-width);
+    margin:             0 auto;
+    display:            flex;
+    justify-content:    flex-start;
+    align-items:        center;
+    flex-flow:          column;
+}
+
+
+
+@media screen and (min-width: 1600px) {
+    :root{
+        font-size: 12px;
+    }
+
+    body {
+        margin:             0 calc(var(--margin) * 2);
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    :root{
+        font-size: 10px;
+    }
+
+    body {
+        margin:             0 calc(var(--margin) * 1);
+    }
+}
+
+@media screen and (max-width: 840px) {
+    :root{
+        font-size: 10px;
+    }
+
+    body {
+        margin:             0 calc(var(--margin) * 0.75);
+    }
+
+}
+
+@media screen and (max-width: 740px) {
+    :root{
+        font-size: 9px;
+    }
+
+    body {
+        margin:             0 calc(var(--margin) * 0.5);
+    }
+}
+
+@media screen and (max-width: 600px) {
+
+    :root{
+        font-size: 8px;
+    }
+
+    body {
+        margin:             0 calc(var(--margin) * 0.25);
+    }
+}
+

@@ -1,6 +1,6 @@
 {
     "application"       : {
-        "development"   : false,
+        "development"   : true,
         "version"       : "1.0.0",
         "name"          : "Name of the application",
         "description"   : "Description of the application",
@@ -8,13 +8,11 @@
         "created"       : "01.08.2023 00:00:00",
         "updated"       : "01.08.2023 00:00:00",
 
-        "languages"     : [
-            "en"
-        ],
+        "languages"     : null,
 
         "router"            : {
-            "host"          : "example.com",
-            "base"          : "https://example.com",
+            "host"          : "localhost",
+            "base"          : "https://localhost",
             "index"         : "home",
             "error"         : "error",
             "controller"    : "index",

@@ -6,7 +6,7 @@
 		},
 		"fi": {
 			"title":        "Virheellinen pyyntö",
-			"description":  "Pyyntöä ei voitu ymmärtää virheellisen syntaksin vuoksi."
+			"description": "Pyyntöä ei voitu ymmärtää virheellisen syntaksin vuoksi."
 		}
 	},
     

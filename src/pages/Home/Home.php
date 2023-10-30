@@ -1,20 +1,17 @@
-<?php
+<?php 
 
-// Require any components
-Components::require([
-    'Notification'
-]);
-
-// Add the head content, here we can override any
-// of the head content, such as the title, description, etc.
 Head::render();
 
-// Add the page content:
 class Content {
-    public static function render(): void { 
-        Notification::render();
-    }
+
+    public static function render(): void { ?>
+
+        <div class="container">
+            <img src="/assets/images/banner.png" alt="Simple Framework">
+        </div>
+
+    <?php }
+
 };
 
-// Add the foot content, here we can override any
 Foot::render();
